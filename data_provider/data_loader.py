@@ -19,7 +19,7 @@ warnings.filterwarnings('ignore')
 class Dataset_ETT_hour(Dataset):
     def __init__(self, args, root_path, flag='train', size=None,
                  features='S', data_path='ETTh1.csv',
-                 target='OT', scale=True, timeenc=0, freq='h', seasonal_patterns=None):
+                 target='Close', scale=True, timeenc=0, freq='h', seasonal_patterns=None):
         # size [seq_len, label_len, pred_len]
         self.args = args
         # info
@@ -50,6 +50,20 @@ class Dataset_ETT_hour(Dataset):
         self.scaler = StandardScaler()
         df_raw = pd.read_csv(os.path.join(self.root_path,
                                           self.data_path))
+
+
+        print(f"DataFrame shape after processing: {df_raw.shape}")
+        print(f"Final columns to use: {cols}")
+        print(f"Target column: {self.target}")
+        print(f"First few rows of processed data:")
+        print(df_raw.head())
+                 
+        # Check if dataframe is empty
+        if len(df_raw) == 0:
+            raise ValueError("Dataset is empty after processing!")
+
+
+
 
         border1s = [0, 12 * 30 * 24 - self.seq_len, 12 * 30 * 24 + 4 * 30 * 24 - self.seq_len]
         border2s = [12 * 30 * 24, 12 * 30 * 24 + 4 * 30 * 24, 12 * 30 * 24 + 8 * 30 * 24]
@@ -112,7 +126,7 @@ class Dataset_ETT_hour(Dataset):
 class Dataset_ETT_minute(Dataset):
     def __init__(self, args, root_path, flag='train', size=None,
                  features='S', data_path='ETTm1.csv',
-                 target='OT', scale=True, timeenc=0, freq='t', seasonal_patterns=None):
+                 target='close', scale=True, timeenc=0, freq='t', seasonal_patterns=None):
         # size [seq_len, label_len, pred_len]
         self.args = args
         # info
@@ -144,10 +158,17 @@ class Dataset_ETT_minute(Dataset):
         df_raw = pd.read_csv(os.path.join(self.root_path,
                                           self.data_path))
 
-        border1s = [0, 12 * 30 * 24 * 4 - self.seq_len, 12 * 30 * 24 * 4 + 4 * 30 * 24 * 4 - self.seq_len]
-        border2s = [12 * 30 * 24 * 4, 12 * 30 * 24 * 4 + 4 * 30 * 24 * 4, 12 * 30 * 24 * 4 + 8 * 30 * 24 * 4]
-        border1 = border1s[self.set_type]
-        border2 = border2s[self.set_type]
+        num_train = int(len(df_raw) * 0.7)
+        num_val = int(len(df_raw) * 0.2)
+        num_test = len(df_raw) - num_train - num_val
+
+        border1s = [0, num_train - self.seq_len, len(df_raw) - num_test - self.seq_len]
+        border2s = [num_train, num_train + num_val, len(df_raw)]
+
+        #border1s = [0, 12 * 30 * 24 * 4 - self.seq_len, 12 * 30 * 24 * 4 + 4 * 30 * 24 * 4 - self.seq_len]
+        #border2s = [12 * 30 * 24 * 4, 12 * 30 * 24 * 4 + 4 * 30 * 24 * 4, 12 * 30 * 24 * 4 + 8 * 30 * 24 * 4]
+        #border1 = border1s[self.set_type]
+        #border2 = border2s[self.set_type]
 
         if self.features == 'M' or self.features == 'MS':
             cols_data = df_raw.columns[1:]
@@ -207,7 +228,7 @@ class Dataset_ETT_minute(Dataset):
 class Dataset_Custom(Dataset):
     def __init__(self, args, root_path, flag='train', size=None,
                  features='S', data_path='ETTh1.csv',
-                 target='OT', scale=True, timeenc=0, freq='h', seasonal_patterns=None):
+                 target='close', scale=True, timeenc=0, freq='h', seasonal_patterns=None):
         # size [seq_len, label_len, pred_len]
         self.args = args
         # info
@@ -238,11 +259,43 @@ class Dataset_Custom(Dataset):
         self.scaler = StandardScaler()
         df_raw = pd.read_csv(os.path.join(self.root_path,
                                           self.data_path))
+        print("="*50)
+        print("DEBUG INFO:")
+        print(f"Dataset columns: {list(df_raw.columns)}")
+        print(f"Target we're looking for: '{self.target}'")
+        print(f"Target type: {type(self.target)}")
+        print("="*50)
+
 
         '''
         df_raw.columns: ['date', ...(other features), target feature]
         '''
+
+        if self.target == 'OT' and 'close' in df_raw.columns:
+            print(f"Overriding target from '{self.target}' to 'close' for stock data")
+            self.target = 'close'
+                                
+        # FIX: Handle timezone-aware datetime parsing
+
+        if 'date' in df_raw.columns:
+            try:
+                # Try parsing with timezone info
+                df_raw['date'] = pd.to_datetime(df_raw['date'], utc=True)
+            except:
+                try:
+                    # If that fails, try without timezone
+                    df_raw['date'] = pd.to_datetime(df_raw['date'].str.replace(r'[+-]\d{2}:\d{2}$', '', regex=True))
+                except:
+                    # If all else fails, try basic parsing
+                    df_raw['date'] = pd.to_datetime(df_raw['date'], errors='coerce') 
+
+            # Convert to timezone-naive if needed
+            if df_raw['date'].dt.tz is not None:
+                df_raw['date'] = df_raw['date'].dt.tz_convert(None)
+                print(f"Date column parsed successfully. Sample dates: {df_raw['date'].head(2).tolist()}")        
+
         cols = list(df_raw.columns)
+        print(f"Cols before removala: {cols}")
         cols.remove(self.target)
         cols.remove('date')
         df_raw = df_raw[['date'] + cols + [self.target]]
@@ -310,7 +363,7 @@ class Dataset_Custom(Dataset):
 class Dataset_M4(Dataset):
     def __init__(self, args, root_path, flag='pred', size=None,
                  features='S', data_path='ETTh1.csv',
-                 target='OT', scale=False, inverse=False, timeenc=0, freq='15min',
+                 target='close', scale=False, inverse=False, timeenc=0, freq='15min',
                  seasonal_patterns='Yearly'):
         # size [seq_len, label_len, pred_len]
         # init
@@ -745,4 +798,4 @@ class UEAloader(Dataset):
                torch.from_numpy(labels)
 
     def __len__(self):
-        return len(self.all_IDs)
+        return len(self.all_IDs)      
