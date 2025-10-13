@@ -170,3 +170,4 @@ All the experiment datasets are public, and we obtain them from the following li
 <a href="https://github.com/thuml/Time-Series-Library/graphs/contributors">
   <img src="https://contrib.rocks/image?repo=thuml/Time-Series-Library" />
 </a>
+# forecast-research
