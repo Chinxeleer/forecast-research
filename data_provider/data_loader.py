@@ -250,14 +250,7 @@ class Dataset_Custom(Dataset):
         self.scaler = StandardScaler()
         df_raw = pd.read_csv(os.path.join(self.root_path,
                                           self.data_path))
-        print("="*50)
-        print("DEBUG INFO:")
-        print(f"Dataset columns: {list(df_raw.columns)}")
-        print(f"Target we're looking for: '{self.target}'")
-        print(f"Target type: {type(self.target)}")
-        print("="*50)
-
-
+       
         '''
         df_raw.columns: ['date', ...(other features), target feature]
         '''
@@ -303,12 +296,12 @@ class Dataset_Custom(Dataset):
         # ADDED: Print split information
         if self.set_type == 0:  # Only print once during training
             print("="*60)
-            print("DATASET SPLIT INFO (85/5/10):")
+            print("DATASET SPLIT INFO (90/5/5):")
             print("="*60)
             print(f"Total samples: {len(df_raw)}")
-            print(f"Train: {num_train} samples (85%) - rows 0 to {num_train-1}")
+            print(f"Train: {num_train} samples (90%) - rows 0 to {num_train-1}")
             print(f"Val: {num_vali} samples (5%) - rows {num_train} to {num_train+num_vali-1}")
-            print(f"Test: {num_test} samples (10%) - rows {num_train+num_vali} to {len(df_raw)-1}")
+            print(f"Test: {num_test} samples (5%) - rows {num_train+num_vali} to {len(df_raw)-1}")
             print(f"Sequence length: {self.seq_len}, Prediction length: {self.pred_len}")
             print("="*60)
 
