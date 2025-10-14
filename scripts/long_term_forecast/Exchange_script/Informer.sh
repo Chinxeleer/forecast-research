@@ -1,8 +1,6 @@
 #!/bin/sh
 export CUDA_VISIBLE_DEVICES=0
 
-model_name=Transformer
-
 for pred_len in 1 3 7 14 30 48 60 72 96; do
 
 python -u run.py \
@@ -10,22 +8,20 @@ python -u run.py \
   --is_training 1 \
   --root_path ./dataset/exchange_rate/ \
   --data_path exchange_rate.csv \
-  --model_id Exchange_96_96 \
-  --model $model_name \
+  --model_id exchange \
+  --model Informer \
   --data custom \
   --features M \
   --seq_len 96 \
   --label_len 48 \
   --pred_len $pred_len \
+  --d_model 128 \
+  --d_ff 16 \
   --e_layers 2 \
-  --d_layers 1 \
-  --factor 3 \
+  --d_layer 1 \
   --enc_in 5 \
   --dec_in 5 \
   --c_out 5 \
-  --des 'Exp' \
   --train_epochs 50 \
-  --patience 100 \
-  --itr 1
-
+  --patience 100
 done

@@ -1,0 +1,928 @@
+Using GPU
+Args in experiment:
+[1mBasic Config[0m
+  Task Name:          long_term_forecast  Is Training:        1                   
+  Model ID:           Exchange_96_96      Model:              Transformer         
+
+[1mData Loader[0m
+  Data:               custom              Root Path:          ./dataset/exchange_rate/
+  Data Path:          exchange_rate.csv   Features:           M                   
+  Target:             OT                  Freq:               h                   
+  Checkpoints:        ./checkpoints/      
+
+[1mForecasting Task[0m
+  Seq Len:            96                  Label Len:          48                  
+  Pred Len:           1                   Seasonal Patterns:  Monthly             
+  Inverse:            0                   
+
+[1mModel Parameters[0m
+  Top k:              5                   Num Kernels:        6                   
+  Enc In:             5                   Dec In:             5                   
+  C Out:              5                   d model:            512                 
+  n heads:            8                   e layers:           2                   
+  d layers:           1                   d FF:               2048                
+  Moving Avg:         25                  Factor:             3                   
+  Distil:             1                   Dropout:            0.1                 
+  Embed:              timeF               Activation:         gelu                
+
+[1mRun Parameters[0m
+  Num Workers:        10                  Itr:                1                   
+  Train Epochs:       10                  Batch Size:         32                  
+  Patience:           3                   Learning Rate:      0.0001              
+  Des:                Exp                 Loss:               MSE                 
+  Lradj:              type1               Use Amp:            0                   
+
+[1mGPU[0m
+  Use GPU:            1                   GPU:                0                   
+  Use Multi GPU:      0                   Devices:            0,1,2,3             
+
+[1mDe-stationary Projector Params[0m
+  P Hidden Dims:      128, 128            P Hidden Layers:    2                   
+
+Use GPU: cuda:0
+>>>>>>>start training : long_term_forecast_Exchange_96_96_Transformer_custom_ftM_sl96_ll48_pl1_dm512_nh8_el2_dl1_df2048_expand2_dc4_fc3_ebtimeF_dtTrue_Exp_0>>>>>>>>>>>>>>>>>>>>>>>>>>
+==================================================
+DEBUG INFO:
+Dataset columns: ['date', 'open', 'high', 'low', 'close', 'volume']
+Target we're looking for: 'OT'
+Target type: <class 'str'>
+==================================================
+Overriding target from 'OT' to 'close' for stock data
+============================================================
+DATASET SPLIT INFO (85/5/10):
+============================================================
+Total samples: 5193
+Train: 4673 samples (85%) - rows 0 to 4672
+Val: 259 samples (5%) - rows 4673 to 4931
+Test: 261 samples (10%) - rows 4932 to 5192
+Sequence length: 96, Prediction length: 1
+============================================================
+train 4577
+==================================================
+DEBUG INFO:
+Dataset columns: ['date', 'open', 'high', 'low', 'close', 'volume']
+Target we're looking for: 'OT'
+Target type: <class 'str'>
+==================================================
+Overriding target from 'OT' to 'close' for stock data
+val 259
+==================================================
+DEBUG INFO:
+Dataset columns: ['date', 'open', 'high', 'low', 'close', 'volume']
+Target we're looking for: 'OT'
+Target type: <class 'str'>
+==================================================
+Overriding target from 'OT' to 'close' for stock data
+test 261
+Validation loss decreased (inf --> 0.035721).  Saving model ...
+Updating learning rate to 0.0001
+EarlyStopping counter: 1 out of 3
+Updating learning rate to 5e-05
+Validation loss decreased (0.035721 --> 0.032309).  Saving model ...
+Updating learning rate to 2.5e-05
+Validation loss decreased (0.032309 --> 0.030322).  Saving model ...
+Updating learning rate to 1.25e-05
+EarlyStopping counter: 1 out of 3
+Updating learning rate to 6.25e-06
+Validation loss decreased (0.030322 --> 0.026070).  Saving model ...
+Updating learning rate to 3.125e-06
+EarlyStopping counter: 1 out of 3
+Updating learning rate to 1.5625e-06
+Validation loss decreased (0.026070 --> 0.025058).  Saving model ...
+Updating learning rate to 7.8125e-07
+EarlyStopping counter: 1 out of 3
+Updating learning rate to 3.90625e-07
+EarlyStopping counter: 2 out of 3
+Updating learning rate to 1.953125e-07
+>>>>>>>testing : long_term_forecast_Exchange_96_96_Transformer_custom_ftM_sl96_ll48_pl1_dm512_nh8_el2_dl1_df2048_expand2_dc4_fc3_ebtimeF_dtTrue_Exp_0<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+==================================================
+DEBUG INFO:
+Dataset columns: ['date', 'open', 'high', 'low', 'close', 'volume']
+Target we're looking for: 'OT'
+Target type: <class 'str'>
+==================================================
+Overriding target from 'OT' to 'close' for stock data
+test 261
+test shape: (261, 1, 5) (261, 1, 5)
+test shape: (261, 1, 5) (261, 1, 5)
+
+
+	mse:0.061891745775938034, mae:0.10717256367206573, dtw:Not calculated
+
+
+Using GPU
+Args in experiment:
+[1mBasic Config[0m
+  Task Name:          long_term_forecast  Is Training:        1                   
+  Model ID:           Exchange_96_96      Model:              Transformer         
+
+[1mData Loader[0m
+  Data:               custom              Root Path:          ./dataset/exchange_rate/
+  Data Path:          exchange_rate.csv   Features:           M                   
+  Target:             OT                  Freq:               h                   
+  Checkpoints:        ./checkpoints/      
+
+[1mForecasting Task[0m
+  Seq Len:            96                  Label Len:          48                  
+  Pred Len:           3                   Seasonal Patterns:  Monthly             
+  Inverse:            0                   
+
+[1mModel Parameters[0m
+  Top k:              5                   Num Kernels:        6                   
+  Enc In:             5                   Dec In:             5                   
+  C Out:              5                   d model:            512                 
+  n heads:            8                   e layers:           2                   
+  d layers:           1                   d FF:               2048                
+  Moving Avg:         25                  Factor:             3                   
+  Distil:             1                   Dropout:            0.1                 
+  Embed:              timeF               Activation:         gelu                
+
+[1mRun Parameters[0m
+  Num Workers:        10                  Itr:                1                   
+  Train Epochs:       10                  Batch Size:         32                  
+  Patience:           3                   Learning Rate:      0.0001              
+  Des:                Exp                 Loss:               MSE                 
+  Lradj:              type1               Use Amp:            0                   
+
+[1mGPU[0m
+  Use GPU:            1                   GPU:                0                   
+  Use Multi GPU:      0                   Devices:            0,1,2,3             
+
+[1mDe-stationary Projector Params[0m
+  P Hidden Dims:      128, 128            P Hidden Layers:    2                   
+
+Use GPU: cuda:0
+>>>>>>>start training : long_term_forecast_Exchange_96_96_Transformer_custom_ftM_sl96_ll48_pl3_dm512_nh8_el2_dl1_df2048_expand2_dc4_fc3_ebtimeF_dtTrue_Exp_0>>>>>>>>>>>>>>>>>>>>>>>>>>
+==================================================
+DEBUG INFO:
+Dataset columns: ['date', 'open', 'high', 'low', 'close', 'volume']
+Target we're looking for: 'OT'
+Target type: <class 'str'>
+==================================================
+Overriding target from 'OT' to 'close' for stock data
+============================================================
+DATASET SPLIT INFO (85/5/10):
+============================================================
+Total samples: 5193
+Train: 4673 samples (85%) - rows 0 to 4672
+Val: 259 samples (5%) - rows 4673 to 4931
+Test: 261 samples (10%) - rows 4932 to 5192
+Sequence length: 96, Prediction length: 3
+============================================================
+train 4575
+==================================================
+DEBUG INFO:
+Dataset columns: ['date', 'open', 'high', 'low', 'close', 'volume']
+Target we're looking for: 'OT'
+Target type: <class 'str'>
+==================================================
+Overriding target from 'OT' to 'close' for stock data
+val 257
+==================================================
+DEBUG INFO:
+Dataset columns: ['date', 'open', 'high', 'low', 'close', 'volume']
+Target we're looking for: 'OT'
+Target type: <class 'str'>
+==================================================
+Overriding target from 'OT' to 'close' for stock data
+test 259
+Validation loss decreased (inf --> 0.056670).  Saving model ...
+Updating learning rate to 0.0001
+Validation loss decreased (0.056670 --> 0.051115).  Saving model ...
+Updating learning rate to 5e-05
+Validation loss decreased (0.051115 --> 0.047382).  Saving model ...
+Updating learning rate to 2.5e-05
+Validation loss decreased (0.047382 --> 0.037581).  Saving model ...
+Updating learning rate to 1.25e-05
+Validation loss decreased (0.037581 --> 0.030736).  Saving model ...
+Updating learning rate to 6.25e-06
+EarlyStopping counter: 1 out of 3
+Updating learning rate to 3.125e-06
+EarlyStopping counter: 2 out of 3
+Updating learning rate to 1.5625e-06
+EarlyStopping counter: 3 out of 3
+>>>>>>>testing : long_term_forecast_Exchange_96_96_Transformer_custom_ftM_sl96_ll48_pl3_dm512_nh8_el2_dl1_df2048_expand2_dc4_fc3_ebtimeF_dtTrue_Exp_0<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+==================================================
+DEBUG INFO:
+Dataset columns: ['date', 'open', 'high', 'low', 'close', 'volume']
+Target we're looking for: 'OT'
+Target type: <class 'str'>
+==================================================
+Overriding target from 'OT' to 'close' for stock data
+test 259
+test shape: (259, 3, 5) (259, 3, 5)
+test shape: (259, 3, 5) (259, 3, 5)
+
+
+	mse:0.06527090072631836, mae:0.11509464681148529, dtw:Not calculated
+
+
+Using GPU
+Args in experiment:
+[1mBasic Config[0m
+  Task Name:          long_term_forecast  Is Training:        1                   
+  Model ID:           Exchange_96_96      Model:              Transformer         
+
+[1mData Loader[0m
+  Data:               custom              Root Path:          ./dataset/exchange_rate/
+  Data Path:          exchange_rate.csv   Features:           M                   
+  Target:             OT                  Freq:               h                   
+  Checkpoints:        ./checkpoints/      
+
+[1mForecasting Task[0m
+  Seq Len:            96                  Label Len:          48                  
+  Pred Len:           7                   Seasonal Patterns:  Monthly             
+  Inverse:            0                   
+
+[1mModel Parameters[0m
+  Top k:              5                   Num Kernels:        6                   
+  Enc In:             5                   Dec In:             5                   
+  C Out:              5                   d model:            512                 
+  n heads:            8                   e layers:           2                   
+  d layers:           1                   d FF:               2048                
+  Moving Avg:         25                  Factor:             3                   
+  Distil:             1                   Dropout:            0.1                 
+  Embed:              timeF               Activation:         gelu                
+
+[1mRun Parameters[0m
+  Num Workers:        10                  Itr:                1                   
+  Train Epochs:       10                  Batch Size:         32                  
+  Patience:           3                   Learning Rate:      0.0001              
+  Des:                Exp                 Loss:               MSE                 
+  Lradj:              type1               Use Amp:            0                   
+
+[1mGPU[0m
+  Use GPU:            1                   GPU:                0                   
+  Use Multi GPU:      0                   Devices:            0,1,2,3             
+
+[1mDe-stationary Projector Params[0m
+  P Hidden Dims:      128, 128            P Hidden Layers:    2                   
+
+Use GPU: cuda:0
+>>>>>>>start training : long_term_forecast_Exchange_96_96_Transformer_custom_ftM_sl96_ll48_pl7_dm512_nh8_el2_dl1_df2048_expand2_dc4_fc3_ebtimeF_dtTrue_Exp_0>>>>>>>>>>>>>>>>>>>>>>>>>>
+==================================================
+DEBUG INFO:
+Dataset columns: ['date', 'open', 'high', 'low', 'close', 'volume']
+Target we're looking for: 'OT'
+Target type: <class 'str'>
+==================================================
+Overriding target from 'OT' to 'close' for stock data
+============================================================
+DATASET SPLIT INFO (85/5/10):
+============================================================
+Total samples: 5193
+Train: 4673 samples (85%) - rows 0 to 4672
+Val: 259 samples (5%) - rows 4673 to 4931
+Test: 261 samples (10%) - rows 4932 to 5192
+Sequence length: 96, Prediction length: 7
+============================================================
+train 4571
+==================================================
+DEBUG INFO:
+Dataset columns: ['date', 'open', 'high', 'low', 'close', 'volume']
+Target we're looking for: 'OT'
+Target type: <class 'str'>
+==================================================
+Overriding target from 'OT' to 'close' for stock data
+val 253
+==================================================
+DEBUG INFO:
+Dataset columns: ['date', 'open', 'high', 'low', 'close', 'volume']
+Target we're looking for: 'OT'
+Target type: <class 'str'>
+==================================================
+Overriding target from 'OT' to 'close' for stock data
+test 255
+Validation loss decreased (inf --> 0.051358).  Saving model ...
+Updating learning rate to 0.0001
+Validation loss decreased (0.051358 --> 0.036767).  Saving model ...
+Updating learning rate to 5e-05
+EarlyStopping counter: 1 out of 3
+Updating learning rate to 2.5e-05
+EarlyStopping counter: 2 out of 3
+Updating learning rate to 1.25e-05
+EarlyStopping counter: 3 out of 3
+>>>>>>>testing : long_term_forecast_Exchange_96_96_Transformer_custom_ftM_sl96_ll48_pl7_dm512_nh8_el2_dl1_df2048_expand2_dc4_fc3_ebtimeF_dtTrue_Exp_0<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+==================================================
+DEBUG INFO:
+Dataset columns: ['date', 'open', 'high', 'low', 'close', 'volume']
+Target we're looking for: 'OT'
+Target type: <class 'str'>
+==================================================
+Overriding target from 'OT' to 'close' for stock data
+test 255
+test shape: (255, 7, 5) (255, 7, 5)
+test shape: (255, 7, 5) (255, 7, 5)
+
+
+	mse:0.07177090644836426, mae:0.12981005012989044, dtw:Not calculated
+
+
+Using GPU
+Args in experiment:
+[1mBasic Config[0m
+  Task Name:          long_term_forecast  Is Training:        1                   
+  Model ID:           Exchange_96_96      Model:              Transformer         
+
+[1mData Loader[0m
+  Data:               custom              Root Path:          ./dataset/exchange_rate/
+  Data Path:          exchange_rate.csv   Features:           M                   
+  Target:             OT                  Freq:               h                   
+  Checkpoints:        ./checkpoints/      
+
+[1mForecasting Task[0m
+  Seq Len:            96                  Label Len:          48                  
+  Pred Len:           14                  Seasonal Patterns:  Monthly             
+  Inverse:            0                   
+
+[1mModel Parameters[0m
+  Top k:              5                   Num Kernels:        6                   
+  Enc In:             5                   Dec In:             5                   
+  C Out:              5                   d model:            512                 
+  n heads:            8                   e layers:           2                   
+  d layers:           1                   d FF:               2048                
+  Moving Avg:         25                  Factor:             3                   
+  Distil:             1                   Dropout:            0.1                 
+  Embed:              timeF               Activation:         gelu                
+
+[1mRun Parameters[0m
+  Num Workers:        10                  Itr:                1                   
+  Train Epochs:       10                  Batch Size:         32                  
+  Patience:           3                   Learning Rate:      0.0001              
+  Des:                Exp                 Loss:               MSE                 
+  Lradj:              type1               Use Amp:            0                   
+
+[1mGPU[0m
+  Use GPU:            1                   GPU:                0                   
+  Use Multi GPU:      0                   Devices:            0,1,2,3             
+
+[1mDe-stationary Projector Params[0m
+  P Hidden Dims:      128, 128            P Hidden Layers:    2                   
+
+Use GPU: cuda:0
+>>>>>>>start training : long_term_forecast_Exchange_96_96_Transformer_custom_ftM_sl96_ll48_pl14_dm512_nh8_el2_dl1_df2048_expand2_dc4_fc3_ebtimeF_dtTrue_Exp_0>>>>>>>>>>>>>>>>>>>>>>>>>>
+==================================================
+DEBUG INFO:
+Dataset columns: ['date', 'open', 'high', 'low', 'close', 'volume']
+Target we're looking for: 'OT'
+Target type: <class 'str'>
+==================================================
+Overriding target from 'OT' to 'close' for stock data
+============================================================
+DATASET SPLIT INFO (85/5/10):
+============================================================
+Total samples: 5193
+Train: 4673 samples (85%) - rows 0 to 4672
+Val: 259 samples (5%) - rows 4673 to 4931
+Test: 261 samples (10%) - rows 4932 to 5192
+Sequence length: 96, Prediction length: 14
+============================================================
+train 4564
+==================================================
+DEBUG INFO:
+Dataset columns: ['date', 'open', 'high', 'low', 'close', 'volume']
+Target we're looking for: 'OT'
+Target type: <class 'str'>
+==================================================
+Overriding target from 'OT' to 'close' for stock data
+val 246
+==================================================
+DEBUG INFO:
+Dataset columns: ['date', 'open', 'high', 'low', 'close', 'volume']
+Target we're looking for: 'OT'
+Target type: <class 'str'>
+==================================================
+Overriding target from 'OT' to 'close' for stock data
+test 248
+Validation loss decreased (inf --> 0.044910).  Saving model ...
+Updating learning rate to 0.0001
+Validation loss decreased (0.044910 --> 0.040462).  Saving model ...
+Updating learning rate to 5e-05
+EarlyStopping counter: 1 out of 3
+Updating learning rate to 2.5e-05
+EarlyStopping counter: 2 out of 3
+Updating learning rate to 1.25e-05
+EarlyStopping counter: 3 out of 3
+>>>>>>>testing : long_term_forecast_Exchange_96_96_Transformer_custom_ftM_sl96_ll48_pl14_dm512_nh8_el2_dl1_df2048_expand2_dc4_fc3_ebtimeF_dtTrue_Exp_0<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+==================================================
+DEBUG INFO:
+Dataset columns: ['date', 'open', 'high', 'low', 'close', 'volume']
+Target we're looking for: 'OT'
+Target type: <class 'str'>
+==================================================
+Overriding target from 'OT' to 'close' for stock data
+test 248
+test shape: (248, 14, 5) (248, 14, 5)
+test shape: (248, 14, 5) (248, 14, 5)
+
+
+	mse:0.08555248379707336, mae:0.1315883994102478, dtw:Not calculated
+
+
+Using GPU
+Args in experiment:
+[1mBasic Config[0m
+  Task Name:          long_term_forecast  Is Training:        1                   
+  Model ID:           Exchange_96_96      Model:              Transformer         
+
+[1mData Loader[0m
+  Data:               custom              Root Path:          ./dataset/exchange_rate/
+  Data Path:          exchange_rate.csv   Features:           M                   
+  Target:             OT                  Freq:               h                   
+  Checkpoints:        ./checkpoints/      
+
+[1mForecasting Task[0m
+  Seq Len:            96                  Label Len:          48                  
+  Pred Len:           30                  Seasonal Patterns:  Monthly             
+  Inverse:            0                   
+
+[1mModel Parameters[0m
+  Top k:              5                   Num Kernels:        6                   
+  Enc In:             5                   Dec In:             5                   
+  C Out:              5                   d model:            512                 
+  n heads:            8                   e layers:           2                   
+  d layers:           1                   d FF:               2048                
+  Moving Avg:         25                  Factor:             3                   
+  Distil:             1                   Dropout:            0.1                 
+  Embed:              timeF               Activation:         gelu                
+
+[1mRun Parameters[0m
+  Num Workers:        10                  Itr:                1                   
+  Train Epochs:       10                  Batch Size:         32                  
+  Patience:           3                   Learning Rate:      0.0001              
+  Des:                Exp                 Loss:               MSE                 
+  Lradj:              type1               Use Amp:            0                   
+
+[1mGPU[0m
+  Use GPU:            1                   GPU:                0                   
+  Use Multi GPU:      0                   Devices:            0,1,2,3             
+
+[1mDe-stationary Projector Params[0m
+  P Hidden Dims:      128, 128            P Hidden Layers:    2                   
+
+Use GPU: cuda:0
+>>>>>>>start training : long_term_forecast_Exchange_96_96_Transformer_custom_ftM_sl96_ll48_pl30_dm512_nh8_el2_dl1_df2048_expand2_dc4_fc3_ebtimeF_dtTrue_Exp_0>>>>>>>>>>>>>>>>>>>>>>>>>>
+==================================================
+DEBUG INFO:
+Dataset columns: ['date', 'open', 'high', 'low', 'close', 'volume']
+Target we're looking for: 'OT'
+Target type: <class 'str'>
+==================================================
+Overriding target from 'OT' to 'close' for stock data
+============================================================
+DATASET SPLIT INFO (85/5/10):
+============================================================
+Total samples: 5193
+Train: 4673 samples (85%) - rows 0 to 4672
+Val: 259 samples (5%) - rows 4673 to 4931
+Test: 261 samples (10%) - rows 4932 to 5192
+Sequence length: 96, Prediction length: 30
+============================================================
+train 4548
+==================================================
+DEBUG INFO:
+Dataset columns: ['date', 'open', 'high', 'low', 'close', 'volume']
+Target we're looking for: 'OT'
+Target type: <class 'str'>
+==================================================
+Overriding target from 'OT' to 'close' for stock data
+val 230
+==================================================
+DEBUG INFO:
+Dataset columns: ['date', 'open', 'high', 'low', 'close', 'volume']
+Target we're looking for: 'OT'
+Target type: <class 'str'>
+==================================================
+Overriding target from 'OT' to 'close' for stock data
+test 232
+Validation loss decreased (inf --> 0.039896).  Saving model ...
+Updating learning rate to 0.0001
+EarlyStopping counter: 1 out of 3
+Updating learning rate to 5e-05
+EarlyStopping counter: 2 out of 3
+Updating learning rate to 2.5e-05
+EarlyStopping counter: 3 out of 3
+>>>>>>>testing : long_term_forecast_Exchange_96_96_Transformer_custom_ftM_sl96_ll48_pl30_dm512_nh8_el2_dl1_df2048_expand2_dc4_fc3_ebtimeF_dtTrue_Exp_0<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+==================================================
+DEBUG INFO:
+Dataset columns: ['date', 'open', 'high', 'low', 'close', 'volume']
+Target we're looking for: 'OT'
+Target type: <class 'str'>
+==================================================
+Overriding target from 'OT' to 'close' for stock data
+test 232
+test shape: (232, 30, 5) (232, 30, 5)
+test shape: (232, 30, 5) (232, 30, 5)
+
+
+	mse:0.08980194479227066, mae:0.16561229526996613, dtw:Not calculated
+
+
+Using GPU
+Args in experiment:
+[1mBasic Config[0m
+  Task Name:          long_term_forecast  Is Training:        1                   
+  Model ID:           Exchange_96_96      Model:              Transformer         
+
+[1mData Loader[0m
+  Data:               custom              Root Path:          ./dataset/exchange_rate/
+  Data Path:          exchange_rate.csv   Features:           M                   
+  Target:             OT                  Freq:               h                   
+  Checkpoints:        ./checkpoints/      
+
+[1mForecasting Task[0m
+  Seq Len:            96                  Label Len:          48                  
+  Pred Len:           48                  Seasonal Patterns:  Monthly             
+  Inverse:            0                   
+
+[1mModel Parameters[0m
+  Top k:              5                   Num Kernels:        6                   
+  Enc In:             5                   Dec In:             5                   
+  C Out:              5                   d model:            512                 
+  n heads:            8                   e layers:           2                   
+  d layers:           1                   d FF:               2048                
+  Moving Avg:         25                  Factor:             3                   
+  Distil:             1                   Dropout:            0.1                 
+  Embed:              timeF               Activation:         gelu                
+
+[1mRun Parameters[0m
+  Num Workers:        10                  Itr:                1                   
+  Train Epochs:       10                  Batch Size:         32                  
+  Patience:           3                   Learning Rate:      0.0001              
+  Des:                Exp                 Loss:               MSE                 
+  Lradj:              type1               Use Amp:            0                   
+
+[1mGPU[0m
+  Use GPU:            1                   GPU:                0                   
+  Use Multi GPU:      0                   Devices:            0,1,2,3             
+
+[1mDe-stationary Projector Params[0m
+  P Hidden Dims:      128, 128            P Hidden Layers:    2                   
+
+Use GPU: cuda:0
+>>>>>>>start training : long_term_forecast_Exchange_96_96_Transformer_custom_ftM_sl96_ll48_pl48_dm512_nh8_el2_dl1_df2048_expand2_dc4_fc3_ebtimeF_dtTrue_Exp_0>>>>>>>>>>>>>>>>>>>>>>>>>>
+==================================================
+DEBUG INFO:
+Dataset columns: ['date', 'open', 'high', 'low', 'close', 'volume']
+Target we're looking for: 'OT'
+Target type: <class 'str'>
+==================================================
+Overriding target from 'OT' to 'close' for stock data
+============================================================
+DATASET SPLIT INFO (85/5/10):
+============================================================
+Total samples: 5193
+Train: 4673 samples (85%) - rows 0 to 4672
+Val: 259 samples (5%) - rows 4673 to 4931
+Test: 261 samples (10%) - rows 4932 to 5192
+Sequence length: 96, Prediction length: 48
+============================================================
+train 4530
+==================================================
+DEBUG INFO:
+Dataset columns: ['date', 'open', 'high', 'low', 'close', 'volume']
+Target we're looking for: 'OT'
+Target type: <class 'str'>
+==================================================
+Overriding target from 'OT' to 'close' for stock data
+val 212
+==================================================
+DEBUG INFO:
+Dataset columns: ['date', 'open', 'high', 'low', 'close', 'volume']
+Target we're looking for: 'OT'
+Target type: <class 'str'>
+==================================================
+Overriding target from 'OT' to 'close' for stock data
+test 214
+Validation loss decreased (inf --> 0.065693).  Saving model ...
+Updating learning rate to 0.0001
+Validation loss decreased (0.065693 --> 0.064152).  Saving model ...
+Updating learning rate to 5e-05
+Validation loss decreased (0.064152 --> 0.051978).  Saving model ...
+Updating learning rate to 2.5e-05
+EarlyStopping counter: 1 out of 3
+Updating learning rate to 1.25e-05
+EarlyStopping counter: 2 out of 3
+Updating learning rate to 6.25e-06
+EarlyStopping counter: 3 out of 3
+>>>>>>>testing : long_term_forecast_Exchange_96_96_Transformer_custom_ftM_sl96_ll48_pl48_dm512_nh8_el2_dl1_df2048_expand2_dc4_fc3_ebtimeF_dtTrue_Exp_0<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+==================================================
+DEBUG INFO:
+Dataset columns: ['date', 'open', 'high', 'low', 'close', 'volume']
+Target we're looking for: 'OT'
+Target type: <class 'str'>
+==================================================
+Overriding target from 'OT' to 'close' for stock data
+test 214
+test shape: (214, 48, 5) (214, 48, 5)
+test shape: (214, 48, 5) (214, 48, 5)
+
+
+	mse:0.14969217777252197, mae:0.202788844704628, dtw:Not calculated
+
+
+Using GPU
+Args in experiment:
+[1mBasic Config[0m
+  Task Name:          long_term_forecast  Is Training:        1                   
+  Model ID:           Exchange_96_96      Model:              Transformer         
+
+[1mData Loader[0m
+  Data:               custom              Root Path:          ./dataset/exchange_rate/
+  Data Path:          exchange_rate.csv   Features:           M                   
+  Target:             OT                  Freq:               h                   
+  Checkpoints:        ./checkpoints/      
+
+[1mForecasting Task[0m
+  Seq Len:            96                  Label Len:          48                  
+  Pred Len:           60                  Seasonal Patterns:  Monthly             
+  Inverse:            0                   
+
+[1mModel Parameters[0m
+  Top k:              5                   Num Kernels:        6                   
+  Enc In:             5                   Dec In:             5                   
+  C Out:              5                   d model:            512                 
+  n heads:            8                   e layers:           2                   
+  d layers:           1                   d FF:               2048                
+  Moving Avg:         25                  Factor:             3                   
+  Distil:             1                   Dropout:            0.1                 
+  Embed:              timeF               Activation:         gelu                
+
+[1mRun Parameters[0m
+  Num Workers:        10                  Itr:                1                   
+  Train Epochs:       10                  Batch Size:         32                  
+  Patience:           3                   Learning Rate:      0.0001              
+  Des:                Exp                 Loss:               MSE                 
+  Lradj:              type1               Use Amp:            0                   
+
+[1mGPU[0m
+  Use GPU:            1                   GPU:                0                   
+  Use Multi GPU:      0                   Devices:            0,1,2,3             
+
+[1mDe-stationary Projector Params[0m
+  P Hidden Dims:      128, 128            P Hidden Layers:    2                   
+
+Use GPU: cuda:0
+>>>>>>>start training : long_term_forecast_Exchange_96_96_Transformer_custom_ftM_sl96_ll48_pl60_dm512_nh8_el2_dl1_df2048_expand2_dc4_fc3_ebtimeF_dtTrue_Exp_0>>>>>>>>>>>>>>>>>>>>>>>>>>
+==================================================
+DEBUG INFO:
+Dataset columns: ['date', 'open', 'high', 'low', 'close', 'volume']
+Target we're looking for: 'OT'
+Target type: <class 'str'>
+==================================================
+Overriding target from 'OT' to 'close' for stock data
+============================================================
+DATASET SPLIT INFO (85/5/10):
+============================================================
+Total samples: 5193
+Train: 4673 samples (85%) - rows 0 to 4672
+Val: 259 samples (5%) - rows 4673 to 4931
+Test: 261 samples (10%) - rows 4932 to 5192
+Sequence length: 96, Prediction length: 60
+============================================================
+train 4518
+==================================================
+DEBUG INFO:
+Dataset columns: ['date', 'open', 'high', 'low', 'close', 'volume']
+Target we're looking for: 'OT'
+Target type: <class 'str'>
+==================================================
+Overriding target from 'OT' to 'close' for stock data
+val 200
+==================================================
+DEBUG INFO:
+Dataset columns: ['date', 'open', 'high', 'low', 'close', 'volume']
+Target we're looking for: 'OT'
+Target type: <class 'str'>
+==================================================
+Overriding target from 'OT' to 'close' for stock data
+test 202
+Validation loss decreased (inf --> 0.058560).  Saving model ...
+Updating learning rate to 0.0001
+Validation loss decreased (0.058560 --> 0.053716).  Saving model ...
+Updating learning rate to 5e-05
+EarlyStopping counter: 1 out of 3
+Updating learning rate to 2.5e-05
+EarlyStopping counter: 2 out of 3
+Updating learning rate to 1.25e-05
+EarlyStopping counter: 3 out of 3
+>>>>>>>testing : long_term_forecast_Exchange_96_96_Transformer_custom_ftM_sl96_ll48_pl60_dm512_nh8_el2_dl1_df2048_expand2_dc4_fc3_ebtimeF_dtTrue_Exp_0<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+==================================================
+DEBUG INFO:
+Dataset columns: ['date', 'open', 'high', 'low', 'close', 'volume']
+Target we're looking for: 'OT'
+Target type: <class 'str'>
+==================================================
+Overriding target from 'OT' to 'close' for stock data
+test 202
+test shape: (202, 60, 5) (202, 60, 5)
+test shape: (202, 60, 5) (202, 60, 5)
+
+
+	mse:0.144161656498909, mae:0.19356921315193176, dtw:Not calculated
+
+
+Using GPU
+Args in experiment:
+[1mBasic Config[0m
+  Task Name:          long_term_forecast  Is Training:        1                   
+  Model ID:           Exchange_96_96      Model:              Transformer         
+
+[1mData Loader[0m
+  Data:               custom              Root Path:          ./dataset/exchange_rate/
+  Data Path:          exchange_rate.csv   Features:           M                   
+  Target:             OT                  Freq:               h                   
+  Checkpoints:        ./checkpoints/      
+
+[1mForecasting Task[0m
+  Seq Len:            96                  Label Len:          48                  
+  Pred Len:           72                  Seasonal Patterns:  Monthly             
+  Inverse:            0                   
+
+[1mModel Parameters[0m
+  Top k:              5                   Num Kernels:        6                   
+  Enc In:             5                   Dec In:             5                   
+  C Out:              5                   d model:            512                 
+  n heads:            8                   e layers:           2                   
+  d layers:           1                   d FF:               2048                
+  Moving Avg:         25                  Factor:             3                   
+  Distil:             1                   Dropout:            0.1                 
+  Embed:              timeF               Activation:         gelu                
+
+[1mRun Parameters[0m
+  Num Workers:        10                  Itr:                1                   
+  Train Epochs:       10                  Batch Size:         32                  
+  Patience:           3                   Learning Rate:      0.0001              
+  Des:                Exp                 Loss:               MSE                 
+  Lradj:              type1               Use Amp:            0                   
+
+[1mGPU[0m
+  Use GPU:            1                   GPU:                0                   
+  Use Multi GPU:      0                   Devices:            0,1,2,3             
+
+[1mDe-stationary Projector Params[0m
+  P Hidden Dims:      128, 128            P Hidden Layers:    2                   
+
+Use GPU: cuda:0
+>>>>>>>start training : long_term_forecast_Exchange_96_96_Transformer_custom_ftM_sl96_ll48_pl72_dm512_nh8_el2_dl1_df2048_expand2_dc4_fc3_ebtimeF_dtTrue_Exp_0>>>>>>>>>>>>>>>>>>>>>>>>>>
+==================================================
+DEBUG INFO:
+Dataset columns: ['date', 'open', 'high', 'low', 'close', 'volume']
+Target we're looking for: 'OT'
+Target type: <class 'str'>
+==================================================
+Overriding target from 'OT' to 'close' for stock data
+============================================================
+DATASET SPLIT INFO (85/5/10):
+============================================================
+Total samples: 5193
+Train: 4673 samples (85%) - rows 0 to 4672
+Val: 259 samples (5%) - rows 4673 to 4931
+Test: 261 samples (10%) - rows 4932 to 5192
+Sequence length: 96, Prediction length: 72
+============================================================
+train 4506
+==================================================
+DEBUG INFO:
+Dataset columns: ['date', 'open', 'high', 'low', 'close', 'volume']
+Target we're looking for: 'OT'
+Target type: <class 'str'>
+==================================================
+Overriding target from 'OT' to 'close' for stock data
+val 188
+==================================================
+DEBUG INFO:
+Dataset columns: ['date', 'open', 'high', 'low', 'close', 'volume']
+Target we're looking for: 'OT'
+Target type: <class 'str'>
+==================================================
+Overriding target from 'OT' to 'close' for stock data
+test 190
+Validation loss decreased (inf --> 0.071740).  Saving model ...
+Updating learning rate to 0.0001
+EarlyStopping counter: 1 out of 3
+Updating learning rate to 5e-05
+EarlyStopping counter: 2 out of 3
+Updating learning rate to 2.5e-05
+Validation loss decreased (0.071740 --> 0.060766).  Saving model ...
+Updating learning rate to 1.25e-05
+EarlyStopping counter: 1 out of 3
+Updating learning rate to 6.25e-06
+EarlyStopping counter: 2 out of 3
+Updating learning rate to 3.125e-06
+EarlyStopping counter: 3 out of 3
+>>>>>>>testing : long_term_forecast_Exchange_96_96_Transformer_custom_ftM_sl96_ll48_pl72_dm512_nh8_el2_dl1_df2048_expand2_dc4_fc3_ebtimeF_dtTrue_Exp_0<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+==================================================
+DEBUG INFO:
+Dataset columns: ['date', 'open', 'high', 'low', 'close', 'volume']
+Target we're looking for: 'OT'
+Target type: <class 'str'>
+==================================================
+Overriding target from 'OT' to 'close' for stock data
+test 190
+test shape: (190, 72, 5) (190, 72, 5)
+test shape: (190, 72, 5) (190, 72, 5)
+
+
+	mse:0.24545052647590637, mae:0.22944839298725128, dtw:Not calculated
+
+
+Using GPU
+Args in experiment:
+[1mBasic Config[0m
+  Task Name:          long_term_forecast  Is Training:        1                   
+  Model ID:           Exchange_96_96      Model:              Transformer         
+
+[1mData Loader[0m
+  Data:               custom              Root Path:          ./dataset/exchange_rate/
+  Data Path:          exchange_rate.csv   Features:           M                   
+  Target:             OT                  Freq:               h                   
+  Checkpoints:        ./checkpoints/      
+
+[1mForecasting Task[0m
+  Seq Len:            96                  Label Len:          48                  
+  Pred Len:           96                  Seasonal Patterns:  Monthly             
+  Inverse:            0                   
+
+[1mModel Parameters[0m
+  Top k:              5                   Num Kernels:        6                   
+  Enc In:             5                   Dec In:             5                   
+  C Out:              5                   d model:            512                 
+  n heads:            8                   e layers:           2                   
+  d layers:           1                   d FF:               2048                
+  Moving Avg:         25                  Factor:             3                   
+  Distil:             1                   Dropout:            0.1                 
+  Embed:              timeF               Activation:         gelu                
+
+[1mRun Parameters[0m
+  Num Workers:        10                  Itr:                1                   
+  Train Epochs:       10                  Batch Size:         32                  
+  Patience:           3                   Learning Rate:      0.0001              
+  Des:                Exp                 Loss:               MSE                 
+  Lradj:              type1               Use Amp:            0                   
+
+[1mGPU[0m
+  Use GPU:            1                   GPU:                0                   
+  Use Multi GPU:      0                   Devices:            0,1,2,3             
+
+[1mDe-stationary Projector Params[0m
+  P Hidden Dims:      128, 128            P Hidden Layers:    2                   
+
+Use GPU: cuda:0
+>>>>>>>start training : long_term_forecast_Exchange_96_96_Transformer_custom_ftM_sl96_ll48_pl96_dm512_nh8_el2_dl1_df2048_expand2_dc4_fc3_ebtimeF_dtTrue_Exp_0>>>>>>>>>>>>>>>>>>>>>>>>>>
+==================================================
+DEBUG INFO:
+Dataset columns: ['date', 'open', 'high', 'low', 'close', 'volume']
+Target we're looking for: 'OT'
+Target type: <class 'str'>
+==================================================
+Overriding target from 'OT' to 'close' for stock data
+============================================================
+DATASET SPLIT INFO (85/5/10):
+============================================================
+Total samples: 5193
+Train: 4673 samples (85%) - rows 0 to 4672
+Val: 259 samples (5%) - rows 4673 to 4931
+Test: 261 samples (10%) - rows 4932 to 5192
+Sequence length: 96, Prediction length: 96
+============================================================
+train 4482
+==================================================
+DEBUG INFO:
+Dataset columns: ['date', 'open', 'high', 'low', 'close', 'volume']
+Target we're looking for: 'OT'
+Target type: <class 'str'>
+==================================================
+Overriding target from 'OT' to 'close' for stock data
+val 164
+==================================================
+DEBUG INFO:
+Dataset columns: ['date', 'open', 'high', 'low', 'close', 'volume']
+Target we're looking for: 'OT'
+Target type: <class 'str'>
+==================================================
+Overriding target from 'OT' to 'close' for stock data
+test 166
+Validation loss decreased (inf --> 0.062212).  Saving model ...
+Updating learning rate to 0.0001
+EarlyStopping counter: 1 out of 3
+Updating learning rate to 5e-05
+EarlyStopping counter: 2 out of 3
+Updating learning rate to 2.5e-05
+EarlyStopping counter: 3 out of 3
+>>>>>>>testing : long_term_forecast_Exchange_96_96_Transformer_custom_ftM_sl96_ll48_pl96_dm512_nh8_el2_dl1_df2048_expand2_dc4_fc3_ebtimeF_dtTrue_Exp_0<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+==================================================
+DEBUG INFO:
+Dataset columns: ['date', 'open', 'high', 'low', 'close', 'volume']
+Target we're looking for: 'OT'
+Target type: <class 'str'>
+==================================================
+Overriding target from 'OT' to 'close' for stock data
+test 166
+test shape: (166, 96, 5) (166, 96, 5)
+test shape: (166, 96, 5) (166, 96, 5)
+
+
+	mse:0.1395004391670227, mae:0.19422480463981628, dtw:Not calculated
+
+

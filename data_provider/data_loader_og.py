@@ -50,10 +50,19 @@ class Dataset_ETT_hour(Dataset):
         self.scaler = StandardScaler()
         df_raw = pd.read_csv(os.path.join(self.root_path,
                                           self.data_path))
-                         
+
+
+        # print(f"DataFrame shape after processing: {df_raw.shape}")
+        # print(f"Final columns to use: {cols}")
+        # print(f"Target column: {self.target}")
+        # print(f"First few rows of processed data:")
+        # print(df_raw.head())
+                 
         # Check if dataframe is empty
         if len(df_raw) == 0:
             raise ValueError("Dataset is empty after processing!")
+
+
 
 
         border1s = [0, 12 * 30 * 24 - self.seq_len, 12 * 30 * 24 + 4 * 30 * 24 - self.seq_len]
@@ -250,23 +259,15 @@ class Dataset_Custom(Dataset):
         self.scaler = StandardScaler()
         df_raw = pd.read_csv(os.path.join(self.root_path,
                                           self.data_path))
-        print("="*50)
-        print("DEBUG INFO:")
-        print(f"Dataset columns: {list(df_raw.columns)}")
-        print(f"Target we're looking for: '{self.target}'")
-        print(f"Target type: {type(self.target)}")
-        print("="*50)
-
 
         '''
         df_raw.columns: ['date', ...(other features), target feature]
         '''
 
         if self.target == 'OT' and 'close' in df_raw.columns:
-            print(f"Overriding target from '{self.target}' to 'close' for stock data")
+            # print(f"Overriding target from '{self.target}' to 'close' for stock data")
             self.target = 'close'
                                 
-        # FIX: Handle timezone-aware datetime parsing
 
         if 'date' in df_raw.columns:
             try:
@@ -283,34 +284,20 @@ class Dataset_Custom(Dataset):
             # Convert to timezone-naive if needed
             if df_raw['date'].dt.tz is not None:
                 df_raw['date'] = df_raw['date'].dt.tz_convert(None)
+                # print(f"Date column parsed successfully. Sample dates: {df_raw['date'].head(2).tolist()}")        
 
         cols = list(df_raw.columns)
+        # print(f"Cols before removala: {cols}")
         cols.remove(self.target)
         cols.remove('date')
         df_raw = df_raw[['date'] + cols + [self.target]]
-        
-        # CHANGED: 85/5/10 split instead of 70/10/20
-        num_train = int(len(df_raw) * 0.9)
-        num_vali = int(len(df_raw) * 0.05)
-        num_test = len(df_raw) - num_train - num_vali
-        
-        # Define boundaries with sequence length adjustment
-        border1s = [0, num_train - self.seq_len, num_train + num_vali - self.seq_len]
+        num_train = int(len(df_raw) * 0.7)
+        num_test = int(len(df_raw) * 0.2)
+        num_vali = len(df_raw) - num_train - num_test
+        border1s = [0, num_train - self.seq_len, len(df_raw) - num_test - self.seq_len]
         border2s = [num_train, num_train + num_vali, len(df_raw)]
         border1 = border1s[self.set_type]
         border2 = border2s[self.set_type]
-        
-        # ADDED: Print split information
-        if self.set_type == 0:  # Only print once during training
-            print("="*60)
-            print("DATASET SPLIT INFO (85/5/10):")
-            print("="*60)
-            print(f"Total samples: {len(df_raw)}")
-            print(f"Train: {num_train} samples (85%) - rows 0 to {num_train-1}")
-            print(f"Val: {num_vali} samples (5%) - rows {num_train} to {num_train+num_vali-1}")
-            print(f"Test: {num_test} samples (10%) - rows {num_train+num_vali} to {len(df_raw)-1}")
-            print(f"Sequence length: {self.seq_len}, Prediction length: {self.pred_len}")
-            print("="*60)
 
         if self.features == 'M' or self.features == 'MS':
             cols_data = df_raw.columns[1:]
@@ -363,6 +350,7 @@ class Dataset_Custom(Dataset):
 
     def inverse_transform(self, data):
         return self.scaler.inverse_transform(data)
+
 
 class Dataset_M4(Dataset):
     def __init__(self, args, root_path, flag='pred', size=None,

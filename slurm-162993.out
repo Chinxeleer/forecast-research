@@ -1,0 +1,1737 @@
+Using GPU
+Args in experiment:
+[1mBasic Config[0m
+  Task Name:          long_term_forecast  Is Training:        1                   
+  Model ID:           Exchange_1          Model:              Mamba               
+
+[1mData Loader[0m
+  Data:               custom              Root Path:          ./dataset/exchange_rate/
+  Data Path:          exchange_rate.csv   Features:           M                   
+  Target:             OT                  Freq:               h                   
+  Checkpoints:        ./checkpoints/      
+
+[1mForecasting Task[0m
+  Seq Len:            96                  Label Len:          48                  
+  Pred Len:           1                   Seasonal Patterns:  Monthly             
+  Inverse:            0                   
+
+[1mModel Parameters[0m
+  Top k:              5                   Num Kernels:        6                   
+  Enc In:             5                   Dec In:             5                   
+  C Out:              5                   d model:            128                 
+  n heads:            8                   e layers:           2                   
+  d layers:           1                   d FF:               16                  
+  Moving Avg:         25                  Factor:             1                   
+  Distil:             1                   Dropout:            0.1                 
+  Embed:              timeF               Activation:         gelu                
+
+[1mRun Parameters[0m
+  Num Workers:        10                  Itr:                1                   
+  Train Epochs:       50                  Batch Size:         32                  
+  Patience:           50                  Learning Rate:      0.0001              
+  Des:                Exp                 Loss:               MSE                 
+  Lradj:              type1               Use Amp:            0                   
+
+[1mGPU[0m
+  Use GPU:            1                   GPU:                0                   
+  Use Multi GPU:      0                   Devices:            0,1,2,3             
+
+[1mDe-stationary Projector Params[0m
+  P Hidden Dims:      128, 128            P Hidden Layers:    2                   
+
+Please make sure you have successfully installed mamba_ssm
+Use GPU: cuda:0
+>>>>>>>start training : long_term_forecast_Exchange_1_Mamba_custom_ftM_sl96_ll48_pl1_dm128_nh8_el2_dl1_df16_expand2_dc4_fc1_ebtimeF_dtTrue_Exp_0>>>>>>>>>>>>>>>>>>>>>>>>>>
+==================================================
+DEBUG INFO:
+Dataset columns: ['date', 'open', 'high', 'low', 'close', 'volume']
+Target we're looking for: 'OT'
+Target type: <class 'str'>
+==================================================
+Overriding target from 'OT' to 'close' for stock data
+============================================================
+DATASET SPLIT INFO (85/5/10):
+============================================================
+Total samples: 5193
+Train: 4673 samples (85%) - rows 0 to 4672
+Val: 259 samples (5%) - rows 4673 to 4931
+Test: 261 samples (10%) - rows 4932 to 5192
+Sequence length: 96, Prediction length: 1
+============================================================
+train 4577
+==================================================
+DEBUG INFO:
+Dataset columns: ['date', 'open', 'high', 'low', 'close', 'volume']
+Target we're looking for: 'OT'
+Target type: <class 'str'>
+==================================================
+Overriding target from 'OT' to 'close' for stock data
+val 259
+==================================================
+DEBUG INFO:
+Dataset columns: ['date', 'open', 'high', 'low', 'close', 'volume']
+Target we're looking for: 'OT'
+Target type: <class 'str'>
+==================================================
+Overriding target from 'OT' to 'close' for stock data
+test 261
+Validation loss decreased (inf --> 0.027071).  Saving model ...
+Updating learning rate to 0.0001
+Validation loss decreased (0.027071 --> 0.025186).  Saving model ...
+Updating learning rate to 5e-05
+Validation loss decreased (0.025186 --> 0.023825).  Saving model ...
+Updating learning rate to 2.5e-05
+EarlyStopping counter: 1 out of 50
+Updating learning rate to 1.25e-05
+EarlyStopping counter: 2 out of 50
+Updating learning rate to 6.25e-06
+EarlyStopping counter: 3 out of 50
+Updating learning rate to 3.125e-06
+EarlyStopping counter: 4 out of 50
+Updating learning rate to 1.5625e-06
+EarlyStopping counter: 5 out of 50
+Updating learning rate to 7.8125e-07
+EarlyStopping counter: 6 out of 50
+Updating learning rate to 3.90625e-07
+EarlyStopping counter: 7 out of 50
+Updating learning rate to 1.953125e-07
+EarlyStopping counter: 8 out of 50
+Updating learning rate to 9.765625e-08
+EarlyStopping counter: 9 out of 50
+Updating learning rate to 4.8828125e-08
+EarlyStopping counter: 10 out of 50
+Updating learning rate to 2.44140625e-08
+EarlyStopping counter: 11 out of 50
+Updating learning rate to 1.220703125e-08
+EarlyStopping counter: 12 out of 50
+Updating learning rate to 6.103515625e-09
+EarlyStopping counter: 13 out of 50
+Updating learning rate to 3.0517578125e-09
+EarlyStopping counter: 14 out of 50
+Updating learning rate to 1.52587890625e-09
+EarlyStopping counter: 15 out of 50
+Updating learning rate to 7.62939453125e-10
+EarlyStopping counter: 16 out of 50
+Updating learning rate to 3.814697265625e-10
+EarlyStopping counter: 17 out of 50
+Updating learning rate to 1.9073486328125e-10
+EarlyStopping counter: 18 out of 50
+Updating learning rate to 9.5367431640625e-11
+EarlyStopping counter: 19 out of 50
+Updating learning rate to 4.76837158203125e-11
+EarlyStopping counter: 20 out of 50
+Updating learning rate to 2.384185791015625e-11
+EarlyStopping counter: 21 out of 50
+Updating learning rate to 1.1920928955078126e-11
+EarlyStopping counter: 22 out of 50
+Updating learning rate to 5.960464477539063e-12
+EarlyStopping counter: 23 out of 50
+Updating learning rate to 2.9802322387695314e-12
+EarlyStopping counter: 24 out of 50
+Updating learning rate to 1.4901161193847657e-12
+EarlyStopping counter: 25 out of 50
+Updating learning rate to 7.450580596923828e-13
+EarlyStopping counter: 26 out of 50
+Updating learning rate to 3.725290298461914e-13
+EarlyStopping counter: 27 out of 50
+Updating learning rate to 1.862645149230957e-13
+EarlyStopping counter: 28 out of 50
+Updating learning rate to 9.313225746154786e-14
+EarlyStopping counter: 29 out of 50
+Updating learning rate to 4.656612873077393e-14
+EarlyStopping counter: 30 out of 50
+Updating learning rate to 2.3283064365386964e-14
+EarlyStopping counter: 31 out of 50
+Updating learning rate to 1.1641532182693482e-14
+EarlyStopping counter: 32 out of 50
+Updating learning rate to 5.820766091346741e-15
+EarlyStopping counter: 33 out of 50
+Updating learning rate to 2.9103830456733705e-15
+EarlyStopping counter: 34 out of 50
+Updating learning rate to 1.4551915228366853e-15
+EarlyStopping counter: 35 out of 50
+Updating learning rate to 7.275957614183426e-16
+Validation loss decreased (0.023825 --> 0.023660).  Saving model ...
+Updating learning rate to 3.637978807091713e-16
+EarlyStopping counter: 1 out of 50
+Updating learning rate to 1.8189894035458566e-16
+EarlyStopping counter: 2 out of 50
+Updating learning rate to 9.094947017729283e-17
+EarlyStopping counter: 3 out of 50
+Updating learning rate to 4.5474735088646414e-17
+EarlyStopping counter: 4 out of 50
+Updating learning rate to 2.2737367544323207e-17
+EarlyStopping counter: 5 out of 50
+Updating learning rate to 1.1368683772161604e-17
+EarlyStopping counter: 6 out of 50
+Updating learning rate to 5.684341886080802e-18
+EarlyStopping counter: 7 out of 50
+Updating learning rate to 2.842170943040401e-18
+EarlyStopping counter: 8 out of 50
+Updating learning rate to 1.4210854715202004e-18
+EarlyStopping counter: 9 out of 50
+Updating learning rate to 7.105427357601002e-19
+EarlyStopping counter: 10 out of 50
+Updating learning rate to 3.552713678800501e-19
+EarlyStopping counter: 11 out of 50
+Updating learning rate to 1.7763568394002505e-19
+>>>>>>>testing : long_term_forecast_Exchange_1_Mamba_custom_ftM_sl96_ll48_pl1_dm128_nh8_el2_dl1_df16_expand2_dc4_fc1_ebtimeF_dtTrue_Exp_0<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+==================================================
+DEBUG INFO:
+Dataset columns: ['date', 'open', 'high', 'low', 'close', 'volume']
+Target we're looking for: 'OT'
+Target type: <class 'str'>
+==================================================
+Overriding target from 'OT' to 'close' for stock data
+test 261
+test shape: (261, 1, 5) (261, 1, 5)
+test shape: (261, 1, 5) (261, 1, 5)
+
+
+	mse:0.0491158664226532, mae:0.07515937834978104, dtw:Not calculated
+
+
+Using GPU
+Args in experiment:
+[1mBasic Config[0m
+  Task Name:          long_term_forecast  Is Training:        1                   
+  Model ID:           Exchange_3          Model:              Mamba               
+
+[1mData Loader[0m
+  Data:               custom              Root Path:          ./dataset/exchange_rate/
+  Data Path:          exchange_rate.csv   Features:           M                   
+  Target:             OT                  Freq:               h                   
+  Checkpoints:        ./checkpoints/      
+
+[1mForecasting Task[0m
+  Seq Len:            96                  Label Len:          48                  
+  Pred Len:           3                   Seasonal Patterns:  Monthly             
+  Inverse:            0                   
+
+[1mModel Parameters[0m
+  Top k:              5                   Num Kernels:        6                   
+  Enc In:             5                   Dec In:             5                   
+  C Out:              5                   d model:            128                 
+  n heads:            8                   e layers:           2                   
+  d layers:           1                   d FF:               16                  
+  Moving Avg:         25                  Factor:             1                   
+  Distil:             1                   Dropout:            0.1                 
+  Embed:              timeF               Activation:         gelu                
+
+[1mRun Parameters[0m
+  Num Workers:        10                  Itr:                1                   
+  Train Epochs:       50                  Batch Size:         32                  
+  Patience:           50                  Learning Rate:      0.0001              
+  Des:                Exp                 Loss:               MSE                 
+  Lradj:              type1               Use Amp:            0                   
+
+[1mGPU[0m
+  Use GPU:            1                   GPU:                0                   
+  Use Multi GPU:      0                   Devices:            0,1,2,3             
+
+[1mDe-stationary Projector Params[0m
+  P Hidden Dims:      128, 128            P Hidden Layers:    2                   
+
+Please make sure you have successfully installed mamba_ssm
+Use GPU: cuda:0
+>>>>>>>start training : long_term_forecast_Exchange_3_Mamba_custom_ftM_sl96_ll48_pl3_dm128_nh8_el2_dl1_df16_expand2_dc4_fc1_ebtimeF_dtTrue_Exp_0>>>>>>>>>>>>>>>>>>>>>>>>>>
+==================================================
+DEBUG INFO:
+Dataset columns: ['date', 'open', 'high', 'low', 'close', 'volume']
+Target we're looking for: 'OT'
+Target type: <class 'str'>
+==================================================
+Overriding target from 'OT' to 'close' for stock data
+============================================================
+DATASET SPLIT INFO (85/5/10):
+============================================================
+Total samples: 5193
+Train: 4673 samples (85%) - rows 0 to 4672
+Val: 259 samples (5%) - rows 4673 to 4931
+Test: 261 samples (10%) - rows 4932 to 5192
+Sequence length: 96, Prediction length: 3
+============================================================
+train 4575
+==================================================
+DEBUG INFO:
+Dataset columns: ['date', 'open', 'high', 'low', 'close', 'volume']
+Target we're looking for: 'OT'
+Target type: <class 'str'>
+==================================================
+Overriding target from 'OT' to 'close' for stock data
+val 257
+==================================================
+DEBUG INFO:
+Dataset columns: ['date', 'open', 'high', 'low', 'close', 'volume']
+Target we're looking for: 'OT'
+Target type: <class 'str'>
+==================================================
+Overriding target from 'OT' to 'close' for stock data
+test 259
+Validation loss decreased (inf --> 0.038801).  Saving model ...
+Updating learning rate to 0.0001
+EarlyStopping counter: 1 out of 50
+Updating learning rate to 5e-05
+EarlyStopping counter: 2 out of 50
+Updating learning rate to 2.5e-05
+Validation loss decreased (0.038801 --> 0.033333).  Saving model ...
+Updating learning rate to 1.25e-05
+Validation loss decreased (0.033333 --> 0.031310).  Saving model ...
+Updating learning rate to 6.25e-06
+EarlyStopping counter: 1 out of 50
+Updating learning rate to 3.125e-06
+EarlyStopping counter: 2 out of 50
+Updating learning rate to 1.5625e-06
+EarlyStopping counter: 3 out of 50
+Updating learning rate to 7.8125e-07
+EarlyStopping counter: 4 out of 50
+Updating learning rate to 3.90625e-07
+EarlyStopping counter: 5 out of 50
+Updating learning rate to 1.953125e-07
+EarlyStopping counter: 6 out of 50
+Updating learning rate to 9.765625e-08
+EarlyStopping counter: 7 out of 50
+Updating learning rate to 4.8828125e-08
+EarlyStopping counter: 8 out of 50
+Updating learning rate to 2.44140625e-08
+EarlyStopping counter: 9 out of 50
+Updating learning rate to 1.220703125e-08
+EarlyStopping counter: 10 out of 50
+Updating learning rate to 6.103515625e-09
+EarlyStopping counter: 11 out of 50
+Updating learning rate to 3.0517578125e-09
+EarlyStopping counter: 12 out of 50
+Updating learning rate to 1.52587890625e-09
+EarlyStopping counter: 13 out of 50
+Updating learning rate to 7.62939453125e-10
+EarlyStopping counter: 14 out of 50
+Updating learning rate to 3.814697265625e-10
+EarlyStopping counter: 15 out of 50
+Updating learning rate to 1.9073486328125e-10
+EarlyStopping counter: 16 out of 50
+Updating learning rate to 9.5367431640625e-11
+EarlyStopping counter: 17 out of 50
+Updating learning rate to 4.76837158203125e-11
+EarlyStopping counter: 18 out of 50
+Updating learning rate to 2.384185791015625e-11
+EarlyStopping counter: 19 out of 50
+Updating learning rate to 1.1920928955078126e-11
+EarlyStopping counter: 20 out of 50
+Updating learning rate to 5.960464477539063e-12
+EarlyStopping counter: 21 out of 50
+Updating learning rate to 2.9802322387695314e-12
+EarlyStopping counter: 22 out of 50
+Updating learning rate to 1.4901161193847657e-12
+EarlyStopping counter: 23 out of 50
+Updating learning rate to 7.450580596923828e-13
+EarlyStopping counter: 24 out of 50
+Updating learning rate to 3.725290298461914e-13
+EarlyStopping counter: 25 out of 50
+Updating learning rate to 1.862645149230957e-13
+EarlyStopping counter: 26 out of 50
+Updating learning rate to 9.313225746154786e-14
+EarlyStopping counter: 27 out of 50
+Updating learning rate to 4.656612873077393e-14
+EarlyStopping counter: 28 out of 50
+Updating learning rate to 2.3283064365386964e-14
+EarlyStopping counter: 29 out of 50
+Updating learning rate to 1.1641532182693482e-14
+EarlyStopping counter: 30 out of 50
+Updating learning rate to 5.820766091346741e-15
+EarlyStopping counter: 31 out of 50
+Updating learning rate to 2.9103830456733705e-15
+EarlyStopping counter: 32 out of 50
+Updating learning rate to 1.4551915228366853e-15
+EarlyStopping counter: 33 out of 50
+Updating learning rate to 7.275957614183426e-16
+EarlyStopping counter: 34 out of 50
+Updating learning rate to 3.637978807091713e-16
+EarlyStopping counter: 35 out of 50
+Updating learning rate to 1.8189894035458566e-16
+EarlyStopping counter: 36 out of 50
+Updating learning rate to 9.094947017729283e-17
+Validation loss decreased (0.031310 --> 0.031236).  Saving model ...
+Updating learning rate to 4.5474735088646414e-17
+EarlyStopping counter: 1 out of 50
+Updating learning rate to 2.2737367544323207e-17
+EarlyStopping counter: 2 out of 50
+Updating learning rate to 1.1368683772161604e-17
+EarlyStopping counter: 3 out of 50
+Updating learning rate to 5.684341886080802e-18
+EarlyStopping counter: 4 out of 50
+Updating learning rate to 2.842170943040401e-18
+EarlyStopping counter: 5 out of 50
+Updating learning rate to 1.4210854715202004e-18
+EarlyStopping counter: 6 out of 50
+Updating learning rate to 7.105427357601002e-19
+EarlyStopping counter: 7 out of 50
+Updating learning rate to 3.552713678800501e-19
+EarlyStopping counter: 8 out of 50
+Updating learning rate to 1.7763568394002505e-19
+>>>>>>>testing : long_term_forecast_Exchange_3_Mamba_custom_ftM_sl96_ll48_pl3_dm128_nh8_el2_dl1_df16_expand2_dc4_fc1_ebtimeF_dtTrue_Exp_0<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+==================================================
+DEBUG INFO:
+Dataset columns: ['date', 'open', 'high', 'low', 'close', 'volume']
+Target we're looking for: 'OT'
+Target type: <class 'str'>
+==================================================
+Overriding target from 'OT' to 'close' for stock data
+test 259
+test shape: (259, 3, 5) (259, 3, 5)
+test shape: (259, 3, 5) (259, 3, 5)
+
+
+	mse:0.06050886958837509, mae:0.08926529437303543, dtw:Not calculated
+
+
+Using GPU
+Args in experiment:
+[1mBasic Config[0m
+  Task Name:          long_term_forecast  Is Training:        1                   
+  Model ID:           Exchange_7          Model:              Mamba               
+
+[1mData Loader[0m
+  Data:               custom              Root Path:          ./dataset/exchange_rate/
+  Data Path:          exchange_rate.csv   Features:           M                   
+  Target:             OT                  Freq:               h                   
+  Checkpoints:        ./checkpoints/      
+
+[1mForecasting Task[0m
+  Seq Len:            96                  Label Len:          48                  
+  Pred Len:           7                   Seasonal Patterns:  Monthly             
+  Inverse:            0                   
+
+[1mModel Parameters[0m
+  Top k:              5                   Num Kernels:        6                   
+  Enc In:             5                   Dec In:             5                   
+  C Out:              5                   d model:            128                 
+  n heads:            8                   e layers:           2                   
+  d layers:           1                   d FF:               16                  
+  Moving Avg:         25                  Factor:             1                   
+  Distil:             1                   Dropout:            0.1                 
+  Embed:              timeF               Activation:         gelu                
+
+[1mRun Parameters[0m
+  Num Workers:        10                  Itr:                1                   
+  Train Epochs:       50                  Batch Size:         32                  
+  Patience:           50                  Learning Rate:      0.0001              
+  Des:                Exp                 Loss:               MSE                 
+  Lradj:              type1               Use Amp:            0                   
+
+[1mGPU[0m
+  Use GPU:            1                   GPU:                0                   
+  Use Multi GPU:      0                   Devices:            0,1,2,3             
+
+[1mDe-stationary Projector Params[0m
+  P Hidden Dims:      128, 128            P Hidden Layers:    2                   
+
+Please make sure you have successfully installed mamba_ssm
+Use GPU: cuda:0
+>>>>>>>start training : long_term_forecast_Exchange_7_Mamba_custom_ftM_sl96_ll48_pl7_dm128_nh8_el2_dl1_df16_expand2_dc4_fc1_ebtimeF_dtTrue_Exp_0>>>>>>>>>>>>>>>>>>>>>>>>>>
+==================================================
+DEBUG INFO:
+Dataset columns: ['date', 'open', 'high', 'low', 'close', 'volume']
+Target we're looking for: 'OT'
+Target type: <class 'str'>
+==================================================
+Overriding target from 'OT' to 'close' for stock data
+============================================================
+DATASET SPLIT INFO (85/5/10):
+============================================================
+Total samples: 5193
+Train: 4673 samples (85%) - rows 0 to 4672
+Val: 259 samples (5%) - rows 4673 to 4931
+Test: 261 samples (10%) - rows 4932 to 5192
+Sequence length: 96, Prediction length: 7
+============================================================
+train 4571
+==================================================
+DEBUG INFO:
+Dataset columns: ['date', 'open', 'high', 'low', 'close', 'volume']
+Target we're looking for: 'OT'
+Target type: <class 'str'>
+==================================================
+Overriding target from 'OT' to 'close' for stock data
+val 253
+==================================================
+DEBUG INFO:
+Dataset columns: ['date', 'open', 'high', 'low', 'close', 'volume']
+Target we're looking for: 'OT'
+Target type: <class 'str'>
+==================================================
+Overriding target from 'OT' to 'close' for stock data
+test 255
+Validation loss decreased (inf --> 0.037408).  Saving model ...
+Updating learning rate to 0.0001
+EarlyStopping counter: 1 out of 50
+Updating learning rate to 5e-05
+EarlyStopping counter: 2 out of 50
+Updating learning rate to 2.5e-05
+EarlyStopping counter: 3 out of 50
+Updating learning rate to 1.25e-05
+EarlyStopping counter: 4 out of 50
+Updating learning rate to 6.25e-06
+EarlyStopping counter: 5 out of 50
+Updating learning rate to 3.125e-06
+EarlyStopping counter: 6 out of 50
+Updating learning rate to 1.5625e-06
+EarlyStopping counter: 7 out of 50
+Updating learning rate to 7.8125e-07
+EarlyStopping counter: 8 out of 50
+Updating learning rate to 3.90625e-07
+EarlyStopping counter: 9 out of 50
+Updating learning rate to 1.953125e-07
+EarlyStopping counter: 10 out of 50
+Updating learning rate to 9.765625e-08
+EarlyStopping counter: 11 out of 50
+Updating learning rate to 4.8828125e-08
+EarlyStopping counter: 12 out of 50
+Updating learning rate to 2.44140625e-08
+EarlyStopping counter: 13 out of 50
+Updating learning rate to 1.220703125e-08
+EarlyStopping counter: 14 out of 50
+Updating learning rate to 6.103515625e-09
+EarlyStopping counter: 15 out of 50
+Updating learning rate to 3.0517578125e-09
+EarlyStopping counter: 16 out of 50
+Updating learning rate to 1.52587890625e-09
+EarlyStopping counter: 17 out of 50
+Updating learning rate to 7.62939453125e-10
+EarlyStopping counter: 18 out of 50
+Updating learning rate to 3.814697265625e-10
+EarlyStopping counter: 19 out of 50
+Updating learning rate to 1.9073486328125e-10
+EarlyStopping counter: 20 out of 50
+Updating learning rate to 9.5367431640625e-11
+EarlyStopping counter: 21 out of 50
+Updating learning rate to 4.76837158203125e-11
+EarlyStopping counter: 22 out of 50
+Updating learning rate to 2.384185791015625e-11
+EarlyStopping counter: 23 out of 50
+Updating learning rate to 1.1920928955078126e-11
+EarlyStopping counter: 24 out of 50
+Updating learning rate to 5.960464477539063e-12
+EarlyStopping counter: 25 out of 50
+Updating learning rate to 2.9802322387695314e-12
+EarlyStopping counter: 26 out of 50
+Updating learning rate to 1.4901161193847657e-12
+EarlyStopping counter: 27 out of 50
+Updating learning rate to 7.450580596923828e-13
+EarlyStopping counter: 28 out of 50
+Updating learning rate to 3.725290298461914e-13
+EarlyStopping counter: 29 out of 50
+Updating learning rate to 1.862645149230957e-13
+EarlyStopping counter: 30 out of 50
+Updating learning rate to 9.313225746154786e-14
+EarlyStopping counter: 31 out of 50
+Updating learning rate to 4.656612873077393e-14
+EarlyStopping counter: 32 out of 50
+Updating learning rate to 2.3283064365386964e-14
+EarlyStopping counter: 33 out of 50
+Updating learning rate to 1.1641532182693482e-14
+EarlyStopping counter: 34 out of 50
+Updating learning rate to 5.820766091346741e-15
+EarlyStopping counter: 35 out of 50
+Updating learning rate to 2.9103830456733705e-15
+EarlyStopping counter: 36 out of 50
+Updating learning rate to 1.4551915228366853e-15
+EarlyStopping counter: 37 out of 50
+Updating learning rate to 7.275957614183426e-16
+EarlyStopping counter: 38 out of 50
+Updating learning rate to 3.637978807091713e-16
+EarlyStopping counter: 39 out of 50
+Updating learning rate to 1.8189894035458566e-16
+EarlyStopping counter: 40 out of 50
+Updating learning rate to 9.094947017729283e-17
+EarlyStopping counter: 41 out of 50
+Updating learning rate to 4.5474735088646414e-17
+EarlyStopping counter: 42 out of 50
+Updating learning rate to 2.2737367544323207e-17
+EarlyStopping counter: 43 out of 50
+Updating learning rate to 1.1368683772161604e-17
+EarlyStopping counter: 44 out of 50
+Updating learning rate to 5.684341886080802e-18
+EarlyStopping counter: 45 out of 50
+Updating learning rate to 2.842170943040401e-18
+EarlyStopping counter: 46 out of 50
+Updating learning rate to 1.4210854715202004e-18
+EarlyStopping counter: 47 out of 50
+Updating learning rate to 7.105427357601002e-19
+EarlyStopping counter: 48 out of 50
+Updating learning rate to 3.552713678800501e-19
+EarlyStopping counter: 49 out of 50
+Updating learning rate to 1.7763568394002505e-19
+>>>>>>>testing : long_term_forecast_Exchange_7_Mamba_custom_ftM_sl96_ll48_pl7_dm128_nh8_el2_dl1_df16_expand2_dc4_fc1_ebtimeF_dtTrue_Exp_0<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+==================================================
+DEBUG INFO:
+Dataset columns: ['date', 'open', 'high', 'low', 'close', 'volume']
+Target we're looking for: 'OT'
+Target type: <class 'str'>
+==================================================
+Overriding target from 'OT' to 'close' for stock data
+test 255
+test shape: (255, 7, 5) (255, 7, 5)
+test shape: (255, 7, 5) (255, 7, 5)
+
+
+	mse:0.07090945541858673, mae:0.10523227602243423, dtw:Not calculated
+
+
+Using GPU
+Args in experiment:
+[1mBasic Config[0m
+  Task Name:          long_term_forecast  Is Training:        1                   
+  Model ID:           Exchange_14         Model:              Mamba               
+
+[1mData Loader[0m
+  Data:               custom              Root Path:          ./dataset/exchange_rate/
+  Data Path:          exchange_rate.csv   Features:           M                   
+  Target:             OT                  Freq:               h                   
+  Checkpoints:        ./checkpoints/      
+
+[1mForecasting Task[0m
+  Seq Len:            96                  Label Len:          48                  
+  Pred Len:           14                  Seasonal Patterns:  Monthly             
+  Inverse:            0                   
+
+[1mModel Parameters[0m
+  Top k:              5                   Num Kernels:        6                   
+  Enc In:             5                   Dec In:             5                   
+  C Out:              5                   d model:            128                 
+  n heads:            8                   e layers:           2                   
+  d layers:           1                   d FF:               16                  
+  Moving Avg:         25                  Factor:             1                   
+  Distil:             1                   Dropout:            0.1                 
+  Embed:              timeF               Activation:         gelu                
+
+[1mRun Parameters[0m
+  Num Workers:        10                  Itr:                1                   
+  Train Epochs:       50                  Batch Size:         32                  
+  Patience:           50                  Learning Rate:      0.0001              
+  Des:                Exp                 Loss:               MSE                 
+  Lradj:              type1               Use Amp:            0                   
+
+[1mGPU[0m
+  Use GPU:            1                   GPU:                0                   
+  Use Multi GPU:      0                   Devices:            0,1,2,3             
+
+[1mDe-stationary Projector Params[0m
+  P Hidden Dims:      128, 128            P Hidden Layers:    2                   
+
+Please make sure you have successfully installed mamba_ssm
+Use GPU: cuda:0
+>>>>>>>start training : long_term_forecast_Exchange_14_Mamba_custom_ftM_sl96_ll48_pl14_dm128_nh8_el2_dl1_df16_expand2_dc4_fc1_ebtimeF_dtTrue_Exp_0>>>>>>>>>>>>>>>>>>>>>>>>>>
+==================================================
+DEBUG INFO:
+Dataset columns: ['date', 'open', 'high', 'low', 'close', 'volume']
+Target we're looking for: 'OT'
+Target type: <class 'str'>
+==================================================
+Overriding target from 'OT' to 'close' for stock data
+============================================================
+DATASET SPLIT INFO (85/5/10):
+============================================================
+Total samples: 5193
+Train: 4673 samples (85%) - rows 0 to 4672
+Val: 259 samples (5%) - rows 4673 to 4931
+Test: 261 samples (10%) - rows 4932 to 5192
+Sequence length: 96, Prediction length: 14
+============================================================
+train 4564
+==================================================
+DEBUG INFO:
+Dataset columns: ['date', 'open', 'high', 'low', 'close', 'volume']
+Target we're looking for: 'OT'
+Target type: <class 'str'>
+==================================================
+Overriding target from 'OT' to 'close' for stock data
+val 246
+==================================================
+DEBUG INFO:
+Dataset columns: ['date', 'open', 'high', 'low', 'close', 'volume']
+Target we're looking for: 'OT'
+Target type: <class 'str'>
+==================================================
+Overriding target from 'OT' to 'close' for stock data
+test 248
+Validation loss decreased (inf --> 0.040504).  Saving model ...
+Updating learning rate to 0.0001
+EarlyStopping counter: 1 out of 50
+Updating learning rate to 5e-05
+Validation loss decreased (0.040504 --> 0.039811).  Saving model ...
+Updating learning rate to 2.5e-05
+EarlyStopping counter: 1 out of 50
+Updating learning rate to 1.25e-05
+EarlyStopping counter: 2 out of 50
+Updating learning rate to 6.25e-06
+EarlyStopping counter: 3 out of 50
+Updating learning rate to 3.125e-06
+EarlyStopping counter: 4 out of 50
+Updating learning rate to 1.5625e-06
+EarlyStopping counter: 5 out of 50
+Updating learning rate to 7.8125e-07
+EarlyStopping counter: 6 out of 50
+Updating learning rate to 3.90625e-07
+EarlyStopping counter: 7 out of 50
+Updating learning rate to 1.953125e-07
+EarlyStopping counter: 8 out of 50
+Updating learning rate to 9.765625e-08
+EarlyStopping counter: 9 out of 50
+Updating learning rate to 4.8828125e-08
+EarlyStopping counter: 10 out of 50
+Updating learning rate to 2.44140625e-08
+EarlyStopping counter: 11 out of 50
+Updating learning rate to 1.220703125e-08
+EarlyStopping counter: 12 out of 50
+Updating learning rate to 6.103515625e-09
+EarlyStopping counter: 13 out of 50
+Updating learning rate to 3.0517578125e-09
+EarlyStopping counter: 14 out of 50
+Updating learning rate to 1.52587890625e-09
+EarlyStopping counter: 15 out of 50
+Updating learning rate to 7.62939453125e-10
+EarlyStopping counter: 16 out of 50
+Updating learning rate to 3.814697265625e-10
+EarlyStopping counter: 17 out of 50
+Updating learning rate to 1.9073486328125e-10
+EarlyStopping counter: 18 out of 50
+Updating learning rate to 9.5367431640625e-11
+EarlyStopping counter: 19 out of 50
+Updating learning rate to 4.76837158203125e-11
+EarlyStopping counter: 20 out of 50
+Updating learning rate to 2.384185791015625e-11
+EarlyStopping counter: 21 out of 50
+Updating learning rate to 1.1920928955078126e-11
+EarlyStopping counter: 22 out of 50
+Updating learning rate to 5.960464477539063e-12
+EarlyStopping counter: 23 out of 50
+Updating learning rate to 2.9802322387695314e-12
+EarlyStopping counter: 24 out of 50
+Updating learning rate to 1.4901161193847657e-12
+EarlyStopping counter: 25 out of 50
+Updating learning rate to 7.450580596923828e-13
+EarlyStopping counter: 26 out of 50
+Updating learning rate to 3.725290298461914e-13
+EarlyStopping counter: 27 out of 50
+Updating learning rate to 1.862645149230957e-13
+EarlyStopping counter: 28 out of 50
+Updating learning rate to 9.313225746154786e-14
+Validation loss decreased (0.039811 --> 0.039670).  Saving model ...
+Updating learning rate to 4.656612873077393e-14
+EarlyStopping counter: 1 out of 50
+Updating learning rate to 2.3283064365386964e-14
+EarlyStopping counter: 2 out of 50
+Updating learning rate to 1.1641532182693482e-14
+EarlyStopping counter: 3 out of 50
+Updating learning rate to 5.820766091346741e-15
+EarlyStopping counter: 4 out of 50
+Updating learning rate to 2.9103830456733705e-15
+EarlyStopping counter: 5 out of 50
+Updating learning rate to 1.4551915228366853e-15
+EarlyStopping counter: 6 out of 50
+Updating learning rate to 7.275957614183426e-16
+EarlyStopping counter: 7 out of 50
+Updating learning rate to 3.637978807091713e-16
+EarlyStopping counter: 8 out of 50
+Updating learning rate to 1.8189894035458566e-16
+EarlyStopping counter: 9 out of 50
+Updating learning rate to 9.094947017729283e-17
+EarlyStopping counter: 10 out of 50
+Updating learning rate to 4.5474735088646414e-17
+EarlyStopping counter: 11 out of 50
+Updating learning rate to 2.2737367544323207e-17
+EarlyStopping counter: 12 out of 50
+Updating learning rate to 1.1368683772161604e-17
+EarlyStopping counter: 13 out of 50
+Updating learning rate to 5.684341886080802e-18
+EarlyStopping counter: 14 out of 50
+Updating learning rate to 2.842170943040401e-18
+EarlyStopping counter: 15 out of 50
+Updating learning rate to 1.4210854715202004e-18
+EarlyStopping counter: 16 out of 50
+Updating learning rate to 7.105427357601002e-19
+EarlyStopping counter: 17 out of 50
+Updating learning rate to 3.552713678800501e-19
+EarlyStopping counter: 18 out of 50
+Updating learning rate to 1.7763568394002505e-19
+>>>>>>>testing : long_term_forecast_Exchange_14_Mamba_custom_ftM_sl96_ll48_pl14_dm128_nh8_el2_dl1_df16_expand2_dc4_fc1_ebtimeF_dtTrue_Exp_0<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+==================================================
+DEBUG INFO:
+Dataset columns: ['date', 'open', 'high', 'low', 'close', 'volume']
+Target we're looking for: 'OT'
+Target type: <class 'str'>
+==================================================
+Overriding target from 'OT' to 'close' for stock data
+test 248
+test shape: (248, 14, 5) (248, 14, 5)
+test shape: (248, 14, 5) (248, 14, 5)
+
+
+	mse:0.07345937937498093, mae:0.10665237158536911, dtw:Not calculated
+
+
+Using GPU
+Args in experiment:
+[1mBasic Config[0m
+  Task Name:          long_term_forecast  Is Training:        1                   
+  Model ID:           Exchange_30         Model:              Mamba               
+
+[1mData Loader[0m
+  Data:               custom              Root Path:          ./dataset/exchange_rate/
+  Data Path:          exchange_rate.csv   Features:           M                   
+  Target:             OT                  Freq:               h                   
+  Checkpoints:        ./checkpoints/      
+
+[1mForecasting Task[0m
+  Seq Len:            96                  Label Len:          48                  
+  Pred Len:           30                  Seasonal Patterns:  Monthly             
+  Inverse:            0                   
+
+[1mModel Parameters[0m
+  Top k:              5                   Num Kernels:        6                   
+  Enc In:             5                   Dec In:             5                   
+  C Out:              5                   d model:            128                 
+  n heads:            8                   e layers:           2                   
+  d layers:           1                   d FF:               16                  
+  Moving Avg:         25                  Factor:             1                   
+  Distil:             1                   Dropout:            0.1                 
+  Embed:              timeF               Activation:         gelu                
+
+[1mRun Parameters[0m
+  Num Workers:        10                  Itr:                1                   
+  Train Epochs:       50                  Batch Size:         32                  
+  Patience:           50                  Learning Rate:      0.0001              
+  Des:                Exp                 Loss:               MSE                 
+  Lradj:              type1               Use Amp:            0                   
+
+[1mGPU[0m
+  Use GPU:            1                   GPU:                0                   
+  Use Multi GPU:      0                   Devices:            0,1,2,3             
+
+[1mDe-stationary Projector Params[0m
+  P Hidden Dims:      128, 128            P Hidden Layers:    2                   
+
+Please make sure you have successfully installed mamba_ssm
+Use GPU: cuda:0
+>>>>>>>start training : long_term_forecast_Exchange_30_Mamba_custom_ftM_sl96_ll48_pl30_dm128_nh8_el2_dl1_df16_expand2_dc4_fc1_ebtimeF_dtTrue_Exp_0>>>>>>>>>>>>>>>>>>>>>>>>>>
+==================================================
+DEBUG INFO:
+Dataset columns: ['date', 'open', 'high', 'low', 'close', 'volume']
+Target we're looking for: 'OT'
+Target type: <class 'str'>
+==================================================
+Overriding target from 'OT' to 'close' for stock data
+============================================================
+DATASET SPLIT INFO (85/5/10):
+============================================================
+Total samples: 5193
+Train: 4673 samples (85%) - rows 0 to 4672
+Val: 259 samples (5%) - rows 4673 to 4931
+Test: 261 samples (10%) - rows 4932 to 5192
+Sequence length: 96, Prediction length: 30
+============================================================
+train 4548
+==================================================
+DEBUG INFO:
+Dataset columns: ['date', 'open', 'high', 'low', 'close', 'volume']
+Target we're looking for: 'OT'
+Target type: <class 'str'>
+==================================================
+Overriding target from 'OT' to 'close' for stock data
+val 230
+==================================================
+DEBUG INFO:
+Dataset columns: ['date', 'open', 'high', 'low', 'close', 'volume']
+Target we're looking for: 'OT'
+Target type: <class 'str'>
+==================================================
+Overriding target from 'OT' to 'close' for stock data
+test 232
+Validation loss decreased (inf --> 0.036225).  Saving model ...
+Updating learning rate to 0.0001
+EarlyStopping counter: 1 out of 50
+Updating learning rate to 5e-05
+EarlyStopping counter: 2 out of 50
+Updating learning rate to 2.5e-05
+EarlyStopping counter: 3 out of 50
+Updating learning rate to 1.25e-05
+EarlyStopping counter: 4 out of 50
+Updating learning rate to 6.25e-06
+EarlyStopping counter: 5 out of 50
+Updating learning rate to 3.125e-06
+EarlyStopping counter: 6 out of 50
+Updating learning rate to 1.5625e-06
+EarlyStopping counter: 7 out of 50
+Updating learning rate to 7.8125e-07
+EarlyStopping counter: 8 out of 50
+Updating learning rate to 3.90625e-07
+EarlyStopping counter: 9 out of 50
+Updating learning rate to 1.953125e-07
+EarlyStopping counter: 10 out of 50
+Updating learning rate to 9.765625e-08
+Validation loss decreased (0.036225 --> 0.035651).  Saving model ...
+Updating learning rate to 4.8828125e-08
+EarlyStopping counter: 1 out of 50
+Updating learning rate to 2.44140625e-08
+EarlyStopping counter: 2 out of 50
+Updating learning rate to 1.220703125e-08
+EarlyStopping counter: 3 out of 50
+Updating learning rate to 6.103515625e-09
+EarlyStopping counter: 4 out of 50
+Updating learning rate to 3.0517578125e-09
+EarlyStopping counter: 5 out of 50
+Updating learning rate to 1.52587890625e-09
+EarlyStopping counter: 6 out of 50
+Updating learning rate to 7.62939453125e-10
+EarlyStopping counter: 7 out of 50
+Updating learning rate to 3.814697265625e-10
+EarlyStopping counter: 8 out of 50
+Updating learning rate to 1.9073486328125e-10
+EarlyStopping counter: 9 out of 50
+Updating learning rate to 9.5367431640625e-11
+EarlyStopping counter: 10 out of 50
+Updating learning rate to 4.76837158203125e-11
+EarlyStopping counter: 11 out of 50
+Updating learning rate to 2.384185791015625e-11
+EarlyStopping counter: 12 out of 50
+Updating learning rate to 1.1920928955078126e-11
+EarlyStopping counter: 13 out of 50
+Updating learning rate to 5.960464477539063e-12
+EarlyStopping counter: 14 out of 50
+Updating learning rate to 2.9802322387695314e-12
+EarlyStopping counter: 15 out of 50
+Updating learning rate to 1.4901161193847657e-12
+EarlyStopping counter: 16 out of 50
+Updating learning rate to 7.450580596923828e-13
+EarlyStopping counter: 17 out of 50
+Updating learning rate to 3.725290298461914e-13
+EarlyStopping counter: 18 out of 50
+Updating learning rate to 1.862645149230957e-13
+EarlyStopping counter: 19 out of 50
+Updating learning rate to 9.313225746154786e-14
+EarlyStopping counter: 20 out of 50
+Updating learning rate to 4.656612873077393e-14
+EarlyStopping counter: 21 out of 50
+Updating learning rate to 2.3283064365386964e-14
+EarlyStopping counter: 22 out of 50
+Updating learning rate to 1.1641532182693482e-14
+EarlyStopping counter: 23 out of 50
+Updating learning rate to 5.820766091346741e-15
+EarlyStopping counter: 24 out of 50
+Updating learning rate to 2.9103830456733705e-15
+EarlyStopping counter: 25 out of 50
+Updating learning rate to 1.4551915228366853e-15
+EarlyStopping counter: 26 out of 50
+Updating learning rate to 7.275957614183426e-16
+EarlyStopping counter: 27 out of 50
+Updating learning rate to 3.637978807091713e-16
+EarlyStopping counter: 28 out of 50
+Updating learning rate to 1.8189894035458566e-16
+EarlyStopping counter: 29 out of 50
+Updating learning rate to 9.094947017729283e-17
+EarlyStopping counter: 30 out of 50
+Updating learning rate to 4.5474735088646414e-17
+EarlyStopping counter: 31 out of 50
+Updating learning rate to 2.2737367544323207e-17
+EarlyStopping counter: 32 out of 50
+Updating learning rate to 1.1368683772161604e-17
+EarlyStopping counter: 33 out of 50
+Updating learning rate to 5.684341886080802e-18
+EarlyStopping counter: 34 out of 50
+Updating learning rate to 2.842170943040401e-18
+EarlyStopping counter: 35 out of 50
+Updating learning rate to 1.4210854715202004e-18
+EarlyStopping counter: 36 out of 50
+Updating learning rate to 7.105427357601002e-19
+EarlyStopping counter: 37 out of 50
+Updating learning rate to 3.552713678800501e-19
+EarlyStopping counter: 38 out of 50
+Updating learning rate to 1.7763568394002505e-19
+>>>>>>>testing : long_term_forecast_Exchange_30_Mamba_custom_ftM_sl96_ll48_pl30_dm128_nh8_el2_dl1_df16_expand2_dc4_fc1_ebtimeF_dtTrue_Exp_0<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+==================================================
+DEBUG INFO:
+Dataset columns: ['date', 'open', 'high', 'low', 'close', 'volume']
+Target we're looking for: 'OT'
+Target type: <class 'str'>
+==================================================
+Overriding target from 'OT' to 'close' for stock data
+test 232
+test shape: (232, 30, 5) (232, 30, 5)
+test shape: (232, 30, 5) (232, 30, 5)
+
+
+	mse:0.07168195396661758, mae:0.11244478076696396, dtw:Not calculated
+
+
+Using GPU
+Args in experiment:
+[1mBasic Config[0m
+  Task Name:          long_term_forecast  Is Training:        1                   
+  Model ID:           Exchange_48         Model:              Mamba               
+
+[1mData Loader[0m
+  Data:               custom              Root Path:          ./dataset/exchange_rate/
+  Data Path:          exchange_rate.csv   Features:           M                   
+  Target:             OT                  Freq:               h                   
+  Checkpoints:        ./checkpoints/      
+
+[1mForecasting Task[0m
+  Seq Len:            96                  Label Len:          48                  
+  Pred Len:           48                  Seasonal Patterns:  Monthly             
+  Inverse:            0                   
+
+[1mModel Parameters[0m
+  Top k:              5                   Num Kernels:        6                   
+  Enc In:             5                   Dec In:             5                   
+  C Out:              5                   d model:            128                 
+  n heads:            8                   e layers:           2                   
+  d layers:           1                   d FF:               16                  
+  Moving Avg:         25                  Factor:             1                   
+  Distil:             1                   Dropout:            0.1                 
+  Embed:              timeF               Activation:         gelu                
+
+[1mRun Parameters[0m
+  Num Workers:        10                  Itr:                1                   
+  Train Epochs:       50                  Batch Size:         32                  
+  Patience:           50                  Learning Rate:      0.0001              
+  Des:                Exp                 Loss:               MSE                 
+  Lradj:              type1               Use Amp:            0                   
+
+[1mGPU[0m
+  Use GPU:            1                   GPU:                0                   
+  Use Multi GPU:      0                   Devices:            0,1,2,3             
+
+[1mDe-stationary Projector Params[0m
+  P Hidden Dims:      128, 128            P Hidden Layers:    2                   
+
+Please make sure you have successfully installed mamba_ssm
+Use GPU: cuda:0
+>>>>>>>start training : long_term_forecast_Exchange_48_Mamba_custom_ftM_sl96_ll48_pl48_dm128_nh8_el2_dl1_df16_expand2_dc4_fc1_ebtimeF_dtTrue_Exp_0>>>>>>>>>>>>>>>>>>>>>>>>>>
+==================================================
+DEBUG INFO:
+Dataset columns: ['date', 'open', 'high', 'low', 'close', 'volume']
+Target we're looking for: 'OT'
+Target type: <class 'str'>
+==================================================
+Overriding target from 'OT' to 'close' for stock data
+============================================================
+DATASET SPLIT INFO (85/5/10):
+============================================================
+Total samples: 5193
+Train: 4673 samples (85%) - rows 0 to 4672
+Val: 259 samples (5%) - rows 4673 to 4931
+Test: 261 samples (10%) - rows 4932 to 5192
+Sequence length: 96, Prediction length: 48
+============================================================
+train 4530
+==================================================
+DEBUG INFO:
+Dataset columns: ['date', 'open', 'high', 'low', 'close', 'volume']
+Target we're looking for: 'OT'
+Target type: <class 'str'>
+==================================================
+Overriding target from 'OT' to 'close' for stock data
+val 212
+==================================================
+DEBUG INFO:
+Dataset columns: ['date', 'open', 'high', 'low', 'close', 'volume']
+Target we're looking for: 'OT'
+Target type: <class 'str'>
+==================================================
+Overriding target from 'OT' to 'close' for stock data
+test 214
+Validation loss decreased (inf --> 0.036653).  Saving model ...
+Updating learning rate to 0.0001
+EarlyStopping counter: 1 out of 50
+Updating learning rate to 5e-05
+EarlyStopping counter: 2 out of 50
+Updating learning rate to 2.5e-05
+EarlyStopping counter: 3 out of 50
+Updating learning rate to 1.25e-05
+EarlyStopping counter: 4 out of 50
+Updating learning rate to 6.25e-06
+EarlyStopping counter: 5 out of 50
+Updating learning rate to 3.125e-06
+EarlyStopping counter: 6 out of 50
+Updating learning rate to 1.5625e-06
+EarlyStopping counter: 7 out of 50
+Updating learning rate to 7.8125e-07
+EarlyStopping counter: 8 out of 50
+Updating learning rate to 3.90625e-07
+EarlyStopping counter: 9 out of 50
+Updating learning rate to 1.953125e-07
+EarlyStopping counter: 10 out of 50
+Updating learning rate to 9.765625e-08
+EarlyStopping counter: 11 out of 50
+Updating learning rate to 4.8828125e-08
+EarlyStopping counter: 12 out of 50
+Updating learning rate to 2.44140625e-08
+EarlyStopping counter: 13 out of 50
+Updating learning rate to 1.220703125e-08
+EarlyStopping counter: 14 out of 50
+Updating learning rate to 6.103515625e-09
+EarlyStopping counter: 15 out of 50
+Updating learning rate to 3.0517578125e-09
+EarlyStopping counter: 16 out of 50
+Updating learning rate to 1.52587890625e-09
+EarlyStopping counter: 17 out of 50
+Updating learning rate to 7.62939453125e-10
+EarlyStopping counter: 18 out of 50
+Updating learning rate to 3.814697265625e-10
+EarlyStopping counter: 19 out of 50
+Updating learning rate to 1.9073486328125e-10
+EarlyStopping counter: 20 out of 50
+Updating learning rate to 9.5367431640625e-11
+EarlyStopping counter: 21 out of 50
+Updating learning rate to 4.76837158203125e-11
+EarlyStopping counter: 22 out of 50
+Updating learning rate to 2.384185791015625e-11
+EarlyStopping counter: 23 out of 50
+Updating learning rate to 1.1920928955078126e-11
+EarlyStopping counter: 24 out of 50
+Updating learning rate to 5.960464477539063e-12
+EarlyStopping counter: 25 out of 50
+Updating learning rate to 2.9802322387695314e-12
+EarlyStopping counter: 26 out of 50
+Updating learning rate to 1.4901161193847657e-12
+EarlyStopping counter: 27 out of 50
+Updating learning rate to 7.450580596923828e-13
+EarlyStopping counter: 28 out of 50
+Updating learning rate to 3.725290298461914e-13
+EarlyStopping counter: 29 out of 50
+Updating learning rate to 1.862645149230957e-13
+EarlyStopping counter: 30 out of 50
+Updating learning rate to 9.313225746154786e-14
+EarlyStopping counter: 31 out of 50
+Updating learning rate to 4.656612873077393e-14
+EarlyStopping counter: 32 out of 50
+Updating learning rate to 2.3283064365386964e-14
+EarlyStopping counter: 33 out of 50
+Updating learning rate to 1.1641532182693482e-14
+EarlyStopping counter: 34 out of 50
+Updating learning rate to 5.820766091346741e-15
+EarlyStopping counter: 35 out of 50
+Updating learning rate to 2.9103830456733705e-15
+EarlyStopping counter: 36 out of 50
+Updating learning rate to 1.4551915228366853e-15
+EarlyStopping counter: 37 out of 50
+Updating learning rate to 7.275957614183426e-16
+EarlyStopping counter: 38 out of 50
+Updating learning rate to 3.637978807091713e-16
+EarlyStopping counter: 39 out of 50
+Updating learning rate to 1.8189894035458566e-16
+EarlyStopping counter: 40 out of 50
+Updating learning rate to 9.094947017729283e-17
+EarlyStopping counter: 41 out of 50
+Updating learning rate to 4.5474735088646414e-17
+EarlyStopping counter: 42 out of 50
+Updating learning rate to 2.2737367544323207e-17
+EarlyStopping counter: 43 out of 50
+Updating learning rate to 1.1368683772161604e-17
+EarlyStopping counter: 44 out of 50
+Updating learning rate to 5.684341886080802e-18
+EarlyStopping counter: 45 out of 50
+Updating learning rate to 2.842170943040401e-18
+EarlyStopping counter: 46 out of 50
+Updating learning rate to 1.4210854715202004e-18
+EarlyStopping counter: 47 out of 50
+Updating learning rate to 7.105427357601002e-19
+EarlyStopping counter: 48 out of 50
+Updating learning rate to 3.552713678800501e-19
+EarlyStopping counter: 49 out of 50
+Updating learning rate to 1.7763568394002505e-19
+>>>>>>>testing : long_term_forecast_Exchange_48_Mamba_custom_ftM_sl96_ll48_pl48_dm128_nh8_el2_dl1_df16_expand2_dc4_fc1_ebtimeF_dtTrue_Exp_0<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+==================================================
+DEBUG INFO:
+Dataset columns: ['date', 'open', 'high', 'low', 'close', 'volume']
+Target we're looking for: 'OT'
+Target type: <class 'str'>
+==================================================
+Overriding target from 'OT' to 'close' for stock data
+test 214
+test shape: (214, 48, 5) (214, 48, 5)
+test shape: (214, 48, 5) (214, 48, 5)
+
+
+	mse:0.07907683402299881, mae:0.12874647974967957, dtw:Not calculated
+
+
+Using GPU
+Args in experiment:
+[1mBasic Config[0m
+  Task Name:          long_term_forecast  Is Training:        1                   
+  Model ID:           Exchange_60         Model:              Mamba               
+
+[1mData Loader[0m
+  Data:               custom              Root Path:          ./dataset/exchange_rate/
+  Data Path:          exchange_rate.csv   Features:           M                   
+  Target:             OT                  Freq:               h                   
+  Checkpoints:        ./checkpoints/      
+
+[1mForecasting Task[0m
+  Seq Len:            96                  Label Len:          48                  
+  Pred Len:           60                  Seasonal Patterns:  Monthly             
+  Inverse:            0                   
+
+[1mModel Parameters[0m
+  Top k:              5                   Num Kernels:        6                   
+  Enc In:             5                   Dec In:             5                   
+  C Out:              5                   d model:            128                 
+  n heads:            8                   e layers:           2                   
+  d layers:           1                   d FF:               16                  
+  Moving Avg:         25                  Factor:             1                   
+  Distil:             1                   Dropout:            0.1                 
+  Embed:              timeF               Activation:         gelu                
+
+[1mRun Parameters[0m
+  Num Workers:        10                  Itr:                1                   
+  Train Epochs:       50                  Batch Size:         32                  
+  Patience:           50                  Learning Rate:      0.0001              
+  Des:                Exp                 Loss:               MSE                 
+  Lradj:              type1               Use Amp:            0                   
+
+[1mGPU[0m
+  Use GPU:            1                   GPU:                0                   
+  Use Multi GPU:      0                   Devices:            0,1,2,3             
+
+[1mDe-stationary Projector Params[0m
+  P Hidden Dims:      128, 128            P Hidden Layers:    2                   
+
+Please make sure you have successfully installed mamba_ssm
+Use GPU: cuda:0
+>>>>>>>start training : long_term_forecast_Exchange_60_Mamba_custom_ftM_sl96_ll48_pl60_dm128_nh8_el2_dl1_df16_expand2_dc4_fc1_ebtimeF_dtTrue_Exp_0>>>>>>>>>>>>>>>>>>>>>>>>>>
+==================================================
+DEBUG INFO:
+Dataset columns: ['date', 'open', 'high', 'low', 'close', 'volume']
+Target we're looking for: 'OT'
+Target type: <class 'str'>
+==================================================
+Overriding target from 'OT' to 'close' for stock data
+============================================================
+DATASET SPLIT INFO (85/5/10):
+============================================================
+Total samples: 5193
+Train: 4673 samples (85%) - rows 0 to 4672
+Val: 259 samples (5%) - rows 4673 to 4931
+Test: 261 samples (10%) - rows 4932 to 5192
+Sequence length: 96, Prediction length: 60
+============================================================
+train 4518
+==================================================
+DEBUG INFO:
+Dataset columns: ['date', 'open', 'high', 'low', 'close', 'volume']
+Target we're looking for: 'OT'
+Target type: <class 'str'>
+==================================================
+Overriding target from 'OT' to 'close' for stock data
+val 200
+==================================================
+DEBUG INFO:
+Dataset columns: ['date', 'open', 'high', 'low', 'close', 'volume']
+Target we're looking for: 'OT'
+Target type: <class 'str'>
+==================================================
+Overriding target from 'OT' to 'close' for stock data
+test 202
+Validation loss decreased (inf --> 0.036658).  Saving model ...
+Updating learning rate to 0.0001
+Validation loss decreased (0.036658 --> 0.036020).  Saving model ...
+Updating learning rate to 5e-05
+EarlyStopping counter: 1 out of 50
+Updating learning rate to 2.5e-05
+EarlyStopping counter: 2 out of 50
+Updating learning rate to 1.25e-05
+EarlyStopping counter: 3 out of 50
+Updating learning rate to 6.25e-06
+EarlyStopping counter: 4 out of 50
+Updating learning rate to 3.125e-06
+EarlyStopping counter: 5 out of 50
+Updating learning rate to 1.5625e-06
+EarlyStopping counter: 6 out of 50
+Updating learning rate to 7.8125e-07
+EarlyStopping counter: 7 out of 50
+Updating learning rate to 3.90625e-07
+EarlyStopping counter: 8 out of 50
+Updating learning rate to 1.953125e-07
+EarlyStopping counter: 9 out of 50
+Updating learning rate to 9.765625e-08
+EarlyStopping counter: 10 out of 50
+Updating learning rate to 4.8828125e-08
+EarlyStopping counter: 11 out of 50
+Updating learning rate to 2.44140625e-08
+EarlyStopping counter: 12 out of 50
+Updating learning rate to 1.220703125e-08
+EarlyStopping counter: 13 out of 50
+Updating learning rate to 6.103515625e-09
+EarlyStopping counter: 14 out of 50
+Updating learning rate to 3.0517578125e-09
+EarlyStopping counter: 15 out of 50
+Updating learning rate to 1.52587890625e-09
+EarlyStopping counter: 16 out of 50
+Updating learning rate to 7.62939453125e-10
+EarlyStopping counter: 17 out of 50
+Updating learning rate to 3.814697265625e-10
+EarlyStopping counter: 18 out of 50
+Updating learning rate to 1.9073486328125e-10
+EarlyStopping counter: 19 out of 50
+Updating learning rate to 9.5367431640625e-11
+EarlyStopping counter: 20 out of 50
+Updating learning rate to 4.76837158203125e-11
+Validation loss decreased (0.036020 --> 0.035962).  Saving model ...
+Updating learning rate to 2.384185791015625e-11
+EarlyStopping counter: 1 out of 50
+Updating learning rate to 1.1920928955078126e-11
+EarlyStopping counter: 2 out of 50
+Updating learning rate to 5.960464477539063e-12
+EarlyStopping counter: 3 out of 50
+Updating learning rate to 2.9802322387695314e-12
+Validation loss decreased (0.035962 --> 0.035898).  Saving model ...
+Updating learning rate to 1.4901161193847657e-12
+EarlyStopping counter: 1 out of 50
+Updating learning rate to 7.450580596923828e-13
+EarlyStopping counter: 2 out of 50
+Updating learning rate to 3.725290298461914e-13
+EarlyStopping counter: 3 out of 50
+Updating learning rate to 1.862645149230957e-13
+EarlyStopping counter: 4 out of 50
+Updating learning rate to 9.313225746154786e-14
+EarlyStopping counter: 5 out of 50
+Updating learning rate to 4.656612873077393e-14
+EarlyStopping counter: 6 out of 50
+Updating learning rate to 2.3283064365386964e-14
+EarlyStopping counter: 7 out of 50
+Updating learning rate to 1.1641532182693482e-14
+EarlyStopping counter: 8 out of 50
+Updating learning rate to 5.820766091346741e-15
+EarlyStopping counter: 9 out of 50
+Updating learning rate to 2.9103830456733705e-15
+EarlyStopping counter: 10 out of 50
+Updating learning rate to 1.4551915228366853e-15
+EarlyStopping counter: 11 out of 50
+Updating learning rate to 7.275957614183426e-16
+Validation loss decreased (0.035898 --> 0.035708).  Saving model ...
+Updating learning rate to 3.637978807091713e-16
+EarlyStopping counter: 1 out of 50
+Updating learning rate to 1.8189894035458566e-16
+EarlyStopping counter: 2 out of 50
+Updating learning rate to 9.094947017729283e-17
+EarlyStopping counter: 3 out of 50
+Updating learning rate to 4.5474735088646414e-17
+EarlyStopping counter: 4 out of 50
+Updating learning rate to 2.2737367544323207e-17
+EarlyStopping counter: 5 out of 50
+Updating learning rate to 1.1368683772161604e-17
+EarlyStopping counter: 6 out of 50
+Updating learning rate to 5.684341886080802e-18
+EarlyStopping counter: 7 out of 50
+Updating learning rate to 2.842170943040401e-18
+EarlyStopping counter: 8 out of 50
+Updating learning rate to 1.4210854715202004e-18
+EarlyStopping counter: 9 out of 50
+Updating learning rate to 7.105427357601002e-19
+EarlyStopping counter: 10 out of 50
+Updating learning rate to 3.552713678800501e-19
+EarlyStopping counter: 11 out of 50
+Updating learning rate to 1.7763568394002505e-19
+>>>>>>>testing : long_term_forecast_Exchange_60_Mamba_custom_ftM_sl96_ll48_pl60_dm128_nh8_el2_dl1_df16_expand2_dc4_fc1_ebtimeF_dtTrue_Exp_0<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+==================================================
+DEBUG INFO:
+Dataset columns: ['date', 'open', 'high', 'low', 'close', 'volume']
+Target we're looking for: 'OT'
+Target type: <class 'str'>
+==================================================
+Overriding target from 'OT' to 'close' for stock data
+test 202
+test shape: (202, 60, 5) (202, 60, 5)
+test shape: (202, 60, 5) (202, 60, 5)
+
+
+	mse:0.07945158332586288, mae:0.1316920816898346, dtw:Not calculated
+
+
+Using GPU
+Args in experiment:
+[1mBasic Config[0m
+  Task Name:          long_term_forecast  Is Training:        1                   
+  Model ID:           Exchange_72         Model:              Mamba               
+
+[1mData Loader[0m
+  Data:               custom              Root Path:          ./dataset/exchange_rate/
+  Data Path:          exchange_rate.csv   Features:           M                   
+  Target:             OT                  Freq:               h                   
+  Checkpoints:        ./checkpoints/      
+
+[1mForecasting Task[0m
+  Seq Len:            96                  Label Len:          48                  
+  Pred Len:           72                  Seasonal Patterns:  Monthly             
+  Inverse:            0                   
+
+[1mModel Parameters[0m
+  Top k:              5                   Num Kernels:        6                   
+  Enc In:             5                   Dec In:             5                   
+  C Out:              5                   d model:            128                 
+  n heads:            8                   e layers:           2                   
+  d layers:           1                   d FF:               16                  
+  Moving Avg:         25                  Factor:             1                   
+  Distil:             1                   Dropout:            0.1                 
+  Embed:              timeF               Activation:         gelu                
+
+[1mRun Parameters[0m
+  Num Workers:        10                  Itr:                1                   
+  Train Epochs:       50                  Batch Size:         32                  
+  Patience:           50                  Learning Rate:      0.0001              
+  Des:                Exp                 Loss:               MSE                 
+  Lradj:              type1               Use Amp:            0                   
+
+[1mGPU[0m
+  Use GPU:            1                   GPU:                0                   
+  Use Multi GPU:      0                   Devices:            0,1,2,3             
+
+[1mDe-stationary Projector Params[0m
+  P Hidden Dims:      128, 128            P Hidden Layers:    2                   
+
+Please make sure you have successfully installed mamba_ssm
+Use GPU: cuda:0
+>>>>>>>start training : long_term_forecast_Exchange_72_Mamba_custom_ftM_sl96_ll48_pl72_dm128_nh8_el2_dl1_df16_expand2_dc4_fc1_ebtimeF_dtTrue_Exp_0>>>>>>>>>>>>>>>>>>>>>>>>>>
+==================================================
+DEBUG INFO:
+Dataset columns: ['date', 'open', 'high', 'low', 'close', 'volume']
+Target we're looking for: 'OT'
+Target type: <class 'str'>
+==================================================
+Overriding target from 'OT' to 'close' for stock data
+============================================================
+DATASET SPLIT INFO (85/5/10):
+============================================================
+Total samples: 5193
+Train: 4673 samples (85%) - rows 0 to 4672
+Val: 259 samples (5%) - rows 4673 to 4931
+Test: 261 samples (10%) - rows 4932 to 5192
+Sequence length: 96, Prediction length: 72
+============================================================
+train 4506
+==================================================
+DEBUG INFO:
+Dataset columns: ['date', 'open', 'high', 'low', 'close', 'volume']
+Target we're looking for: 'OT'
+Target type: <class 'str'>
+==================================================
+Overriding target from 'OT' to 'close' for stock data
+val 188
+==================================================
+DEBUG INFO:
+Dataset columns: ['date', 'open', 'high', 'low', 'close', 'volume']
+Target we're looking for: 'OT'
+Target type: <class 'str'>
+==================================================
+Overriding target from 'OT' to 'close' for stock data
+test 190
+Validation loss decreased (inf --> 0.035888).  Saving model ...
+Updating learning rate to 0.0001
+EarlyStopping counter: 1 out of 50
+Updating learning rate to 5e-05
+EarlyStopping counter: 2 out of 50
+Updating learning rate to 2.5e-05
+EarlyStopping counter: 3 out of 50
+Updating learning rate to 1.25e-05
+EarlyStopping counter: 4 out of 50
+Updating learning rate to 6.25e-06
+EarlyStopping counter: 5 out of 50
+Updating learning rate to 3.125e-06
+EarlyStopping counter: 6 out of 50
+Updating learning rate to 1.5625e-06
+EarlyStopping counter: 7 out of 50
+Updating learning rate to 7.8125e-07
+EarlyStopping counter: 8 out of 50
+Updating learning rate to 3.90625e-07
+EarlyStopping counter: 9 out of 50
+Updating learning rate to 1.953125e-07
+EarlyStopping counter: 10 out of 50
+Updating learning rate to 9.765625e-08
+EarlyStopping counter: 11 out of 50
+Updating learning rate to 4.8828125e-08
+EarlyStopping counter: 12 out of 50
+Updating learning rate to 2.44140625e-08
+EarlyStopping counter: 13 out of 50
+Updating learning rate to 1.220703125e-08
+EarlyStopping counter: 14 out of 50
+Updating learning rate to 6.103515625e-09
+EarlyStopping counter: 15 out of 50
+Updating learning rate to 3.0517578125e-09
+EarlyStopping counter: 16 out of 50
+Updating learning rate to 1.52587890625e-09
+EarlyStopping counter: 17 out of 50
+Updating learning rate to 7.62939453125e-10
+EarlyStopping counter: 18 out of 50
+Updating learning rate to 3.814697265625e-10
+EarlyStopping counter: 19 out of 50
+Updating learning rate to 1.9073486328125e-10
+EarlyStopping counter: 20 out of 50
+Updating learning rate to 9.5367431640625e-11
+EarlyStopping counter: 21 out of 50
+Updating learning rate to 4.76837158203125e-11
+EarlyStopping counter: 22 out of 50
+Updating learning rate to 2.384185791015625e-11
+EarlyStopping counter: 23 out of 50
+Updating learning rate to 1.1920928955078126e-11
+EarlyStopping counter: 24 out of 50
+Updating learning rate to 5.960464477539063e-12
+EarlyStopping counter: 25 out of 50
+Updating learning rate to 2.9802322387695314e-12
+EarlyStopping counter: 26 out of 50
+Updating learning rate to 1.4901161193847657e-12
+EarlyStopping counter: 27 out of 50
+Updating learning rate to 7.450580596923828e-13
+EarlyStopping counter: 28 out of 50
+Updating learning rate to 3.725290298461914e-13
+EarlyStopping counter: 29 out of 50
+Updating learning rate to 1.862645149230957e-13
+EarlyStopping counter: 30 out of 50
+Updating learning rate to 9.313225746154786e-14
+EarlyStopping counter: 31 out of 50
+Updating learning rate to 4.656612873077393e-14
+EarlyStopping counter: 32 out of 50
+Updating learning rate to 2.3283064365386964e-14
+EarlyStopping counter: 33 out of 50
+Updating learning rate to 1.1641532182693482e-14
+EarlyStopping counter: 34 out of 50
+Updating learning rate to 5.820766091346741e-15
+EarlyStopping counter: 35 out of 50
+Updating learning rate to 2.9103830456733705e-15
+EarlyStopping counter: 36 out of 50
+Updating learning rate to 1.4551915228366853e-15
+EarlyStopping counter: 37 out of 50
+Updating learning rate to 7.275957614183426e-16
+EarlyStopping counter: 38 out of 50
+Updating learning rate to 3.637978807091713e-16
+EarlyStopping counter: 39 out of 50
+Updating learning rate to 1.8189894035458566e-16
+EarlyStopping counter: 40 out of 50
+Updating learning rate to 9.094947017729283e-17
+EarlyStopping counter: 41 out of 50
+Updating learning rate to 4.5474735088646414e-17
+EarlyStopping counter: 42 out of 50
+Updating learning rate to 2.2737367544323207e-17
+EarlyStopping counter: 43 out of 50
+Updating learning rate to 1.1368683772161604e-17
+EarlyStopping counter: 44 out of 50
+Updating learning rate to 5.684341886080802e-18
+EarlyStopping counter: 45 out of 50
+Updating learning rate to 2.842170943040401e-18
+EarlyStopping counter: 46 out of 50
+Updating learning rate to 1.4210854715202004e-18
+EarlyStopping counter: 47 out of 50
+Updating learning rate to 7.105427357601002e-19
+EarlyStopping counter: 48 out of 50
+Updating learning rate to 3.552713678800501e-19
+EarlyStopping counter: 49 out of 50
+Updating learning rate to 1.7763568394002505e-19
+>>>>>>>testing : long_term_forecast_Exchange_72_Mamba_custom_ftM_sl96_ll48_pl72_dm128_nh8_el2_dl1_df16_expand2_dc4_fc1_ebtimeF_dtTrue_Exp_0<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+==================================================
+DEBUG INFO:
+Dataset columns: ['date', 'open', 'high', 'low', 'close', 'volume']
+Target we're looking for: 'OT'
+Target type: <class 'str'>
+==================================================
+Overriding target from 'OT' to 'close' for stock data
+test 190
+test shape: (190, 72, 5) (190, 72, 5)
+test shape: (190, 72, 5) (190, 72, 5)
+
+
+	mse:0.08107846975326538, mae:0.1420629471540451, dtw:Not calculated
+
+
+Using GPU
+Args in experiment:
+[1mBasic Config[0m
+  Task Name:          long_term_forecast  Is Training:        1                   
+  Model ID:           Exchange_96         Model:              Mamba               
+
+[1mData Loader[0m
+  Data:               custom              Root Path:          ./dataset/exchange_rate/
+  Data Path:          exchange_rate.csv   Features:           M                   
+  Target:             OT                  Freq:               h                   
+  Checkpoints:        ./checkpoints/      
+
+[1mForecasting Task[0m
+  Seq Len:            96                  Label Len:          48                  
+  Pred Len:           96                  Seasonal Patterns:  Monthly             
+  Inverse:            0                   
+
+[1mModel Parameters[0m
+  Top k:              5                   Num Kernels:        6                   
+  Enc In:             5                   Dec In:             5                   
+  C Out:              5                   d model:            128                 
+  n heads:            8                   e layers:           2                   
+  d layers:           1                   d FF:               16                  
+  Moving Avg:         25                  Factor:             1                   
+  Distil:             1                   Dropout:            0.1                 
+  Embed:              timeF               Activation:         gelu                
+
+[1mRun Parameters[0m
+  Num Workers:        10                  Itr:                1                   
+  Train Epochs:       50                  Batch Size:         32                  
+  Patience:           50                  Learning Rate:      0.0001              
+  Des:                Exp                 Loss:               MSE                 
+  Lradj:              type1               Use Amp:            0                   
+
+[1mGPU[0m
+  Use GPU:            1                   GPU:                0                   
+  Use Multi GPU:      0                   Devices:            0,1,2,3             
+
+[1mDe-stationary Projector Params[0m
+  P Hidden Dims:      128, 128            P Hidden Layers:    2                   
+
+Please make sure you have successfully installed mamba_ssm
+Use GPU: cuda:0
+>>>>>>>start training : long_term_forecast_Exchange_96_Mamba_custom_ftM_sl96_ll48_pl96_dm128_nh8_el2_dl1_df16_expand2_dc4_fc1_ebtimeF_dtTrue_Exp_0>>>>>>>>>>>>>>>>>>>>>>>>>>
+==================================================
+DEBUG INFO:
+Dataset columns: ['date', 'open', 'high', 'low', 'close', 'volume']
+Target we're looking for: 'OT'
+Target type: <class 'str'>
+==================================================
+Overriding target from 'OT' to 'close' for stock data
+============================================================
+DATASET SPLIT INFO (85/5/10):
+============================================================
+Total samples: 5193
+Train: 4673 samples (85%) - rows 0 to 4672
+Val: 259 samples (5%) - rows 4673 to 4931
+Test: 261 samples (10%) - rows 4932 to 5192
+Sequence length: 96, Prediction length: 96
+============================================================
+train 4482
+==================================================
+DEBUG INFO:
+Dataset columns: ['date', 'open', 'high', 'low', 'close', 'volume']
+Target we're looking for: 'OT'
+Target type: <class 'str'>
+==================================================
+Overriding target from 'OT' to 'close' for stock data
+val 164
+==================================================
+DEBUG INFO:
+Dataset columns: ['date', 'open', 'high', 'low', 'close', 'volume']
+Target we're looking for: 'OT'
+Target type: <class 'str'>
+==================================================
+Overriding target from 'OT' to 'close' for stock data
+test 166
+Validation loss decreased (inf --> 0.034257).  Saving model ...
+Updating learning rate to 0.0001
+Validation loss decreased (0.034257 --> 0.033999).  Saving model ...
+Updating learning rate to 5e-05
+EarlyStopping counter: 1 out of 50
+Updating learning rate to 2.5e-05
+EarlyStopping counter: 2 out of 50
+Updating learning rate to 1.25e-05
+EarlyStopping counter: 3 out of 50
+Updating learning rate to 6.25e-06
+EarlyStopping counter: 4 out of 50
+Updating learning rate to 3.125e-06
+EarlyStopping counter: 5 out of 50
+Updating learning rate to 1.5625e-06
+EarlyStopping counter: 6 out of 50
+Updating learning rate to 7.8125e-07
+EarlyStopping counter: 7 out of 50
+Updating learning rate to 3.90625e-07
+EarlyStopping counter: 8 out of 50
+Updating learning rate to 1.953125e-07
+EarlyStopping counter: 9 out of 50
+Updating learning rate to 9.765625e-08
+EarlyStopping counter: 10 out of 50
+Updating learning rate to 4.8828125e-08
+EarlyStopping counter: 11 out of 50
+Updating learning rate to 2.44140625e-08
+EarlyStopping counter: 12 out of 50
+Updating learning rate to 1.220703125e-08
+EarlyStopping counter: 13 out of 50
+Updating learning rate to 6.103515625e-09
+EarlyStopping counter: 14 out of 50
+Updating learning rate to 3.0517578125e-09
+EarlyStopping counter: 15 out of 50
+Updating learning rate to 1.52587890625e-09
+EarlyStopping counter: 16 out of 50
+Updating learning rate to 7.62939453125e-10
+EarlyStopping counter: 17 out of 50
+Updating learning rate to 3.814697265625e-10
+EarlyStopping counter: 18 out of 50
+Updating learning rate to 1.9073486328125e-10
+EarlyStopping counter: 19 out of 50
+Updating learning rate to 9.5367431640625e-11
+EarlyStopping counter: 20 out of 50
+Updating learning rate to 4.76837158203125e-11
+EarlyStopping counter: 21 out of 50
+Updating learning rate to 2.384185791015625e-11
+EarlyStopping counter: 22 out of 50
+Updating learning rate to 1.1920928955078126e-11
+EarlyStopping counter: 23 out of 50
+Updating learning rate to 5.960464477539063e-12
+EarlyStopping counter: 24 out of 50
+Updating learning rate to 2.9802322387695314e-12
+EarlyStopping counter: 25 out of 50
+Updating learning rate to 1.4901161193847657e-12
+EarlyStopping counter: 26 out of 50
+Updating learning rate to 7.450580596923828e-13
+EarlyStopping counter: 27 out of 50
+Updating learning rate to 3.725290298461914e-13
+EarlyStopping counter: 28 out of 50
+Updating learning rate to 1.862645149230957e-13
+EarlyStopping counter: 29 out of 50
+Updating learning rate to 9.313225746154786e-14
+EarlyStopping counter: 30 out of 50
+Updating learning rate to 4.656612873077393e-14
+EarlyStopping counter: 31 out of 50
+Updating learning rate to 2.3283064365386964e-14
+EarlyStopping counter: 32 out of 50
+Updating learning rate to 1.1641532182693482e-14
+EarlyStopping counter: 33 out of 50
+Updating learning rate to 5.820766091346741e-15
+EarlyStopping counter: 34 out of 50
+Updating learning rate to 2.9103830456733705e-15
+EarlyStopping counter: 35 out of 50
+Updating learning rate to 1.4551915228366853e-15
+EarlyStopping counter: 36 out of 50
+Updating learning rate to 7.275957614183426e-16
+EarlyStopping counter: 37 out of 50
+Updating learning rate to 3.637978807091713e-16
+EarlyStopping counter: 38 out of 50
+Updating learning rate to 1.8189894035458566e-16
+EarlyStopping counter: 39 out of 50
+Updating learning rate to 9.094947017729283e-17
+EarlyStopping counter: 40 out of 50
+Updating learning rate to 4.5474735088646414e-17
+EarlyStopping counter: 41 out of 50
+Updating learning rate to 2.2737367544323207e-17
+EarlyStopping counter: 42 out of 50
+Updating learning rate to 1.1368683772161604e-17
+EarlyStopping counter: 43 out of 50
+Updating learning rate to 5.684341886080802e-18
+EarlyStopping counter: 44 out of 50
+Updating learning rate to 2.842170943040401e-18
+EarlyStopping counter: 45 out of 50
+Updating learning rate to 1.4210854715202004e-18
+EarlyStopping counter: 46 out of 50
+Updating learning rate to 7.105427357601002e-19
+EarlyStopping counter: 47 out of 50
+Updating learning rate to 3.552713678800501e-19
+EarlyStopping counter: 48 out of 50
+Updating learning rate to 1.7763568394002505e-19
+>>>>>>>testing : long_term_forecast_Exchange_96_Mamba_custom_ftM_sl96_ll48_pl96_dm128_nh8_el2_dl1_df16_expand2_dc4_fc1_ebtimeF_dtTrue_Exp_0<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+==================================================
+DEBUG INFO:
+Dataset columns: ['date', 'open', 'high', 'low', 'close', 'volume']
+Target we're looking for: 'OT'
+Target type: <class 'str'>
+==================================================
+Overriding target from 'OT' to 'close' for stock data
+test 166
+test shape: (166, 96, 5) (166, 96, 5)
+test shape: (166, 96, 5) (166, 96, 5)
+
+
+	mse:0.07911383360624313, mae:0.13966584205627441, dtw:Not calculated
+
+
