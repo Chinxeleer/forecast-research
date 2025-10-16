@@ -20,10 +20,10 @@ for pred_len in 1 7 14 30; do
 		--e_layers 2 \
 		--d_layers 1 \
 		--enc_in 5 \
-		--expand 2 \
+		--use_gpu 1 \
+		--gpu 0 \
 		--d_ff 16 \
 		--dec_in 5 \
-		--d_conv 4 \
 		--c_out 5 \
 		--d_model 128 \
 		--des 'Exp' \

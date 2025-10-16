@@ -10,6 +10,7 @@ import optuna
 from optuna.trial import Trial
 import argparse
 import torch
+import gc
 import numpy as np
 from exp.exp_long_term_forecasting import Exp_Long_Term_Forecast
 import os
@@ -48,6 +49,7 @@ def get_base_args():
     parser.add_argument('--dec_in', type=int, default=5, help='decoder input size')  # ⚠️ CHANGE THIS
     parser.add_argument('--c_out', type=int, default=5, help='output size')  # ⚠️ CHANGE THIS
     parser.add_argument('--d_model', type=int, default=512)
+    parser.add_argument('--d_conv', type=int, default=4)
     parser.add_argument('--n_heads', type=int, default=8)
     parser.add_argument('--e_layers', type=int, default=2)
     parser.add_argument('--d_layers', type=int, default=1)
@@ -73,15 +75,26 @@ def get_base_args():
     parser.add_argument('--use_amp', action='store_true', default=False)
     
     # GPU
-    parser.add_argument('--use_gpu', type=bool, default=True)
-    parser.add_argument('--gpu', type=int, default=0)
-    parser.add_argument('--use_multi_gpu', action='store_true', default=False)
-    parser.add_argument('--devices', type=str, default='0,1')
+    #parser.add_argument('--use_gpu', type=bool, default=True)
+    #parser.add_argument('--gpu', type=int, default=0)
+    #parser.add_argument('--use_multi_gpu', action='store_true', default=False)
+    #parser.add_argument('--devices', type=str, default='0')
+
+
+
+    parser.add_argument('--use_gpu', type=bool, default=True, help='use gpu')
+    parser.add_argument('--gpu', type=int, default=0, help='gpu')
+    parser.add_argument('--gpu_type', type=str, default='cuda', help='gpu type')  # cuda or mps
+    parser.add_argument('--use_multi_gpu', action='store_true', help='use multiple gpus', default=False)
+    parser.add_argument('--devices', type=str, default='0', help='device ids of multile gpus')
     
     # Additional args
     parser.add_argument('--seasonal_patterns', type=str, default='Monthly')
     parser.add_argument('--inverse', action='store_true', default=False)
     parser.add_argument('--augmentation_ratio', type=int, default=0)
+
+    parser.add_argument('--use_dtw', type=bool, default=False,
+                        help='the controller of using dtw metric (dtw is time consuming, not suggested unless necessary)')
     
     # Optuna specific
     parser.add_argument('--n_trials', type=int, default=50,
@@ -108,24 +121,39 @@ def objective(trial: Trial, base_args):
     args = argparse.Namespace(**vars(base_args))
     
     # ========== HYPERPARAMETERS TO TUNE ==========
-    
+
+    args.use_gpu = True
+    args.gpu = 0
+    args.devices = '0'
+    args.use_multi_gpu = False
+
     # Sequence lengths
     args.seq_len = trial.suggest_categorical('seq_len', [48, 96, 168, 336])
     args.label_len = args.seq_len // 2
-    args.pred_len = trial.suggest_categorical('pred_len', [1,3,7,14,30,24, 48, 96])
-    
+    args.pred_len = trial.suggest_categorical('pred_len', [1,7,14,30])
+    args.expand = trial.suggest_int('expand', 1, 2)
+
     # Model architecture
-    args.d_model = trial.suggest_categorical('d_model', [128, 256, 512])
+    args.d_model = trial.suggest_categorical('d_model', [32,64,128,256])
     args.d_ff = args.d_model * 4
     args.n_heads = trial.suggest_categorical('n_heads', [4, 8])
-    args.e_layers = trial.suggest_int('e_layers', 1, 3)
+    args.e_layers = trial.suggest_int('e_layers', 1, 2)
     args.d_layers = trial.suggest_int('d_layers', 1, 2)
+    args.d_state = trial.suggest_categorical('d_state', [16, 32, 64, 128])
     
     # Optimization
     args.batch_size = trial.suggest_categorical('batch_size', [16, 32, 64])
     args.learning_rate = trial.suggest_float('learning_rate', 1e-5, 1e-3, log=True)
     args.dropout = trial.suggest_float('dropout', 0.0, 0.3)
+
+    if args.d_state > 256:
+        args.d_state = 256
     
+    d_inner = int(args.d_model * args.expand)
+
+    if d_inner > 256:
+        raise optuna.TrialPruned()
+
     # Model-specific parameters
     if args.model == 'TimesNet':
         args.top_k = trial.suggest_int('top_k', 3, 5)
@@ -156,7 +184,7 @@ def objective(trial: Trial, base_args):
     
     # Validate model
     print(f'>>>>>> Testing on validation set: trial_{trial.number} >>>>>>')
-    mse, mae = exp.test(setting=f'trial_{trial.number}', test=0)  # test=0 for validation
+    #mse, mae = exp.test(setting=f'trial_{trial.number}', test=0)  # test=0 for validation
     
     # Clean up to save disk space (optional)
     checkpoint_path = os.path.join(
@@ -173,7 +201,17 @@ def objective(trial: Trial, base_args):
                     pass
     
     # Return validation MSE (lower is better)
-    return mse
+    #return mse
+    try:
+        #exp = Exp_Long_Term_Forecast(args)
+        #exp.train(setting=f"trial_{trial.number}")
+        mse, mae = exp.test(setting=f"trial_{trial.number}", test=0)
+        return mse
+    finally:
+        # clean up CUDA memory after each trial
+        del exp
+        gc.collect()
+        torch.cuda.empty_cache()
 
 
 def run_optimization(args):
