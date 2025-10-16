@@ -128,18 +128,20 @@ def objective(trial: Trial, base_args):
     args.use_multi_gpu = False
 
     # Sequence lengths
-    args.seq_len = trial.suggest_categorical('seq_len', [48, 96, 168, 336])
+    args.seq_len = trial.suggest_categorical('seq_len', [48, 96])
     args.label_len = args.seq_len // 2
     args.pred_len = trial.suggest_categorical('pred_len', [1,7,14,30])
     args.expand = trial.suggest_int('expand', 1, 2)
+    
 
     # Model architecture
-    args.d_model = trial.suggest_categorical('d_model', [32,64,128,256])
+    args.d_model = trial.suggest_categorical('d_model', [32,64])
     args.d_ff = args.d_model * 4
     args.n_heads = trial.suggest_categorical('n_heads', [4, 8])
     args.e_layers = trial.suggest_int('e_layers', 1, 2)
     args.d_layers = trial.suggest_int('d_layers', 1, 2)
-    args.d_state = trial.suggest_categorical('d_state', [16, 32, 64, 128])
+    #args.d_state = trial.suggest_categorical('d_state', [8,16])
+    args.d_state = 16
     
     # Optimization
     args.batch_size = trial.suggest_categorical('batch_size', [16, 32, 64])
@@ -149,12 +151,24 @@ def objective(trial: Trial, base_args):
     if args.d_state > 256:
         args.d_state = 256
     
-    d_inner = int(args.d_model * args.expand)
+    #d_inner = int(args.d_model * args.expand)
 
-    if d_inner > 256:
-        raise optuna.TrialPruned()
+    #if d_inner > 256:
+    #raise optuna.TrialPruned()
 
-    # Model-specific parameters
+
+
+
+     #Model-specifi ccitly check for Mamba, as the constraint is model-specific
+    if args.model == 'Mamba':
+        d_inner = int(args.d_model * args.expand)
+
+        # Prune if the Inner Dimension is 256 or higher, based on previous failures
+        if d_inner >= 256: 
+            print(f"Pruning Trial {trial.number}: Mamba d_inner ({d_inner}) >= 256 limit.")
+            raise optuna.TrialPruned()
+
+
     if args.model == 'TimesNet':
         args.top_k = trial.suggest_int('top_k', 3, 5)
         args.num_kernels = trial.suggest_int('num_kernels', 4, 6)

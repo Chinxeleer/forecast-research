@@ -29,6 +29,10 @@ class Model(nn.Module):
 
         self.out_layer = nn.Linear(configs.d_model, configs.c_out, bias=False)
 
+        # In Mamba.py __init__ method
+        print(f"DEBUG Mamba Init - d_model: {configs.d_model}, d_state: {configs.d_state}, "
+                      f"d_inner: {self.d_inner}, expand: {configs.expand}")
+
     def forecast(self, x_enc, x_mark_enc):
         mean_enc = x_enc.mean(1, keepdim=True).detach()
         x_enc = x_enc - mean_enc

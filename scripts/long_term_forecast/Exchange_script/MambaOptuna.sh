@@ -12,7 +12,7 @@ for pred_len in 1 7 14 30; do
 		--model $model_name \
 		--data custom \
 		--study_name Mamba_Exchange_$pred_len \
-		--n_trials 10 \
+		--n_trials 50 \
 		--features M \
 		--seq_len 96 \
 		--label_len 5 \
