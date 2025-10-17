@@ -1,0 +1,288 @@
+[I 2025-10-17 01:34:07,614] A new study created in RDB with name: Autoformer_Exchange_1
+
+======================================================================
+Starting Optuna Hyperparameter Optimization
+======================================================================
+Model: Autoformer
+Dataset: custom
+Number of trials: 50
+Study name: Autoformer_Exchange_1
+Storage: sqlite:///optuna_study.db
+======================================================================
+
+  0%|          | 0/50 [00:00<?, ?it/s]
+============================================================
+Trial 0
+============================================================
+seq_len: 48, pred_len: 14
+d_model: 32, n_heads: 4
+e_layers: 1, d_layers: 1
+batch_size: 32, lr: 0.000225
+dropout: 0.26043590432271596
+============================================================
+
+Use GPU: cuda:0
+>>>>>> Start training: trial_0 >>>>>>
+============================================================
+DATASET SPLIT INFO (90/5/5):
+============================================================
+Total samples: 5193
+Train: 4673 samples (90%) - rows 0 to 4672
+Val: 259 samples (5%) - rows 4673 to 4931
+Test: 261 samples (5%) - rows 4932 to 5192
+Sequence length: 48, Prediction length: 14
+============================================================
+train 4612
+val 246
+test 248
+                                      [W 2025-10-17 01:34:08,279] Trial 0 failed with parameters: {'seq_len': 48, 'pred_len': 14, 'expand': 2, 'd_model': 32, 'n_heads': 4, 'e_layers': 1, 'd_layers': 1, 'batch_size': 32, 'learning_rate': 0.00022471990731180337, 'dropout': 0.26043590432271596} because of the following error: TypeError("'NoneType' object is not subscriptable").
+Traceback (most recent call last):
+  File "/home-mscluster/bkodze/miniconda3/envs/finalenv/lib/python3.8/site-packages/optuna/study/_optimize.py", line 201, in _run_trial
+    value_or_values = func(trial)
+  File "optuna_tune.py", line 261, in <lambda>
+    lambda trial: objective(trial, args),
+  File "optuna_tune.py", line 197, in objective
+    exp.train(setting=f'trial_{trial.number}')
+  File "/home-mscluster/bkodze/Time-Series-Library/exp/exp_long_term_forecasting.py", line 128, in train
+    outputs = outputs[:, -self.args.pred_len:, f_dim:]
+TypeError: 'NoneType' object is not subscriptable
+  0%|          | 0/50 [00:00<?, ?it/s]                                      [W 2025-10-17 01:34:08,307] Trial 0 failed with value None.
+  0%|          | 0/50 [00:00<?, ?it/s]  0%|          | 0/50 [00:00<?, ?it/s]
+Traceback (most recent call last):
+  File "optuna_tune.py", line 320, in <module>
+    study = run_optimization(args)
+  File "optuna_tune.py", line 260, in run_optimization
+    study.optimize(
+  File "/home-mscluster/bkodze/miniconda3/envs/finalenv/lib/python3.8/site-packages/optuna/study/study.py", line 490, in optimize
+    _optimize(
+  File "/home-mscluster/bkodze/miniconda3/envs/finalenv/lib/python3.8/site-packages/optuna/study/_optimize.py", line 63, in _optimize
+    _optimize_sequential(
+  File "/home-mscluster/bkodze/miniconda3/envs/finalenv/lib/python3.8/site-packages/optuna/study/_optimize.py", line 160, in _optimize_sequential
+    frozen_trial_id = _run_trial(study, func, catch)
+  File "/home-mscluster/bkodze/miniconda3/envs/finalenv/lib/python3.8/site-packages/optuna/study/_optimize.py", line 258, in _run_trial
+    raise func_err
+  File "/home-mscluster/bkodze/miniconda3/envs/finalenv/lib/python3.8/site-packages/optuna/study/_optimize.py", line 201, in _run_trial
+    value_or_values = func(trial)
+  File "optuna_tune.py", line 261, in <lambda>
+    lambda trial: objective(trial, args),
+  File "optuna_tune.py", line 197, in objective
+    exp.train(setting=f'trial_{trial.number}')
+  File "/home-mscluster/bkodze/Time-Series-Library/exp/exp_long_term_forecasting.py", line 128, in train
+    outputs = outputs[:, -self.args.pred_len:, f_dim:]
+TypeError: 'NoneType' object is not subscriptable
+[I 2025-10-17 01:34:12,492] A new study created in RDB with name: Autoformer_Exchange_7
+
+======================================================================
+Starting Optuna Hyperparameter Optimization
+======================================================================
+Model: Autoformer
+Dataset: custom
+Number of trials: 50
+Study name: Autoformer_Exchange_7
+Storage: sqlite:///optuna_study.db
+======================================================================
+
+  0%|          | 0/50 [00:00<?, ?it/s]
+============================================================
+Trial 0
+============================================================
+seq_len: 48, pred_len: 30
+d_model: 64, n_heads: 4
+e_layers: 1, d_layers: 2
+batch_size: 64, lr: 0.000016
+dropout: 0.26709213590180975
+============================================================
+
+Use GPU: cuda:0
+>>>>>> Start training: trial_0 >>>>>>
+============================================================
+DATASET SPLIT INFO (90/5/5):
+============================================================
+Total samples: 5193
+Train: 4673 samples (90%) - rows 0 to 4672
+Val: 259 samples (5%) - rows 4673 to 4931
+Test: 261 samples (5%) - rows 4932 to 5192
+Sequence length: 48, Prediction length: 30
+============================================================
+train 4596
+val 230
+test 232
+                                      [W 2025-10-17 01:34:13,045] Trial 0 failed with parameters: {'seq_len': 48, 'pred_len': 30, 'expand': 2, 'd_model': 64, 'n_heads': 4, 'e_layers': 1, 'd_layers': 2, 'batch_size': 64, 'learning_rate': 1.6216425275547483e-05, 'dropout': 0.26709213590180975} because of the following error: TypeError("'NoneType' object is not subscriptable").
+Traceback (most recent call last):
+  File "/home-mscluster/bkodze/miniconda3/envs/finalenv/lib/python3.8/site-packages/optuna/study/_optimize.py", line 201, in _run_trial
+    value_or_values = func(trial)
+  File "optuna_tune.py", line 261, in <lambda>
+    lambda trial: objective(trial, args),
+  File "optuna_tune.py", line 197, in objective
+    exp.train(setting=f'trial_{trial.number}')
+  File "/home-mscluster/bkodze/Time-Series-Library/exp/exp_long_term_forecasting.py", line 128, in train
+    outputs = outputs[:, -self.args.pred_len:, f_dim:]
+TypeError: 'NoneType' object is not subscriptable
+  0%|          | 0/50 [00:00<?, ?it/s]                                      [W 2025-10-17 01:34:13,045] Trial 0 failed with value None.
+  0%|          | 0/50 [00:00<?, ?it/s]  0%|          | 0/50 [00:00<?, ?it/s]
+Traceback (most recent call last):
+  File "optuna_tune.py", line 320, in <module>
+    study = run_optimization(args)
+  File "optuna_tune.py", line 260, in run_optimization
+    study.optimize(
+  File "/home-mscluster/bkodze/miniconda3/envs/finalenv/lib/python3.8/site-packages/optuna/study/study.py", line 490, in optimize
+    _optimize(
+  File "/home-mscluster/bkodze/miniconda3/envs/finalenv/lib/python3.8/site-packages/optuna/study/_optimize.py", line 63, in _optimize
+    _optimize_sequential(
+  File "/home-mscluster/bkodze/miniconda3/envs/finalenv/lib/python3.8/site-packages/optuna/study/_optimize.py", line 160, in _optimize_sequential
+    frozen_trial_id = _run_trial(study, func, catch)
+  File "/home-mscluster/bkodze/miniconda3/envs/finalenv/lib/python3.8/site-packages/optuna/study/_optimize.py", line 258, in _run_trial
+    raise func_err
+  File "/home-mscluster/bkodze/miniconda3/envs/finalenv/lib/python3.8/site-packages/optuna/study/_optimize.py", line 201, in _run_trial
+    value_or_values = func(trial)
+  File "optuna_tune.py", line 261, in <lambda>
+    lambda trial: objective(trial, args),
+  File "optuna_tune.py", line 197, in objective
+    exp.train(setting=f'trial_{trial.number}')
+  File "/home-mscluster/bkodze/Time-Series-Library/exp/exp_long_term_forecasting.py", line 128, in train
+    outputs = outputs[:, -self.args.pred_len:, f_dim:]
+TypeError: 'NoneType' object is not subscriptable
+[I 2025-10-17 01:34:16,859] A new study created in RDB with name: Autoformer_Exchange_14
+
+======================================================================
+Starting Optuna Hyperparameter Optimization
+======================================================================
+Model: Autoformer
+Dataset: custom
+Number of trials: 50
+Study name: Autoformer_Exchange_14
+Storage: sqlite:///optuna_study.db
+======================================================================
+
+  0%|          | 0/50 [00:00<?, ?it/s]
+============================================================
+Trial 0
+============================================================
+seq_len: 48, pred_len: 30
+d_model: 32, n_heads: 4
+e_layers: 1, d_layers: 1
+batch_size: 32, lr: 0.000061
+dropout: 0.19233190548211007
+============================================================
+
+Use GPU: cuda:0
+>>>>>> Start training: trial_0 >>>>>>
+============================================================
+DATASET SPLIT INFO (90/5/5):
+============================================================
+Total samples: 5193
+Train: 4673 samples (90%) - rows 0 to 4672
+Val: 259 samples (5%) - rows 4673 to 4931
+Test: 261 samples (5%) - rows 4932 to 5192
+Sequence length: 48, Prediction length: 30
+============================================================
+train 4596
+val 230
+test 232
+                                      [W 2025-10-17 01:34:17,395] Trial 0 failed with parameters: {'seq_len': 48, 'pred_len': 30, 'expand': 2, 'd_model': 32, 'n_heads': 4, 'e_layers': 1, 'd_layers': 1, 'batch_size': 32, 'learning_rate': 6.104593258774177e-05, 'dropout': 0.19233190548211007} because of the following error: TypeError("'NoneType' object is not subscriptable").
+Traceback (most recent call last):
+  File "/home-mscluster/bkodze/miniconda3/envs/finalenv/lib/python3.8/site-packages/optuna/study/_optimize.py", line 201, in _run_trial
+    value_or_values = func(trial)
+  File "optuna_tune.py", line 261, in <lambda>
+    lambda trial: objective(trial, args),
+  File "optuna_tune.py", line 197, in objective
+    exp.train(setting=f'trial_{trial.number}')
+  File "/home-mscluster/bkodze/Time-Series-Library/exp/exp_long_term_forecasting.py", line 128, in train
+    outputs = outputs[:, -self.args.pred_len:, f_dim:]
+TypeError: 'NoneType' object is not subscriptable
+  0%|          | 0/50 [00:00<?, ?it/s]                                      [W 2025-10-17 01:34:17,396] Trial 0 failed with value None.
+  0%|          | 0/50 [00:00<?, ?it/s]  0%|          | 0/50 [00:00<?, ?it/s]
+Traceback (most recent call last):
+  File "optuna_tune.py", line 320, in <module>
+    study = run_optimization(args)
+  File "optuna_tune.py", line 260, in run_optimization
+    study.optimize(
+  File "/home-mscluster/bkodze/miniconda3/envs/finalenv/lib/python3.8/site-packages/optuna/study/study.py", line 490, in optimize
+    _optimize(
+  File "/home-mscluster/bkodze/miniconda3/envs/finalenv/lib/python3.8/site-packages/optuna/study/_optimize.py", line 63, in _optimize
+    _optimize_sequential(
+  File "/home-mscluster/bkodze/miniconda3/envs/finalenv/lib/python3.8/site-packages/optuna/study/_optimize.py", line 160, in _optimize_sequential
+    frozen_trial_id = _run_trial(study, func, catch)
+  File "/home-mscluster/bkodze/miniconda3/envs/finalenv/lib/python3.8/site-packages/optuna/study/_optimize.py", line 258, in _run_trial
+    raise func_err
+  File "/home-mscluster/bkodze/miniconda3/envs/finalenv/lib/python3.8/site-packages/optuna/study/_optimize.py", line 201, in _run_trial
+    value_or_values = func(trial)
+  File "optuna_tune.py", line 261, in <lambda>
+    lambda trial: objective(trial, args),
+  File "optuna_tune.py", line 197, in objective
+    exp.train(setting=f'trial_{trial.number}')
+  File "/home-mscluster/bkodze/Time-Series-Library/exp/exp_long_term_forecasting.py", line 128, in train
+    outputs = outputs[:, -self.args.pred_len:, f_dim:]
+TypeError: 'NoneType' object is not subscriptable
+[I 2025-10-17 01:34:21,537] A new study created in RDB with name: Autoformer_Exchange_30
+
+======================================================================
+Starting Optuna Hyperparameter Optimization
+======================================================================
+Model: Autoformer
+Dataset: custom
+Number of trials: 50
+Study name: Autoformer_Exchange_30
+Storage: sqlite:///optuna_study.db
+======================================================================
+
+  0%|          | 0/50 [00:00<?, ?it/s]
+============================================================
+Trial 0
+============================================================
+seq_len: 48, pred_len: 14
+d_model: 64, n_heads: 8
+e_layers: 2, d_layers: 2
+batch_size: 32, lr: 0.000489
+dropout: 0.28242122719630186
+============================================================
+
+Use GPU: cuda:0
+>>>>>> Start training: trial_0 >>>>>>
+============================================================
+DATASET SPLIT INFO (90/5/5):
+============================================================
+Total samples: 5193
+Train: 4673 samples (90%) - rows 0 to 4672
+Val: 259 samples (5%) - rows 4673 to 4931
+Test: 261 samples (5%) - rows 4932 to 5192
+Sequence length: 48, Prediction length: 14
+============================================================
+train 4612
+val 246
+test 248
+                                      [W 2025-10-17 01:34:22,102] Trial 0 failed with parameters: {'seq_len': 48, 'pred_len': 14, 'expand': 2, 'd_model': 64, 'n_heads': 8, 'e_layers': 2, 'd_layers': 2, 'batch_size': 32, 'learning_rate': 0.0004894271418178142, 'dropout': 0.28242122719630186} because of the following error: TypeError("'NoneType' object is not subscriptable").
+Traceback (most recent call last):
+  File "/home-mscluster/bkodze/miniconda3/envs/finalenv/lib/python3.8/site-packages/optuna/study/_optimize.py", line 201, in _run_trial
+    value_or_values = func(trial)
+  File "optuna_tune.py", line 261, in <lambda>
+    lambda trial: objective(trial, args),
+  File "optuna_tune.py", line 197, in objective
+    exp.train(setting=f'trial_{trial.number}')
+  File "/home-mscluster/bkodze/Time-Series-Library/exp/exp_long_term_forecasting.py", line 128, in train
+    outputs = outputs[:, -self.args.pred_len:, f_dim:]
+TypeError: 'NoneType' object is not subscriptable
+  0%|          | 0/50 [00:00<?, ?it/s]                                      [W 2025-10-17 01:34:22,102] Trial 0 failed with value None.
+  0%|          | 0/50 [00:00<?, ?it/s]  0%|          | 0/50 [00:00<?, ?it/s]
+Traceback (most recent call last):
+  File "optuna_tune.py", line 320, in <module>
+    study = run_optimization(args)
+  File "optuna_tune.py", line 260, in run_optimization
+    study.optimize(
+  File "/home-mscluster/bkodze/miniconda3/envs/finalenv/lib/python3.8/site-packages/optuna/study/study.py", line 490, in optimize
+    _optimize(
+  File "/home-mscluster/bkodze/miniconda3/envs/finalenv/lib/python3.8/site-packages/optuna/study/_optimize.py", line 63, in _optimize
+    _optimize_sequential(
+  File "/home-mscluster/bkodze/miniconda3/envs/finalenv/lib/python3.8/site-packages/optuna/study/_optimize.py", line 160, in _optimize_sequential
+    frozen_trial_id = _run_trial(study, func, catch)
+  File "/home-mscluster/bkodze/miniconda3/envs/finalenv/lib/python3.8/site-packages/optuna/study/_optimize.py", line 258, in _run_trial
+    raise func_err
+  File "/home-mscluster/bkodze/miniconda3/envs/finalenv/lib/python3.8/site-packages/optuna/study/_optimize.py", line 201, in _run_trial
+    value_or_values = func(trial)
+  File "optuna_tune.py", line 261, in <lambda>
+    lambda trial: objective(trial, args),
+  File "optuna_tune.py", line 197, in objective
+    exp.train(setting=f'trial_{trial.number}')
+  File "/home-mscluster/bkodze/Time-Series-Library/exp/exp_long_term_forecasting.py", line 128, in train
+    outputs = outputs[:, -self.args.pred_len:, f_dim:]
+TypeError: 'NoneType' object is not subscriptable

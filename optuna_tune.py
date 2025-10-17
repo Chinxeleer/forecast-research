@@ -65,9 +65,9 @@ def get_base_args():
     # Optimization - these will be tuned
     parser.add_argument('--num_workers', type=int, default=0)
     parser.add_argument('--itr', type=int, default=1)
-    parser.add_argument('--train_epochs', type=int, default=10)
+    parser.add_argument('--train_epochs', type=int, default=100)
     parser.add_argument('--batch_size', type=int, default=32)
-    parser.add_argument('--patience', type=int, default=3)
+    parser.add_argument('--patience', type=int, default=100)
     parser.add_argument('--learning_rate', type=float, default=0.0001)
     parser.add_argument('--des', type=str, default='optuna_tuning')
     parser.add_argument('--loss', type=str, default='MSE')

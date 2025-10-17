@@ -27,7 +27,6 @@ for pred_len in 1 7 14 30; do
 		--c_out 5 \
 		--d_model 128 \
 		--des 'Exp' \
-		--itr 1 # --patience 100 \
-	# --train_epochs 50 \
+		--itr 1  
 
 done

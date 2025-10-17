@@ -2,11 +2,11 @@
     "seq_len": 48,
     "pred_len": 1,
     "expand": 2,
-    "d_model": 32,
-    "n_heads": 4,
+    "d_model": 64,
+    "n_heads": 8,
     "e_layers": 1,
     "d_layers": 2,
-    "batch_size": 16,
-    "learning_rate": 0.0008624166512028265,
-    "dropout": 0.26301575261418764
+    "batch_size": 32,
+    "learning_rate": 0.0007133465844372447,
+    "dropout": 0.1614951733539902
 }
