@@ -1124,3 +1124,21 @@ EarlyStopping counter: 41 out of 999
 Updating learning rate to 2.6469779601696887e-27
 EarlyStopping counter: 42 out of 999
 Updating learning rate to 1.3234889800848443e-27
+Validation loss decreased (0.035637 --> 0.035591).  Saving model ...
+Updating learning rate to 6.617444900424222e-28
+EarlyStopping counter: 1 out of 999
+Updating learning rate to 3.308722450212111e-28
+EarlyStopping counter: 2 out of 999
+Updating learning rate to 1.6543612251060554e-28
+EarlyStopping counter: 3 out of 999
+Updating learning rate to 8.271806125530277e-29
+EarlyStopping counter: 4 out of 999
+Updating learning rate to 4.1359030627651386e-29
+EarlyStopping counter: 5 out of 999
+Updating learning rate to 2.0679515313825693e-29
+EarlyStopping counter: 6 out of 999
+Updating learning rate to 1.0339757656912846e-29
+EarlyStopping counter: 7 out of 999
+Updating learning rate to 5.169878828456423e-30
+EarlyStopping counter: 8 out of 999
+Updating learning rate to 2.5849394142282116e-30
