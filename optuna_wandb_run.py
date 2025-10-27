@@ -8,7 +8,6 @@ This script maps paper's parameters to Time-Series-Library's actual parameters:
 Paper's Table VIII          →    Time-Series-Library Equivalent
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 lr (learning rate)          →    --learning_rate
-wd (weight decay)           →    No direct parameter! (handled in optimizer)
 hidden_dim                  →    --d_model (model dimension)
 num_layers                  →    --e_layers (encoder layers)
 
@@ -120,7 +119,6 @@ def objective(trial: Trial, base_args):
     Paper's Table VIII        →    Time-Series-Library
     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
     lr: 1e-5 to 1e-2          →    --learning_rate
-    wd: 1e-6 to 1e-3          →    (added via optimizer, see below)
     hidden_dim: 8 to 64       →    --d_model
     num_layers: 1 to 4        →    --e_layers
     """
@@ -132,10 +130,6 @@ def objective(trial: Trial, base_args):
     
     # Paper's "lr" → Time-Series-Library's "learning_rate"
     args.learning_rate = trial.suggest_float('lr', 1e-5, 1e-2, log=True)
-    
-    # Paper's "wd" → We'll add this to optimizer manually
-    # Time-Series-Library doesn't have --weight_decay argument
-    weight_decay = trial.suggest_float('wd', 1e-6, 1e-3, log=True)
     
     # Paper's "hidden_dim" → Time-Series-Library's "d_model"
     args.d_model = trial.suggest_int('hidden_dim', 8, 64)
@@ -160,8 +154,6 @@ def objective(trial: Trial, base_args):
     else:
         args.n_heads = 1
     
-    # Store weight_decay for later use in optimizer
-    args.weight_decay = weight_decay
     
     # ========== END OF PARAMETER MAPPING ==========
     
@@ -176,7 +168,6 @@ def objective(trial: Trial, base_args):
     print("Paper Parameters          →    Time-Series-Library Parameters")
     print("-"*70)
     print(f"lr: {args.learning_rate:.6f}       →    learning_rate: {args.learning_rate:.6f}")
-    print(f"wd: {weight_decay:.6f}       →    weight_decay: {weight_decay:.6f} (optimizer)")
     print(f"hidden_dim: {args.d_model}           →    d_model: {args.d_model}")
     print(f"num_layers: {args.e_layers}           →    e_layers: {args.e_layers}")
     print("-"*70)
@@ -193,7 +184,6 @@ def objective(trial: Trial, base_args):
             config={
                 'trial': trial.number,
                 'lr': args.learning_rate,
-                'wd': weight_decay,
                 'hidden_dim': args.d_model,
                 'num_layers': args.e_layers,
                 'd_model': args.d_model,
@@ -209,9 +199,7 @@ def objective(trial: Trial, base_args):
         # Create experiment
         exp = Exp_Long_Term_Forecast(args)
         
-        # IMPORTANT: We need to modify the optimizer to include weight_decay
         # This is typically done in exp_long_term_forecasting.py in _select_optimizer()
-        # If you can't modify that file, weight_decay won't be applied
         # See note below on how to handle this
         
         print(f'>>>>>> Training trial {trial.number} >>>>>>')
@@ -263,7 +251,6 @@ def run_optimization(args):
     print(f"Trials: {args.n_trials}")
     print("\nParameter Mapping:")
     print("  Paper's 'lr'         → Time-Series-Library's 'learning_rate'")
-    print("  Paper's 'wd'         → Optimizer's 'weight_decay' (needs manual setup)")
     print("  Paper's 'hidden_dim' → Time-Series-Library's 'd_model'")
     print("  Paper's 'num_layers' → Time-Series-Library's 'e_layers'")
     print("="*70 + "\n")
@@ -289,7 +276,6 @@ def run_optimization(args):
     # Map back to paper's parameter names for comparison
     best_params = study.best_trial.params
     print(f"lr (learning_rate):  {best_params['lr']:.10f}")
-    print(f"wd (weight_decay):   {best_params['wd']:.10e}")
     print(f"hidden_dim (d_model): {best_params['hidden_dim']}")
     print(f"num_layers (e_layers): {best_params['num_layers']}")
     print("="*70 + "\n")
@@ -302,13 +288,11 @@ def run_optimization(args):
     results = {
         'paper_format': {
             'lr': best_params['lr'],
-            'wd': best_params['wd'],
             'hidden_dim': best_params['hidden_dim'],
             'num_layers': best_params['num_layers']
         },
         'time_series_library_format': {
             'learning_rate': best_params['lr'],
-            'weight_decay': best_params['wd'],
             'd_model': best_params['hidden_dim'],
             'e_layers': best_params['num_layers'],
             'd_ff': best_params['hidden_dim'] * 4

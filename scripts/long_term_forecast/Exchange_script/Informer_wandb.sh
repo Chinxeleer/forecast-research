@@ -9,8 +9,10 @@ for pred_len in 1 7 14 30; do
 		--root_path ./dataset/exchange_rate/ \
 		--data_path exchange_rate.csv \
 		--use_wandb \
-		--wandb_project "financial-forecasting2" \
-		--model_id exchange \
+		--wandb_project "financial-forecasting-tuning" \
+		--study_name Autoformer_Exchange_$pred_len \
+		--n_trials 50 \
+	--model_id exchange \
 		--model Informer \
 		--data custom \
 		--features M \
