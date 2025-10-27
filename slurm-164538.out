@@ -1,0 +1,1126 @@
+Using GPU
+Args in experiment:
+[1mBasic Config[0m
+  Task Name:          long_term_forecast  Is Training:        1                   
+  Model ID:           Exchange_1          Model:              FEDformer           
+
+[1mData Loader[0m
+  Data:               custom              Root Path:          ./dataset/exchange_rate/
+  Data Path:          exchange_rate.csv   Features:           M                   
+  Target:             OT                  Freq:               h                   
+  Checkpoints:        ./checkpoints/      
+
+[1mForecasting Task[0m
+  Seq Len:            96                  Label Len:          48                  
+  Pred Len:           1                   Seasonal Patterns:  Monthly             
+  Inverse:            0                   
+
+[1mModel Parameters[0m
+  Top k:              5                   Num Kernels:        6                   
+  Enc In:             5                   Dec In:             5                   
+  C Out:              5                   d model:            256                 
+  n heads:            8                   e layers:           2                   
+  d layers:           1                   d FF:               2048                
+  Moving Avg:         25                  Factor:             3                   
+  Distil:             1                   Dropout:            0.1                 
+  Embed:              timeF               Activation:         gelu                
+
+[1mRun Parameters[0m
+  Num Workers:        10                  Itr:                1                   
+  Train Epochs:       150                 Batch Size:         32                  
+  Patience:           999                 Learning Rate:      0.0001              
+  Des:                Exp                 Loss:               MSE                 
+  Lradj:              type1               Use Amp:            0                   
+
+[1mGPU[0m
+  Use GPU:            1                   GPU:                0                   
+  Use Multi GPU:      0                   Devices:            0,1,2,3             
+
+[1mDe-stationary Projector Params[0m
+  P Hidden Dims:      128, 128            P Hidden Layers:    2                   
+
+Use GPU: cuda:0
+fourier enhanced block used!
+modes=32, index=[2, 3, 4, 5, 8, 9, 10, 11, 13, 14, 15, 16, 17, 18, 19, 20, 23, 25, 26, 28, 31, 32, 34, 35, 37, 38, 39, 40, 42, 43, 44, 46]
+fourier enhanced block used!
+modes=32, index=[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23]
+ fourier enhanced cross attention used!
+modes_q=24, index_q=[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23]
+modes_kv=32, index_kv=[0, 1, 2, 4, 5, 6, 7, 8, 9, 10, 12, 13, 14, 17, 18, 20, 21, 22, 23, 26, 27, 28, 29, 30, 31, 32, 35, 36, 37, 43, 44, 45]
+wandb: Currently logged in as: blessingeleer-programming (blessingeleer-programming-university-of-the-witwatersrand). Use `wandb login --relogin` to force relogin
+wandb: wandb version 0.22.2 is available!  To upgrade, please run:
+wandb:  $ pip install wandb --upgrade
+wandb: Tracking run with wandb version 0.16.6
+wandb: Run data is saved locally in /home-mscluster/bkodze/Time-Series-Library/wandb/run-20251027_000616-0w6siub9
+wandb: Run `wandb offline` to turn off syncing.
+wandb: Syncing run FEDformer_custom_sl96_pl1
+wandb: ⭐️ View project at https://wandb.ai/blessingeleer-programming-university-of-the-witwatersrand/financial-forecasting2
+wandb: 🚀 View run at https://wandb.ai/blessingeleer-programming-university-of-the-witwatersrand/financial-forecasting2/runs/0w6siub9
+✅ W&B initialized: FEDformer_custom_sl96_pl1
+   Dashboard: https://wandb.ai/blessingeleer-programming-university-of-the-witwatersrand/financial-forecasting2/runs/0w6siub9
+>>>>>>>start training : long_term_forecast_Exchange_1_FEDformer_custom_ftM_sl96_ll48_pl1_dm256_nh8_el2_dl1_df2048_expand2_dc4_fc3_ebtimeF_dtTrue_Exp_0>>>>>>>>>>>>>>>>>>>>>>>>>>
+============================================================
+DATASET SPLIT INFO (90/5/5):
+============================================================
+Total samples: 5193
+Train: 4673 samples (90%) - rows 0 to 4672
+Val: 259 samples (5%) - rows 4673 to 4931
+Test: 261 samples (5%) - rows 4932 to 5192
+Sequence length: 96, Prediction length: 1
+============================================================
+train 4577
+val 259
+test 261
+Validation loss decreased (inf --> 0.035038).  Saving model ...
+Updating learning rate to 0.0001
+wandb: WARNING Step only supports monotonically increasing values, use define_metric to set a custom x axis. For details see: https://wandb.me/define-metric
+wandb: WARNING (User provided step: 0 is less than current step: 2. Dropping entry: {'epoch': 0, 'train/loss': 0.13514643822175762, 'val/loss': 0.03503789587153329, 'test/loss': 0.06791415707104737, '_timestamp': 1761516431.4809139}).
+Validation loss decreased (0.035038 --> 0.032600).  Saving model ...
+Updating learning rate to 5e-05
+wandb: WARNING (User provided step: 1 is less than current step: 2. Dropping entry: {'epoch': 1, 'train/loss': 0.09651118131457931, 'val/loss': 0.03259996966355377, 'test/loss': 0.06364127434790134, '_timestamp': 1761516458.7226305}).
+Validation loss decreased (0.032600 --> 0.029080).  Saving model ...
+Updating learning rate to 2.5e-05
+Validation loss decreased (0.029080 --> 0.028377).  Saving model ...
+Updating learning rate to 1.25e-05
+EarlyStopping counter: 1 out of 999
+Updating learning rate to 6.25e-06
+Validation loss decreased (0.028377 --> 0.027216).  Saving model ...
+Updating learning rate to 3.125e-06
+EarlyStopping counter: 1 out of 999
+Updating learning rate to 1.5625e-06
+EarlyStopping counter: 2 out of 999
+Updating learning rate to 7.8125e-07
+EarlyStopping counter: 3 out of 999
+Updating learning rate to 3.90625e-07
+EarlyStopping counter: 4 out of 999
+Updating learning rate to 1.953125e-07
+EarlyStopping counter: 5 out of 999
+Updating learning rate to 9.765625e-08
+EarlyStopping counter: 6 out of 999
+Updating learning rate to 4.8828125e-08
+EarlyStopping counter: 7 out of 999
+Updating learning rate to 2.44140625e-08
+EarlyStopping counter: 8 out of 999
+Updating learning rate to 1.220703125e-08
+EarlyStopping counter: 9 out of 999
+Updating learning rate to 6.103515625e-09
+EarlyStopping counter: 10 out of 999
+Updating learning rate to 3.0517578125e-09
+EarlyStopping counter: 11 out of 999
+Updating learning rate to 1.52587890625e-09
+EarlyStopping counter: 12 out of 999
+Updating learning rate to 7.62939453125e-10
+EarlyStopping counter: 13 out of 999
+Updating learning rate to 3.814697265625e-10
+EarlyStopping counter: 14 out of 999
+Updating learning rate to 1.9073486328125e-10
+EarlyStopping counter: 15 out of 999
+Updating learning rate to 9.5367431640625e-11
+EarlyStopping counter: 16 out of 999
+Updating learning rate to 4.76837158203125e-11
+EarlyStopping counter: 17 out of 999
+Updating learning rate to 2.384185791015625e-11
+Validation loss decreased (0.027216 --> 0.027163).  Saving model ...
+Updating learning rate to 1.1920928955078126e-11
+EarlyStopping counter: 1 out of 999
+Updating learning rate to 5.960464477539063e-12
+EarlyStopping counter: 2 out of 999
+Updating learning rate to 2.9802322387695314e-12
+EarlyStopping counter: 3 out of 999
+Updating learning rate to 1.4901161193847657e-12
+EarlyStopping counter: 4 out of 999
+Updating learning rate to 7.450580596923828e-13
+EarlyStopping counter: 5 out of 999
+Updating learning rate to 3.725290298461914e-13
+EarlyStopping counter: 6 out of 999
+Updating learning rate to 1.862645149230957e-13
+Validation loss decreased (0.027163 --> 0.026978).  Saving model ...
+Updating learning rate to 9.313225746154786e-14
+EarlyStopping counter: 1 out of 999
+Updating learning rate to 4.656612873077393e-14
+EarlyStopping counter: 2 out of 999
+Updating learning rate to 2.3283064365386964e-14
+EarlyStopping counter: 3 out of 999
+Updating learning rate to 1.1641532182693482e-14
+EarlyStopping counter: 4 out of 999
+Updating learning rate to 5.820766091346741e-15
+EarlyStopping counter: 5 out of 999
+Updating learning rate to 2.9103830456733705e-15
+EarlyStopping counter: 6 out of 999
+Updating learning rate to 1.4551915228366853e-15
+EarlyStopping counter: 7 out of 999
+Updating learning rate to 7.275957614183426e-16
+EarlyStopping counter: 8 out of 999
+Updating learning rate to 3.637978807091713e-16
+EarlyStopping counter: 9 out of 999
+Updating learning rate to 1.8189894035458566e-16
+EarlyStopping counter: 10 out of 999
+Updating learning rate to 9.094947017729283e-17
+EarlyStopping counter: 11 out of 999
+Updating learning rate to 4.5474735088646414e-17
+EarlyStopping counter: 12 out of 999
+Updating learning rate to 2.2737367544323207e-17
+EarlyStopping counter: 13 out of 999
+Updating learning rate to 1.1368683772161604e-17
+EarlyStopping counter: 14 out of 999
+Updating learning rate to 5.684341886080802e-18
+EarlyStopping counter: 15 out of 999
+Updating learning rate to 2.842170943040401e-18
+EarlyStopping counter: 16 out of 999
+Updating learning rate to 1.4210854715202004e-18
+EarlyStopping counter: 17 out of 999
+Updating learning rate to 7.105427357601002e-19
+EarlyStopping counter: 18 out of 999
+Updating learning rate to 3.552713678800501e-19
+Validation loss decreased (0.026978 --> 0.026823).  Saving model ...
+Updating learning rate to 1.7763568394002505e-19
+EarlyStopping counter: 1 out of 999
+Updating learning rate to 8.881784197001253e-20
+EarlyStopping counter: 2 out of 999
+Updating learning rate to 4.4408920985006264e-20
+EarlyStopping counter: 3 out of 999
+Updating learning rate to 2.2204460492503132e-20
+EarlyStopping counter: 4 out of 999
+Updating learning rate to 1.1102230246251566e-20
+EarlyStopping counter: 5 out of 999
+Updating learning rate to 5.551115123125783e-21
+EarlyStopping counter: 6 out of 999
+Updating learning rate to 2.7755575615628915e-21
+EarlyStopping counter: 7 out of 999
+Updating learning rate to 1.3877787807814457e-21
+EarlyStopping counter: 8 out of 999
+Updating learning rate to 6.938893903907229e-22
+EarlyStopping counter: 9 out of 999
+Updating learning rate to 3.4694469519536144e-22
+EarlyStopping counter: 10 out of 999
+Updating learning rate to 1.7347234759768072e-22
+EarlyStopping counter: 11 out of 999
+Updating learning rate to 8.673617379884036e-23
+EarlyStopping counter: 12 out of 999
+Updating learning rate to 4.336808689942018e-23
+EarlyStopping counter: 13 out of 999
+Updating learning rate to 2.168404344971009e-23
+EarlyStopping counter: 14 out of 999
+Updating learning rate to 1.0842021724855045e-23
+Validation loss decreased (0.026823 --> 0.026783).  Saving model ...
+Updating learning rate to 5.4210108624275224e-24
+EarlyStopping counter: 1 out of 999
+Updating learning rate to 2.7105054312137612e-24
+EarlyStopping counter: 2 out of 999
+Updating learning rate to 1.3552527156068806e-24
+EarlyStopping counter: 3 out of 999
+Updating learning rate to 6.776263578034403e-25
+EarlyStopping counter: 4 out of 999
+Updating learning rate to 3.3881317890172015e-25
+EarlyStopping counter: 5 out of 999
+Updating learning rate to 1.6940658945086008e-25
+EarlyStopping counter: 6 out of 999
+Updating learning rate to 8.470329472543004e-26
+EarlyStopping counter: 7 out of 999
+Updating learning rate to 4.235164736271502e-26
+EarlyStopping counter: 8 out of 999
+Updating learning rate to 2.117582368135751e-26
+EarlyStopping counter: 9 out of 999
+Updating learning rate to 1.0587911840678755e-26
+EarlyStopping counter: 10 out of 999
+Updating learning rate to 5.2939559203393774e-27
+EarlyStopping counter: 11 out of 999
+Updating learning rate to 2.6469779601696887e-27
+EarlyStopping counter: 12 out of 999
+Updating learning rate to 1.3234889800848443e-27
+EarlyStopping counter: 13 out of 999
+Updating learning rate to 6.617444900424222e-28
+EarlyStopping counter: 14 out of 999
+Updating learning rate to 3.308722450212111e-28
+EarlyStopping counter: 15 out of 999
+Updating learning rate to 1.6543612251060554e-28
+EarlyStopping counter: 16 out of 999
+Updating learning rate to 8.271806125530277e-29
+Validation loss decreased (0.026783 --> 0.026773).  Saving model ...
+Updating learning rate to 4.1359030627651386e-29
+EarlyStopping counter: 1 out of 999
+Updating learning rate to 2.0679515313825693e-29
+EarlyStopping counter: 2 out of 999
+Updating learning rate to 1.0339757656912846e-29
+EarlyStopping counter: 3 out of 999
+Updating learning rate to 5.169878828456423e-30
+EarlyStopping counter: 4 out of 999
+Updating learning rate to 2.5849394142282116e-30
+EarlyStopping counter: 5 out of 999
+Updating learning rate to 1.2924697071141058e-30
+EarlyStopping counter: 6 out of 999
+Updating learning rate to 6.462348535570529e-31
+EarlyStopping counter: 7 out of 999
+Updating learning rate to 3.2311742677852645e-31
+EarlyStopping counter: 8 out of 999
+Updating learning rate to 1.6155871338926323e-31
+EarlyStopping counter: 9 out of 999
+Updating learning rate to 8.077935669463161e-32
+EarlyStopping counter: 10 out of 999
+Updating learning rate to 4.0389678347315806e-32
+EarlyStopping counter: 11 out of 999
+Updating learning rate to 2.0194839173657903e-32
+EarlyStopping counter: 12 out of 999
+Updating learning rate to 1.0097419586828952e-32
+EarlyStopping counter: 13 out of 999
+Updating learning rate to 5.048709793414476e-33
+EarlyStopping counter: 14 out of 999
+Updating learning rate to 2.524354896707238e-33
+EarlyStopping counter: 15 out of 999
+Updating learning rate to 1.262177448353619e-33
+EarlyStopping counter: 16 out of 999
+Updating learning rate to 6.310887241768095e-34
+EarlyStopping counter: 17 out of 999
+Updating learning rate to 3.1554436208840474e-34
+EarlyStopping counter: 18 out of 999
+Updating learning rate to 1.5777218104420237e-34
+EarlyStopping counter: 19 out of 999
+Updating learning rate to 7.888609052210118e-35
+EarlyStopping counter: 20 out of 999
+Updating learning rate to 3.944304526105059e-35
+EarlyStopping counter: 21 out of 999
+Updating learning rate to 1.9721522630525296e-35
+EarlyStopping counter: 22 out of 999
+Updating learning rate to 9.860761315262648e-36
+EarlyStopping counter: 23 out of 999
+Updating learning rate to 4.930380657631324e-36
+EarlyStopping counter: 24 out of 999
+Updating learning rate to 2.465190328815662e-36
+EarlyStopping counter: 25 out of 999
+Updating learning rate to 1.232595164407831e-36
+EarlyStopping counter: 26 out of 999
+Updating learning rate to 6.162975822039155e-37
+EarlyStopping counter: 27 out of 999
+Updating learning rate to 3.0814879110195775e-37
+EarlyStopping counter: 28 out of 999
+Updating learning rate to 1.5407439555097888e-37
+EarlyStopping counter: 29 out of 999
+Updating learning rate to 7.703719777548944e-38
+EarlyStopping counter: 30 out of 999
+Updating learning rate to 3.851859888774472e-38
+EarlyStopping counter: 31 out of 999
+Updating learning rate to 1.925929944387236e-38
+EarlyStopping counter: 32 out of 999
+Updating learning rate to 9.62964972193618e-39
+EarlyStopping counter: 33 out of 999
+Updating learning rate to 4.81482486096809e-39
+EarlyStopping counter: 34 out of 999
+Updating learning rate to 2.407412430484045e-39
+EarlyStopping counter: 35 out of 999
+Updating learning rate to 1.2037062152420225e-39
+EarlyStopping counter: 36 out of 999
+Updating learning rate to 6.018531076210112e-40
+EarlyStopping counter: 37 out of 999
+Updating learning rate to 3.009265538105056e-40
+EarlyStopping counter: 38 out of 999
+Updating learning rate to 1.504632769052528e-40
+EarlyStopping counter: 39 out of 999
+Updating learning rate to 7.52316384526264e-41
+EarlyStopping counter: 40 out of 999
+Updating learning rate to 3.76158192263132e-41
+EarlyStopping counter: 41 out of 999
+Updating learning rate to 1.88079096131566e-41
+EarlyStopping counter: 42 out of 999
+Updating learning rate to 9.4039548065783e-42
+EarlyStopping counter: 43 out of 999
+Updating learning rate to 4.70197740328915e-42
+EarlyStopping counter: 44 out of 999
+Updating learning rate to 2.350988701644575e-42
+EarlyStopping counter: 45 out of 999
+Updating learning rate to 1.1754943508222876e-42
+EarlyStopping counter: 46 out of 999
+Updating learning rate to 5.877471754111438e-43
+EarlyStopping counter: 47 out of 999
+Updating learning rate to 2.938735877055719e-43
+EarlyStopping counter: 48 out of 999
+Updating learning rate to 1.4693679385278595e-43
+EarlyStopping counter: 49 out of 999
+Updating learning rate to 7.346839692639297e-44
+EarlyStopping counter: 50 out of 999
+Updating learning rate to 3.6734198463196486e-44
+EarlyStopping counter: 51 out of 999
+Updating learning rate to 1.8367099231598243e-44
+EarlyStopping counter: 52 out of 999
+Updating learning rate to 9.183549615799122e-45
+EarlyStopping counter: 53 out of 999
+Updating learning rate to 4.591774807899561e-45
+EarlyStopping counter: 54 out of 999
+Updating learning rate to 2.2958874039497804e-45
+EarlyStopping counter: 55 out of 999
+Updating learning rate to 1.1479437019748902e-45
+EarlyStopping counter: 56 out of 999
+Updating learning rate to 5.739718509874451e-46
+EarlyStopping counter: 57 out of 999
+Updating learning rate to 2.8698592549372255e-46
+EarlyStopping counter: 58 out of 999
+Updating learning rate to 1.4349296274686127e-46
+EarlyStopping counter: 59 out of 999
+Updating learning rate to 7.174648137343064e-47
+EarlyStopping counter: 60 out of 999
+Updating learning rate to 3.587324068671532e-47
+EarlyStopping counter: 61 out of 999
+Updating learning rate to 1.793662034335766e-47
+EarlyStopping counter: 62 out of 999
+Updating learning rate to 8.96831017167883e-48
+EarlyStopping counter: 63 out of 999
+Updating learning rate to 4.484155085839415e-48
+EarlyStopping counter: 64 out of 999
+Updating learning rate to 2.2420775429197074e-48
+EarlyStopping counter: 65 out of 999
+Updating learning rate to 1.1210387714598537e-48
+EarlyStopping counter: 66 out of 999
+Updating learning rate to 5.6051938572992686e-49
+EarlyStopping counter: 67 out of 999
+Updating learning rate to 2.8025969286496343e-49
+EarlyStopping counter: 68 out of 999
+Updating learning rate to 1.4012984643248171e-49
+>>>>>>>testing : long_term_forecast_Exchange_1_FEDformer_custom_ftM_sl96_ll48_pl1_dm256_nh8_el2_dl1_df2048_expand2_dc4_fc3_ebtimeF_dtTrue_Exp_0<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+test 261
+test shape: (261, 1, 5) (261, 1, 5)
+test shape: (261, 1, 5) (261, 1, 5)
+Traceback (most recent call last):
+  File "run_wandb.py", line 216, in <module>
+    exp.test(setting)
+  File "/home-mscluster/bkodze/Time-Series-Library/exp/exp_long_term_forecasting.py", line 302, in test
+    self.wandb_logger.log_predictions_table(trues, preds, split=split_name, max_rows=100)
+AttributeError: 'WandbLogger' object has no attribute 'log_predictions_table'
+wandb: - 0.367 MB of 0.573 MB uploaded (0.002 MB deduped)wandb: \ 0.569 MB of 0.573 MB uploaded (0.002 MB deduped)wandb: | 0.569 MB of 0.573 MB uploaded (0.002 MB deduped)wandb: / 0.573 MB of 0.573 MB uploaded (0.002 MB deduped)wandb: 
+wandb: Run history:
+wandb:                      epoch ▁▁▁▁▂▂▂▂▂▃▃▃▃▃▃▄▄▄▄▄▅▅▅▅▅▅▆▆▆▆▆▇▇▇▇▇▇███
+wandb: model/non_trainable_params ▁
+wandb:         model/total_params ▁
+wandb:     model/trainable_params ▁
+wandb:                  test/loss █▃▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁
+wandb:                 train/loss █▄▄▃▃▃▃▁▄▃▂▃▄▂▂▂▂▄▄▃▂▂▂▂▃▃▂▁▃▃▃▂▂▃▂▃▂▃▂▂
+wandb:                   val/loss ▂▁▂█▃▂▂▅▂▁▂▂▃▁▂▂▃▄▂▁▂▁▁▂▅▅▄▆▂▄▁▂▄▁▁▃▆▂▁▁
+wandb:                    val/mae ▁
+wandb:                   val/mape ▁
+wandb:                    val/mse ▁
+wandb:                   val/rmse ▁
+wandb: 
+wandb: Run summary:
+wandb:                      epoch 149
+wandb:         model/architecture Model(
+wandb:   (decomp): s...
+wandb: model/non_trainable_params 0
+wandb:         model/total_params 5524997
+wandb:     model/trainable_params 5524997
+wandb:                  test/loss 0.05672
+wandb:                 train/loss 0.0786
+wandb:                   val/loss 0.02733
+wandb:                    val/mae 0.11098
+wandb:                   val/mape 1.07916
+wandb:                    val/mse 0.06042
+wandb:                   val/rmse 0.24581
+wandb: 
+wandb: 🚀 View run FEDformer_custom_sl96_pl1 at: https://wandb.ai/blessingeleer-programming-university-of-the-witwatersrand/financial-forecasting2/runs/0w6siub9
+wandb: ⭐️ View project at: https://wandb.ai/blessingeleer-programming-university-of-the-witwatersrand/financial-forecasting2
+wandb: Synced 5 W&B file(s), 4 media file(s), 2 artifact file(s) and 0 other file(s)
+wandb: Find logs at: ./wandb/run-20251027_000616-0w6siub9/logs
+Exception in thread ChkStopThr:
+Traceback (most recent call last):
+  File "/home-mscluster/bkodze/miniconda3/envs/finalenv/lib/python3.8/threading.py", line 932, in _bootstrap_inner
+Exception in thread NetStatThr:
+Traceback (most recent call last):
+  File "/home-mscluster/bkodze/miniconda3/envs/finalenv/lib/python3.8/threading.py", line 932, in _bootstrap_inner
+    self.run()
+  File "/home-mscluster/bkodze/miniconda3/envs/finalenv/lib/python3.8/threading.py", line 870, in run
+    self.run()
+  File "/home-mscluster/bkodze/miniconda3/envs/finalenv/lib/python3.8/threading.py", line 870, in run
+    self._target(*self._args, **self._kwargs)
+  File "/home-mscluster/bkodze/miniconda3/envs/finalenv/lib/python3.8/site-packages/wandb/sdk/wandb_run.py", line 268, in check_network_status
+    self._target(*self._args, **self._kwargs)
+  File "/home-mscluster/bkodze/miniconda3/envs/finalenv/lib/python3.8/site-packages/wandb/sdk/wandb_run.py", line 286, in check_stop_status
+    self._loop_check_status(
+  File "/home-mscluster/bkodze/miniconda3/envs/finalenv/lib/python3.8/site-packages/wandb/sdk/wandb_run.py", line 224, in _loop_check_status
+    local_handle = request()
+  File "/home-mscluster/bkodze/miniconda3/envs/finalenv/lib/python3.8/site-packages/wandb/sdk/interface/interface.py", line 848, in deliver_network_status
+    self._loop_check_status(
+  File "/home-mscluster/bkodze/miniconda3/envs/finalenv/lib/python3.8/site-packages/wandb/sdk/wandb_run.py", line 224, in _loop_check_status
+    local_handle = request()
+  File "/home-mscluster/bkodze/miniconda3/envs/finalenv/lib/python3.8/site-packages/wandb/sdk/interface/interface.py", line 840, in deliver_stop_status
+    return self._deliver_network_status(status)
+  File "/home-mscluster/bkodze/miniconda3/envs/finalenv/lib/python3.8/site-packages/wandb/sdk/interface/interface_shared.py", line 510, in _deliver_network_status
+    return self._deliver_stop_status(status)
+  File "/home-mscluster/bkodze/miniconda3/envs/finalenv/lib/python3.8/site-packages/wandb/sdk/interface/interface_shared.py", line 494, in _deliver_stop_status
+    return self._deliver_record(record)
+  File "/home-mscluster/bkodze/miniconda3/envs/finalenv/lib/python3.8/site-packages/wandb/sdk/interface/interface_shared.py", line 459, in _deliver_record
+    return self._deliver_record(record)
+  File "/home-mscluster/bkodze/miniconda3/envs/finalenv/lib/python3.8/site-packages/wandb/sdk/interface/interface_shared.py", line 459, in _deliver_record
+    handle = mailbox._deliver_record(record, interface=self)
+  File "/home-mscluster/bkodze/miniconda3/envs/finalenv/lib/python3.8/site-packages/wandb/sdk/lib/mailbox.py", line 455, in _deliver_record
+    handle = mailbox._deliver_record(record, interface=self)
+  File "/home-mscluster/bkodze/miniconda3/envs/finalenv/lib/python3.8/site-packages/wandb/sdk/lib/mailbox.py", line 455, in _deliver_record
+    interface._publish(record)
+  File "/home-mscluster/bkodze/miniconda3/envs/finalenv/lib/python3.8/site-packages/wandb/sdk/interface/interface_sock.py", line 51, in _publish
+    interface._publish(record)
+  File "/home-mscluster/bkodze/miniconda3/envs/finalenv/lib/python3.8/site-packages/wandb/sdk/interface/interface_sock.py", line 51, in _publish
+    self._sock_client.send_record_publish(record)
+  File "/home-mscluster/bkodze/miniconda3/envs/finalenv/lib/python3.8/site-packages/wandb/sdk/lib/sock_client.py", line 221, in send_record_publish
+    self._sock_client.send_record_publish(record)
+  File "/home-mscluster/bkodze/miniconda3/envs/finalenv/lib/python3.8/site-packages/wandb/sdk/lib/sock_client.py", line 221, in send_record_publish
+    self.send_server_request(server_req)
+  File "/home-mscluster/bkodze/miniconda3/envs/finalenv/lib/python3.8/site-packages/wandb/sdk/lib/sock_client.py", line 155, in send_server_request
+    self.send_server_request(server_req)
+  File "/home-mscluster/bkodze/miniconda3/envs/finalenv/lib/python3.8/site-packages/wandb/sdk/lib/sock_client.py", line 155, in send_server_request
+    self._send_message(msg)
+  File "/home-mscluster/bkodze/miniconda3/envs/finalenv/lib/python3.8/site-packages/wandb/sdk/lib/sock_client.py", line 152, in _send_message
+    self._send_message(msg)
+  File "/home-mscluster/bkodze/miniconda3/envs/finalenv/lib/python3.8/site-packages/wandb/sdk/lib/sock_client.py", line 152, in _send_message
+    self._sendall_with_error_handle(header + data)
+  File "/home-mscluster/bkodze/miniconda3/envs/finalenv/lib/python3.8/site-packages/wandb/sdk/lib/sock_client.py", line 130, in _sendall_with_error_handle
+    self._sendall_with_error_handle(header + data)
+  File "/home-mscluster/bkodze/miniconda3/envs/finalenv/lib/python3.8/site-packages/wandb/sdk/lib/sock_client.py", line 130, in _sendall_with_error_handle
+    sent = self._sock.send(data)
+BrokenPipeError: [Errno 32] Broken pipe
+    sent = self._sock.send(data)
+BrokenPipeError: [Errno 32] Broken pipe
+Using GPU
+Args in experiment:
+[1mBasic Config[0m
+  Task Name:          long_term_forecast  Is Training:        1                   
+  Model ID:           Exchange_7          Model:              FEDformer           
+
+[1mData Loader[0m
+  Data:               custom              Root Path:          ./dataset/exchange_rate/
+  Data Path:          exchange_rate.csv   Features:           M                   
+  Target:             OT                  Freq:               h                   
+  Checkpoints:        ./checkpoints/      
+
+[1mForecasting Task[0m
+  Seq Len:            96                  Label Len:          48                  
+  Pred Len:           7                   Seasonal Patterns:  Monthly             
+  Inverse:            0                   
+
+[1mModel Parameters[0m
+  Top k:              5                   Num Kernels:        6                   
+  Enc In:             5                   Dec In:             5                   
+  C Out:              5                   d model:            256                 
+  n heads:            8                   e layers:           2                   
+  d layers:           1                   d FF:               2048                
+  Moving Avg:         25                  Factor:             3                   
+  Distil:             1                   Dropout:            0.1                 
+  Embed:              timeF               Activation:         gelu                
+
+[1mRun Parameters[0m
+  Num Workers:        10                  Itr:                1                   
+  Train Epochs:       150                 Batch Size:         32                  
+  Patience:           999                 Learning Rate:      0.0001              
+  Des:                Exp                 Loss:               MSE                 
+  Lradj:              type1               Use Amp:            0                   
+
+[1mGPU[0m
+  Use GPU:            1                   GPU:                0                   
+  Use Multi GPU:      0                   Devices:            0,1,2,3             
+
+[1mDe-stationary Projector Params[0m
+  P Hidden Dims:      128, 128            P Hidden Layers:    2                   
+
+Use GPU: cuda:0
+fourier enhanced block used!
+modes=32, index=[2, 3, 4, 5, 8, 9, 10, 11, 13, 14, 15, 16, 17, 18, 19, 20, 23, 25, 26, 28, 31, 32, 34, 35, 37, 38, 39, 40, 42, 43, 44, 46]
+fourier enhanced block used!
+modes=32, index=[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26]
+ fourier enhanced cross attention used!
+modes_q=27, index_q=[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26]
+modes_kv=32, index_kv=[0, 1, 2, 4, 5, 6, 7, 8, 9, 10, 12, 13, 14, 17, 18, 20, 21, 22, 23, 26, 27, 28, 29, 30, 31, 32, 35, 36, 37, 43, 44, 45]
+wandb: Currently logged in as: blessingeleer-programming (blessingeleer-programming-university-of-the-witwatersrand). Use `wandb login --relogin` to force relogin
+wandb: wandb version 0.22.2 is available!  To upgrade, please run:
+wandb:  $ pip install wandb --upgrade
+wandb: Tracking run with wandb version 0.16.6
+wandb: Run data is saved locally in /home-mscluster/bkodze/Time-Series-Library/wandb/run-20251027_011342-w3u9ylq4
+wandb: Run `wandb offline` to turn off syncing.
+wandb: Syncing run FEDformer_custom_sl96_pl7
+wandb: ⭐️ View project at https://wandb.ai/blessingeleer-programming-university-of-the-witwatersrand/financial-forecasting2
+wandb: 🚀 View run at https://wandb.ai/blessingeleer-programming-university-of-the-witwatersrand/financial-forecasting2/runs/w3u9ylq4
+✅ W&B initialized: FEDformer_custom_sl96_pl7
+   Dashboard: https://wandb.ai/blessingeleer-programming-university-of-the-witwatersrand/financial-forecasting2/runs/w3u9ylq4
+>>>>>>>start training : long_term_forecast_Exchange_7_FEDformer_custom_ftM_sl96_ll48_pl7_dm256_nh8_el2_dl1_df2048_expand2_dc4_fc3_ebtimeF_dtTrue_Exp_0>>>>>>>>>>>>>>>>>>>>>>>>>>
+============================================================
+DATASET SPLIT INFO (90/5/5):
+============================================================
+Total samples: 5193
+Train: 4673 samples (90%) - rows 0 to 4672
+Val: 259 samples (5%) - rows 4673 to 4931
+Test: 261 samples (5%) - rows 4932 to 5192
+Sequence length: 96, Prediction length: 7
+============================================================
+train 4571
+val 253
+test 255
+Validation loss decreased (inf --> 0.039241).  Saving model ...
+Updating learning rate to 0.0001
+wandb: WARNING Step only supports monotonically increasing values, use define_metric to set a custom x axis. For details see: https://wandb.me/define-metric
+wandb: WARNING (User provided step: 0 is less than current step: 2. Dropping entry: {'epoch': 0, 'train/loss': 0.14240928187028512, 'val/loss': 0.03924079239368439, 'test/loss': 0.07300704577937722, '_timestamp': 1761520458.210756}).
+Validation loss decreased (0.039241 --> 0.038962).  Saving model ...
+Updating learning rate to 5e-05
+wandb: WARNING (User provided step: 1 is less than current step: 2. Dropping entry: {'epoch': 1, 'train/loss': 0.1003855175071663, 'val/loss': 0.03896160377189517, 'test/loss': 0.07055363897234201, '_timestamp': 1761520485.6156476}).
+Validation loss decreased (0.038962 --> 0.037334).  Saving model ...
+Updating learning rate to 2.5e-05
+Validation loss decreased (0.037334 --> 0.035437).  Saving model ...
+Updating learning rate to 1.25e-05
+EarlyStopping counter: 1 out of 999
+Updating learning rate to 6.25e-06
+EarlyStopping counter: 2 out of 999
+Updating learning rate to 3.125e-06
+EarlyStopping counter: 3 out of 999
+Updating learning rate to 1.5625e-06
+EarlyStopping counter: 4 out of 999
+Updating learning rate to 7.8125e-07
+EarlyStopping counter: 5 out of 999
+Updating learning rate to 3.90625e-07
+EarlyStopping counter: 6 out of 999
+Updating learning rate to 1.953125e-07
+EarlyStopping counter: 7 out of 999
+Updating learning rate to 9.765625e-08
+EarlyStopping counter: 8 out of 999
+Updating learning rate to 4.8828125e-08
+EarlyStopping counter: 9 out of 999
+Updating learning rate to 2.44140625e-08
+EarlyStopping counter: 10 out of 999
+Updating learning rate to 1.220703125e-08
+EarlyStopping counter: 11 out of 999
+Updating learning rate to 6.103515625e-09
+EarlyStopping counter: 12 out of 999
+Updating learning rate to 3.0517578125e-09
+EarlyStopping counter: 13 out of 999
+Updating learning rate to 1.52587890625e-09
+EarlyStopping counter: 14 out of 999
+Updating learning rate to 7.62939453125e-10
+EarlyStopping counter: 15 out of 999
+Updating learning rate to 3.814697265625e-10
+EarlyStopping counter: 16 out of 999
+Updating learning rate to 1.9073486328125e-10
+EarlyStopping counter: 17 out of 999
+Updating learning rate to 9.5367431640625e-11
+EarlyStopping counter: 18 out of 999
+Updating learning rate to 4.76837158203125e-11
+EarlyStopping counter: 19 out of 999
+Updating learning rate to 2.384185791015625e-11
+EarlyStopping counter: 20 out of 999
+Updating learning rate to 1.1920928955078126e-11
+EarlyStopping counter: 21 out of 999
+Updating learning rate to 5.960464477539063e-12
+EarlyStopping counter: 22 out of 999
+Updating learning rate to 2.9802322387695314e-12
+EarlyStopping counter: 23 out of 999
+Updating learning rate to 1.4901161193847657e-12
+EarlyStopping counter: 24 out of 999
+Updating learning rate to 7.450580596923828e-13
+EarlyStopping counter: 25 out of 999
+Updating learning rate to 3.725290298461914e-13
+EarlyStopping counter: 26 out of 999
+Updating learning rate to 1.862645149230957e-13
+EarlyStopping counter: 27 out of 999
+Updating learning rate to 9.313225746154786e-14
+EarlyStopping counter: 28 out of 999
+Updating learning rate to 4.656612873077393e-14
+EarlyStopping counter: 29 out of 999
+Updating learning rate to 2.3283064365386964e-14
+EarlyStopping counter: 30 out of 999
+Updating learning rate to 1.1641532182693482e-14
+EarlyStopping counter: 31 out of 999
+Updating learning rate to 5.820766091346741e-15
+EarlyStopping counter: 32 out of 999
+Updating learning rate to 2.9103830456733705e-15
+EarlyStopping counter: 33 out of 999
+Updating learning rate to 1.4551915228366853e-15
+EarlyStopping counter: 34 out of 999
+Updating learning rate to 7.275957614183426e-16
+EarlyStopping counter: 35 out of 999
+Updating learning rate to 3.637978807091713e-16
+EarlyStopping counter: 36 out of 999
+Updating learning rate to 1.8189894035458566e-16
+EarlyStopping counter: 37 out of 999
+Updating learning rate to 9.094947017729283e-17
+EarlyStopping counter: 38 out of 999
+Updating learning rate to 4.5474735088646414e-17
+EarlyStopping counter: 39 out of 999
+Updating learning rate to 2.2737367544323207e-17
+EarlyStopping counter: 40 out of 999
+Updating learning rate to 1.1368683772161604e-17
+EarlyStopping counter: 41 out of 999
+Updating learning rate to 5.684341886080802e-18
+EarlyStopping counter: 42 out of 999
+Updating learning rate to 2.842170943040401e-18
+EarlyStopping counter: 43 out of 999
+Updating learning rate to 1.4210854715202004e-18
+EarlyStopping counter: 44 out of 999
+Updating learning rate to 7.105427357601002e-19
+EarlyStopping counter: 45 out of 999
+Updating learning rate to 3.552713678800501e-19
+EarlyStopping counter: 46 out of 999
+Updating learning rate to 1.7763568394002505e-19
+EarlyStopping counter: 47 out of 999
+Updating learning rate to 8.881784197001253e-20
+EarlyStopping counter: 48 out of 999
+Updating learning rate to 4.4408920985006264e-20
+EarlyStopping counter: 49 out of 999
+Updating learning rate to 2.2204460492503132e-20
+EarlyStopping counter: 50 out of 999
+Updating learning rate to 1.1102230246251566e-20
+EarlyStopping counter: 51 out of 999
+Updating learning rate to 5.551115123125783e-21
+EarlyStopping counter: 52 out of 999
+Updating learning rate to 2.7755575615628915e-21
+EarlyStopping counter: 53 out of 999
+Updating learning rate to 1.3877787807814457e-21
+EarlyStopping counter: 54 out of 999
+Updating learning rate to 6.938893903907229e-22
+EarlyStopping counter: 55 out of 999
+Updating learning rate to 3.4694469519536144e-22
+EarlyStopping counter: 56 out of 999
+Updating learning rate to 1.7347234759768072e-22
+EarlyStopping counter: 57 out of 999
+Updating learning rate to 8.673617379884036e-23
+EarlyStopping counter: 58 out of 999
+Updating learning rate to 4.336808689942018e-23
+EarlyStopping counter: 59 out of 999
+Updating learning rate to 2.168404344971009e-23
+EarlyStopping counter: 60 out of 999
+Updating learning rate to 1.0842021724855045e-23
+EarlyStopping counter: 61 out of 999
+Updating learning rate to 5.4210108624275224e-24
+EarlyStopping counter: 62 out of 999
+Updating learning rate to 2.7105054312137612e-24
+EarlyStopping counter: 63 out of 999
+Updating learning rate to 1.3552527156068806e-24
+EarlyStopping counter: 64 out of 999
+Updating learning rate to 6.776263578034403e-25
+EarlyStopping counter: 65 out of 999
+Updating learning rate to 3.3881317890172015e-25
+EarlyStopping counter: 66 out of 999
+Updating learning rate to 1.6940658945086008e-25
+EarlyStopping counter: 67 out of 999
+Updating learning rate to 8.470329472543004e-26
+EarlyStopping counter: 68 out of 999
+Updating learning rate to 4.235164736271502e-26
+EarlyStopping counter: 69 out of 999
+Updating learning rate to 2.117582368135751e-26
+EarlyStopping counter: 70 out of 999
+Updating learning rate to 1.0587911840678755e-26
+EarlyStopping counter: 71 out of 999
+Updating learning rate to 5.2939559203393774e-27
+EarlyStopping counter: 72 out of 999
+Updating learning rate to 2.6469779601696887e-27
+EarlyStopping counter: 73 out of 999
+Updating learning rate to 1.3234889800848443e-27
+EarlyStopping counter: 74 out of 999
+Updating learning rate to 6.617444900424222e-28
+EarlyStopping counter: 75 out of 999
+Updating learning rate to 3.308722450212111e-28
+EarlyStopping counter: 76 out of 999
+Updating learning rate to 1.6543612251060554e-28
+EarlyStopping counter: 77 out of 999
+Updating learning rate to 8.271806125530277e-29
+EarlyStopping counter: 78 out of 999
+Updating learning rate to 4.1359030627651386e-29
+EarlyStopping counter: 79 out of 999
+Updating learning rate to 2.0679515313825693e-29
+EarlyStopping counter: 80 out of 999
+Updating learning rate to 1.0339757656912846e-29
+EarlyStopping counter: 81 out of 999
+Updating learning rate to 5.169878828456423e-30
+EarlyStopping counter: 82 out of 999
+Updating learning rate to 2.5849394142282116e-30
+EarlyStopping counter: 83 out of 999
+Updating learning rate to 1.2924697071141058e-30
+EarlyStopping counter: 84 out of 999
+Updating learning rate to 6.462348535570529e-31
+EarlyStopping counter: 85 out of 999
+Updating learning rate to 3.2311742677852645e-31
+EarlyStopping counter: 86 out of 999
+Updating learning rate to 1.6155871338926323e-31
+EarlyStopping counter: 87 out of 999
+Updating learning rate to 8.077935669463161e-32
+EarlyStopping counter: 88 out of 999
+Updating learning rate to 4.0389678347315806e-32
+EarlyStopping counter: 89 out of 999
+Updating learning rate to 2.0194839173657903e-32
+EarlyStopping counter: 90 out of 999
+Updating learning rate to 1.0097419586828952e-32
+EarlyStopping counter: 91 out of 999
+Updating learning rate to 5.048709793414476e-33
+EarlyStopping counter: 92 out of 999
+Updating learning rate to 2.524354896707238e-33
+EarlyStopping counter: 93 out of 999
+Updating learning rate to 1.262177448353619e-33
+EarlyStopping counter: 94 out of 999
+Updating learning rate to 6.310887241768095e-34
+EarlyStopping counter: 95 out of 999
+Updating learning rate to 3.1554436208840474e-34
+EarlyStopping counter: 96 out of 999
+Updating learning rate to 1.5777218104420237e-34
+EarlyStopping counter: 97 out of 999
+Updating learning rate to 7.888609052210118e-35
+EarlyStopping counter: 98 out of 999
+Updating learning rate to 3.944304526105059e-35
+EarlyStopping counter: 99 out of 999
+Updating learning rate to 1.9721522630525296e-35
+EarlyStopping counter: 100 out of 999
+Updating learning rate to 9.860761315262648e-36
+EarlyStopping counter: 101 out of 999
+Updating learning rate to 4.930380657631324e-36
+EarlyStopping counter: 102 out of 999
+Updating learning rate to 2.465190328815662e-36
+EarlyStopping counter: 103 out of 999
+Updating learning rate to 1.232595164407831e-36
+EarlyStopping counter: 104 out of 999
+Updating learning rate to 6.162975822039155e-37
+EarlyStopping counter: 105 out of 999
+Updating learning rate to 3.0814879110195775e-37
+EarlyStopping counter: 106 out of 999
+Updating learning rate to 1.5407439555097888e-37
+EarlyStopping counter: 107 out of 999
+Updating learning rate to 7.703719777548944e-38
+EarlyStopping counter: 108 out of 999
+Updating learning rate to 3.851859888774472e-38
+EarlyStopping counter: 109 out of 999
+Updating learning rate to 1.925929944387236e-38
+EarlyStopping counter: 110 out of 999
+Updating learning rate to 9.62964972193618e-39
+EarlyStopping counter: 111 out of 999
+Updating learning rate to 4.81482486096809e-39
+EarlyStopping counter: 112 out of 999
+Updating learning rate to 2.407412430484045e-39
+EarlyStopping counter: 113 out of 999
+Updating learning rate to 1.2037062152420225e-39
+EarlyStopping counter: 114 out of 999
+Updating learning rate to 6.018531076210112e-40
+EarlyStopping counter: 115 out of 999
+Updating learning rate to 3.009265538105056e-40
+EarlyStopping counter: 116 out of 999
+Updating learning rate to 1.504632769052528e-40
+EarlyStopping counter: 117 out of 999
+Updating learning rate to 7.52316384526264e-41
+EarlyStopping counter: 118 out of 999
+Updating learning rate to 3.76158192263132e-41
+EarlyStopping counter: 119 out of 999
+Updating learning rate to 1.88079096131566e-41
+EarlyStopping counter: 120 out of 999
+Updating learning rate to 9.4039548065783e-42
+EarlyStopping counter: 121 out of 999
+Updating learning rate to 4.70197740328915e-42
+EarlyStopping counter: 122 out of 999
+Updating learning rate to 2.350988701644575e-42
+EarlyStopping counter: 123 out of 999
+Updating learning rate to 1.1754943508222876e-42
+EarlyStopping counter: 124 out of 999
+Updating learning rate to 5.877471754111438e-43
+EarlyStopping counter: 125 out of 999
+Updating learning rate to 2.938735877055719e-43
+EarlyStopping counter: 126 out of 999
+Updating learning rate to 1.4693679385278595e-43
+EarlyStopping counter: 127 out of 999
+Updating learning rate to 7.346839692639297e-44
+EarlyStopping counter: 128 out of 999
+Updating learning rate to 3.6734198463196486e-44
+EarlyStopping counter: 129 out of 999
+Updating learning rate to 1.8367099231598243e-44
+EarlyStopping counter: 130 out of 999
+Updating learning rate to 9.183549615799122e-45
+EarlyStopping counter: 131 out of 999
+Updating learning rate to 4.591774807899561e-45
+EarlyStopping counter: 132 out of 999
+Updating learning rate to 2.2958874039497804e-45
+EarlyStopping counter: 133 out of 999
+Updating learning rate to 1.1479437019748902e-45
+EarlyStopping counter: 134 out of 999
+Updating learning rate to 5.739718509874451e-46
+EarlyStopping counter: 135 out of 999
+Updating learning rate to 2.8698592549372255e-46
+EarlyStopping counter: 136 out of 999
+Updating learning rate to 1.4349296274686127e-46
+EarlyStopping counter: 137 out of 999
+Updating learning rate to 7.174648137343064e-47
+EarlyStopping counter: 138 out of 999
+Updating learning rate to 3.587324068671532e-47
+EarlyStopping counter: 139 out of 999
+Updating learning rate to 1.793662034335766e-47
+EarlyStopping counter: 140 out of 999
+Updating learning rate to 8.96831017167883e-48
+EarlyStopping counter: 141 out of 999
+Updating learning rate to 4.484155085839415e-48
+EarlyStopping counter: 142 out of 999
+Updating learning rate to 2.2420775429197074e-48
+EarlyStopping counter: 143 out of 999
+Updating learning rate to 1.1210387714598537e-48
+EarlyStopping counter: 144 out of 999
+Updating learning rate to 5.6051938572992686e-49
+EarlyStopping counter: 145 out of 999
+Updating learning rate to 2.8025969286496343e-49
+EarlyStopping counter: 146 out of 999
+Updating learning rate to 1.4012984643248171e-49
+>>>>>>>testing : long_term_forecast_Exchange_7_FEDformer_custom_ftM_sl96_ll48_pl7_dm256_nh8_el2_dl1_df2048_expand2_dc4_fc3_ebtimeF_dtTrue_Exp_0<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+test 255
+test shape: (255, 7, 5) (255, 7, 5)
+test shape: (255, 7, 5) (255, 7, 5)
+Traceback (most recent call last):
+  File "run_wandb.py", line 216, in <module>
+    exp.test(setting)
+  File "/home-mscluster/bkodze/Time-Series-Library/exp/exp_long_term_forecasting.py", line 302, in test
+    self.wandb_logger.log_predictions_table(trues, preds, split=split_name, max_rows=100)
+AttributeError: 'WandbLogger' object has no attribute 'log_predictions_table'
+wandb: - 0.293 MB of 0.320 MB uploadedwandb: \ 0.293 MB of 0.320 MB uploadedwandb: | 0.293 MB of 0.320 MB uploadedwandb: / 0.293 MB of 0.320 MB uploadedwandb: - 0.444 MB of 0.662 MB uploaded (0.002 MB deduped)wandb: \ 0.444 MB of 0.662 MB uploaded (0.002 MB deduped)wandb: | 0.662 MB of 0.662 MB uploaded (0.002 MB deduped)wandb: / 0.662 MB of 0.662 MB uploaded (0.002 MB deduped)wandb: 
+wandb: Run history:
+wandb:                      epoch ▁▁▁▁▂▂▂▂▂▃▃▃▃▃▃▄▄▄▄▄▅▅▅▅▅▅▆▆▆▆▆▇▇▇▇▇▇███
+wandb: model/non_trainable_params ▁
+wandb:         model/total_params ▁
+wandb:     model/trainable_params ▁
+wandb:                  test/loss ▁█▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆
+wandb:                 train/loss █▄▂▂▃▁▂▃▂▃▂▃▃▂▂▂▃▂▂▂▃▂▂▂▂▁▂▂▃▂▂▃▂▂▂▂▂▃▂▂
+wandb:                   val/loss ▁▆██▇▇▇▇▇▇▇▇▇▇██▇▇▇▇▇▇▇▇█▇▇▇▇█▇███▇█▇▇▇▇
+wandb:                    val/mae ▁
+wandb:                   val/mape ▁
+wandb:                    val/mse ▁
+wandb:                   val/rmse ▁
+wandb: 
+wandb: Run summary:
+wandb:                      epoch 149
+wandb:         model/architecture Model(
+wandb:   (decomp): s...
+wandb: model/non_trainable_params 0
+wandb:         model/total_params 5623301
+wandb:     model/trainable_params 5623301
+wandb:                  test/loss 0.07086
+wandb:                 train/loss 0.08907
+wandb:                   val/loss 0.03645
+wandb:                    val/mae 0.12027
+wandb:                   val/mape 1.31259
+wandb:                    val/mse 0.06998
+wandb:                   val/rmse 0.26454
+wandb: 
+wandb: 🚀 View run FEDformer_custom_sl96_pl7 at: https://wandb.ai/blessingeleer-programming-university-of-the-witwatersrand/financial-forecasting2/runs/w3u9ylq4
+wandb: ⭐️ View project at: https://wandb.ai/blessingeleer-programming-university-of-the-witwatersrand/financial-forecasting2
+wandb: Synced 6 W&B file(s), 4 media file(s), 2 artifact file(s) and 0 other file(s)
+wandb: Find logs at: ./wandb/run-20251027_011342-w3u9ylq4/logs
+Using GPU
+Args in experiment:
+[1mBasic Config[0m
+  Task Name:          long_term_forecast  Is Training:        1                   
+  Model ID:           Exchange_14         Model:              FEDformer           
+
+[1mData Loader[0m
+  Data:               custom              Root Path:          ./dataset/exchange_rate/
+  Data Path:          exchange_rate.csv   Features:           M                   
+  Target:             OT                  Freq:               h                   
+  Checkpoints:        ./checkpoints/      
+
+[1mForecasting Task[0m
+  Seq Len:            96                  Label Len:          48                  
+  Pred Len:           14                  Seasonal Patterns:  Monthly             
+  Inverse:            0                   
+
+[1mModel Parameters[0m
+  Top k:              5                   Num Kernels:        6                   
+  Enc In:             5                   Dec In:             5                   
+  C Out:              5                   d model:            256                 
+  n heads:            8                   e layers:           2                   
+  d layers:           1                   d FF:               2048                
+  Moving Avg:         25                  Factor:             3                   
+  Distil:             1                   Dropout:            0.1                 
+  Embed:              timeF               Activation:         gelu                
+
+[1mRun Parameters[0m
+  Num Workers:        10                  Itr:                1                   
+  Train Epochs:       150                 Batch Size:         32                  
+  Patience:           999                 Learning Rate:      0.0001              
+  Des:                Exp                 Loss:               MSE                 
+  Lradj:              type1               Use Amp:            0                   
+
+[1mGPU[0m
+  Use GPU:            1                   GPU:                0                   
+  Use Multi GPU:      0                   Devices:            0,1,2,3             
+
+[1mDe-stationary Projector Params[0m
+  P Hidden Dims:      128, 128            P Hidden Layers:    2                   
+
+Use GPU: cuda:0
+fourier enhanced block used!
+modes=32, index=[2, 3, 4, 5, 8, 9, 10, 11, 13, 14, 15, 16, 17, 18, 19, 20, 23, 25, 26, 28, 31, 32, 34, 35, 37, 38, 39, 40, 42, 43, 44, 46]
+fourier enhanced block used!
+modes=32, index=[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30]
+ fourier enhanced cross attention used!
+modes_q=31, index_q=[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30]
+modes_kv=32, index_kv=[0, 1, 2, 4, 5, 6, 7, 8, 9, 10, 12, 13, 14, 17, 18, 20, 21, 22, 23, 26, 27, 28, 29, 30, 31, 32, 35, 36, 37, 43, 44, 45]
+wandb: Currently logged in as: blessingeleer-programming (blessingeleer-programming-university-of-the-witwatersrand). Use `wandb login --relogin` to force relogin
+wandb: wandb version 0.22.2 is available!  To upgrade, please run:
+wandb:  $ pip install wandb --upgrade
+wandb: Tracking run with wandb version 0.16.6
+wandb: Run data is saved locally in /home-mscluster/bkodze/Time-Series-Library/wandb/run-20251027_022213-8wb8olg7
+wandb: Run `wandb offline` to turn off syncing.
+wandb: Syncing run FEDformer_custom_sl96_pl14
+wandb: ⭐️ View project at https://wandb.ai/blessingeleer-programming-university-of-the-witwatersrand/financial-forecasting2
+wandb: 🚀 View run at https://wandb.ai/blessingeleer-programming-university-of-the-witwatersrand/financial-forecasting2/runs/8wb8olg7
+✅ W&B initialized: FEDformer_custom_sl96_pl14
+   Dashboard: https://wandb.ai/blessingeleer-programming-university-of-the-witwatersrand/financial-forecasting2/runs/8wb8olg7
+>>>>>>>start training : long_term_forecast_Exchange_14_FEDformer_custom_ftM_sl96_ll48_pl14_dm256_nh8_el2_dl1_df2048_expand2_dc4_fc3_ebtimeF_dtTrue_Exp_0>>>>>>>>>>>>>>>>>>>>>>>>>>
+============================================================
+DATASET SPLIT INFO (90/5/5):
+============================================================
+Total samples: 5193
+Train: 4673 samples (90%) - rows 0 to 4672
+Val: 259 samples (5%) - rows 4673 to 4931
+Test: 261 samples (5%) - rows 4932 to 5192
+Sequence length: 96, Prediction length: 14
+============================================================
+train 4564
+val 246
+test 248
+Validation loss decreased (inf --> 0.039452).  Saving model ...
+Updating learning rate to 0.0001
+wandb: WARNING Step only supports monotonically increasing values, use define_metric to set a custom x axis. For details see: https://wandb.me/define-metric
+wandb: WARNING (User provided step: 0 is less than current step: 2. Dropping entry: {'epoch': 0, 'train/loss': 0.1440396022859153, 'val/loss': 0.03945228178054094, 'test/loss': 0.07522577932104468, '_timestamp': 1761524570.4518323}).
+Validation loss decreased (0.039452 --> 0.037876).  Saving model ...
+Updating learning rate to 5e-05
+wandb: WARNING (User provided step: 1 is less than current step: 2. Dropping entry: {'epoch': 1, 'train/loss': 0.09709308132320851, 'val/loss': 0.03787565906532109, 'test/loss': 0.07037550490349531, '_timestamp': 1761524600.1664343}).
+Validation loss decreased (0.037876 --> 0.037462).  Saving model ...
+Updating learning rate to 2.5e-05
+Validation loss decreased (0.037462 --> 0.036401).  Saving model ...
+Updating learning rate to 1.25e-05
+EarlyStopping counter: 1 out of 999
+Updating learning rate to 6.25e-06
+Validation loss decreased (0.036401 --> 0.035994).  Saving model ...
+Updating learning rate to 3.125e-06
+Validation loss decreased (0.035994 --> 0.035790).  Saving model ...
+Updating learning rate to 1.5625e-06
+EarlyStopping counter: 1 out of 999
+Updating learning rate to 7.8125e-07
+EarlyStopping counter: 2 out of 999
+Updating learning rate to 3.90625e-07
+EarlyStopping counter: 3 out of 999
+Updating learning rate to 1.953125e-07
+EarlyStopping counter: 4 out of 999
+Updating learning rate to 9.765625e-08
+EarlyStopping counter: 5 out of 999
+Updating learning rate to 4.8828125e-08
+EarlyStopping counter: 6 out of 999
+Updating learning rate to 2.44140625e-08
+Validation loss decreased (0.035790 --> 0.035691).  Saving model ...
+Updating learning rate to 1.220703125e-08
+EarlyStopping counter: 1 out of 999
+Updating learning rate to 6.103515625e-09
+EarlyStopping counter: 2 out of 999
+Updating learning rate to 3.0517578125e-09
+EarlyStopping counter: 3 out of 999
+Updating learning rate to 1.52587890625e-09
+EarlyStopping counter: 4 out of 999
+Updating learning rate to 7.62939453125e-10
+EarlyStopping counter: 5 out of 999
+Updating learning rate to 3.814697265625e-10
+EarlyStopping counter: 6 out of 999
+Updating learning rate to 1.9073486328125e-10
+EarlyStopping counter: 7 out of 999
+Updating learning rate to 9.5367431640625e-11
+EarlyStopping counter: 8 out of 999
+Updating learning rate to 4.76837158203125e-11
+EarlyStopping counter: 9 out of 999
+Updating learning rate to 2.384185791015625e-11
+EarlyStopping counter: 10 out of 999
+Updating learning rate to 1.1920928955078126e-11
+EarlyStopping counter: 11 out of 999
+Updating learning rate to 5.960464477539063e-12
+EarlyStopping counter: 12 out of 999
+Updating learning rate to 2.9802322387695314e-12
+EarlyStopping counter: 13 out of 999
+Updating learning rate to 1.4901161193847657e-12
+EarlyStopping counter: 14 out of 999
+Updating learning rate to 7.450580596923828e-13
+EarlyStopping counter: 15 out of 999
+Updating learning rate to 3.725290298461914e-13
+EarlyStopping counter: 16 out of 999
+Updating learning rate to 1.862645149230957e-13
+EarlyStopping counter: 17 out of 999
+Updating learning rate to 9.313225746154786e-14
+EarlyStopping counter: 18 out of 999
+Updating learning rate to 4.656612873077393e-14
+EarlyStopping counter: 19 out of 999
+Updating learning rate to 2.3283064365386964e-14
+EarlyStopping counter: 20 out of 999
+Updating learning rate to 1.1641532182693482e-14
+Validation loss decreased (0.035691 --> 0.035637).  Saving model ...
+Updating learning rate to 5.820766091346741e-15
+EarlyStopping counter: 1 out of 999
+Updating learning rate to 2.9103830456733705e-15
+EarlyStopping counter: 2 out of 999
+Updating learning rate to 1.4551915228366853e-15
+EarlyStopping counter: 3 out of 999
+Updating learning rate to 7.275957614183426e-16
+EarlyStopping counter: 4 out of 999
+Updating learning rate to 3.637978807091713e-16
+EarlyStopping counter: 5 out of 999
+Updating learning rate to 1.8189894035458566e-16
+EarlyStopping counter: 6 out of 999
+Updating learning rate to 9.094947017729283e-17
+EarlyStopping counter: 7 out of 999
+Updating learning rate to 4.5474735088646414e-17
+EarlyStopping counter: 8 out of 999
+Updating learning rate to 2.2737367544323207e-17
+EarlyStopping counter: 9 out of 999
+Updating learning rate to 1.1368683772161604e-17
+EarlyStopping counter: 10 out of 999
+Updating learning rate to 5.684341886080802e-18
+EarlyStopping counter: 11 out of 999
+Updating learning rate to 2.842170943040401e-18
+EarlyStopping counter: 12 out of 999
+Updating learning rate to 1.4210854715202004e-18
+EarlyStopping counter: 13 out of 999
+Updating learning rate to 7.105427357601002e-19
+EarlyStopping counter: 14 out of 999
+Updating learning rate to 3.552713678800501e-19
+EarlyStopping counter: 15 out of 999
+Updating learning rate to 1.7763568394002505e-19
+EarlyStopping counter: 16 out of 999
+Updating learning rate to 8.881784197001253e-20
+EarlyStopping counter: 17 out of 999
+Updating learning rate to 4.4408920985006264e-20
+EarlyStopping counter: 18 out of 999
+Updating learning rate to 2.2204460492503132e-20
+EarlyStopping counter: 19 out of 999
+Updating learning rate to 1.1102230246251566e-20
+EarlyStopping counter: 20 out of 999
+Updating learning rate to 5.551115123125783e-21
+EarlyStopping counter: 21 out of 999
+Updating learning rate to 2.7755575615628915e-21
+EarlyStopping counter: 22 out of 999
+Updating learning rate to 1.3877787807814457e-21
+EarlyStopping counter: 23 out of 999
+Updating learning rate to 6.938893903907229e-22
+EarlyStopping counter: 24 out of 999
+Updating learning rate to 3.4694469519536144e-22
+EarlyStopping counter: 25 out of 999
+Updating learning rate to 1.7347234759768072e-22
+EarlyStopping counter: 26 out of 999
+Updating learning rate to 8.673617379884036e-23
+EarlyStopping counter: 27 out of 999
+Updating learning rate to 4.336808689942018e-23
+EarlyStopping counter: 28 out of 999
+Updating learning rate to 2.168404344971009e-23
+EarlyStopping counter: 29 out of 999
+Updating learning rate to 1.0842021724855045e-23
+EarlyStopping counter: 30 out of 999
+Updating learning rate to 5.4210108624275224e-24
+EarlyStopping counter: 31 out of 999
+Updating learning rate to 2.7105054312137612e-24
+EarlyStopping counter: 32 out of 999
+Updating learning rate to 1.3552527156068806e-24
+EarlyStopping counter: 33 out of 999
+Updating learning rate to 6.776263578034403e-25
+EarlyStopping counter: 34 out of 999
+Updating learning rate to 3.3881317890172015e-25
+EarlyStopping counter: 35 out of 999
+Updating learning rate to 1.6940658945086008e-25
+EarlyStopping counter: 36 out of 999
+Updating learning rate to 8.470329472543004e-26
+EarlyStopping counter: 37 out of 999
+Updating learning rate to 4.235164736271502e-26
+EarlyStopping counter: 38 out of 999
+Updating learning rate to 2.117582368135751e-26
+EarlyStopping counter: 39 out of 999
+Updating learning rate to 1.0587911840678755e-26
+EarlyStopping counter: 40 out of 999
+Updating learning rate to 5.2939559203393774e-27
+EarlyStopping counter: 41 out of 999
+Updating learning rate to 2.6469779601696887e-27
+EarlyStopping counter: 42 out of 999
+Updating learning rate to 1.3234889800848443e-27
