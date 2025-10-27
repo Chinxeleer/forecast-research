@@ -218,7 +218,7 @@ class Dataset_ETT_minute(Dataset):
 
 class Dataset_Custom(Dataset):
     def __init__(self, args, root_path, flag='train', size=None,
-                 features='M', data_path='ETTh1.csv',
+                 features='S', data_path='exchange_rate.csv',
                  target='close', scale=True, timeenc=0, freq='h', seasonal_patterns=None):
         # size [seq_len, label_len, pred_len]
         self.args = args
@@ -255,8 +255,14 @@ class Dataset_Custom(Dataset):
         df_raw.columns: ['date', ...(other features), target feature]
         '''
 
+<<<<<<< HEAD
         if self.target == 'OT' and 'close' in df_raw.columns:
             self.target = 'close'
+=======
+        if self.target == 'OT' and 'pct_chg' in df_raw.columns:
+            print(f"Overriding target from '{self.target}' to 'close' for stock data")
+            self.target = 'pct_chg'
+>>>>>>> 579ebe8 (adds updates to the values)
                                 
         # FIX: Handle timezone-aware datetime parsing
 
